@@ -1,5 +1,5 @@
 /* ===============================
-   COMBROK — BLUE THEME & HEADER (final, mini ribbon + hero overlay)
+   COMBROK — BLUE THEME & HEADER (final, R→L ticker)
    =============================== */
 
 :root{
@@ -9,7 +9,7 @@
   --brand-blue-200:#CFEAF7;
   --brand-blue-300:#A7D4EE;
   --brand-blue-400:#7FC3E7;
-  --brand-blue-600:#218CCF; /* hover/active */
+  --brand-blue-600:#218CCF;
   --brand-blue-700:#0F6DA9;
   --brand-blue-800:#0A4E73;
   --accent-green:#8BC653;
@@ -24,8 +24,11 @@
   --shadow:0 12px 40px rgba(0,0,0,.08);
   --focus:0 0 0 3px rgba(105,184,227,.45);
 
-  /* Mini ribbon */
-  --mini-ribbon-h:38px;
+  /* Ticker sizing */
+  --line-h: 1.35rem;              /* per-line height */
+  --visible-lines: 1;             /* horizontal ticker shows ONE line */
+  --mini-ribbon-pad: 6px;         /* vertical padding inside ribbon */
+  --mini-ribbon-h: calc(var(--line-h) * var(--visible-lines) + (var(--mini-ribbon-pad) * 2));
 }
 
 *{box-sizing:border-box}
@@ -46,6 +49,7 @@ img{max-width:100%;display:block;border-radius:var(--radius)}
   position:relative;
   width:100%;
   height:var(--mini-ribbon-h);
+  padding-block: var(--mini-ribbon-pad);
   background:#0A4E73; color:#fff; z-index:50;
   display:flex; align-items:center;
   box-shadow:0 2px 4px rgba(0,0,0,.08);
@@ -55,20 +59,52 @@ img{max-width:100%;display:block;border-radius:var(--radius)}
   display:flex; align-items:center; gap:16px;
   width:100%; max-width:1280px; margin:0 auto; padding:0 14px;
 }
-.mini-ribbon .logo-text{ font-weight:700; letter-spacing:.3px; font-size:1.05rem; }
+.mini-ribbon .logo-text{ font-weight:700; letter-spacing:.3px; font-size:1.05rem; white-space:nowrap }
 .mini-ribbon .accent{ color:var(--brand-blue); }
 
-/* Ticker (right→left, pauses on hover via JS) */
-.ticker{ flex:1; overflow:hidden; white-space:nowrap; color:#EAF6FC; font-size:.95rem; }
-.ticker .ticker-track{
-  display:inline-block;
-  padding-left:100%;
-  animation: ticker-move 22s linear infinite;
-  will-change: transform;
+/* === HORIZONTAL (R→L) TICKER === */
+.ticker{
+  position:relative;
+  flex:1;
+  overflow:hidden;
+  height:var(--line-h, 1.35rem);
+  line-height:var(--line-h, 1.35rem);
+  color:#EAF6FC;
+  font-size:.95rem;
 }
-@keyframes ticker-move{
-  0%{ transform:translateX(0) }
-  100%{ transform:translateX(-100%) }
+
+.ticker .ticker-track{
+  display:flex;             /* we’ll slide one .tick across at a time */
+  align-items:center;
+  white-space:nowrap;
+}
+
+.ticker .tick{
+  flex-shrink:0;
+  min-width:100%;
+  transform:translateX(100%);
+  opacity:0;
+  transition: transform 1s ease, opacity .5s ease;
+  will-change: transform, opacity;
+}
+
+/* states managed by JS */
+.ticker .tick.active{
+  transform:translateX(0);
+  opacity:1;
+}
+.ticker .tick.exit{
+  transform:translateX(-100%);
+  opacity:0;
+}
+
+/* pause hint on hover (optional visual – animation pause handled in JS) */
+.ticker:hover .tick.active{animation-play-state:paused;}
+
+/* Reduced motion: just show first message without sliding */
+@media (prefers-reduced-motion: reduce){
+  .ticker .tick{ transition:none !important; transform:none !important; opacity:1 !important; }
+  .ticker .tick:not(:first-child){ display:none; }
 }
 
 /* ===============================
@@ -83,7 +119,7 @@ img{max-width:100%;display:block;border-radius:var(--radius)}
 .site-header.scrolled{ box-shadow:0 4px 18px rgba(0,0,0,.08) }
 
 .site-header .wrap{
-  position:relative;                 /* anchor for absolute mobile menu */
+  position:relative; /* anchor for absolute mobile menu */
   display:grid !important; align-items:center;
   grid-template-columns:max-content 1fr;  /* brand fits content; nav takes rest */
   column-gap:clamp(36px,6vw,84px);
@@ -116,7 +152,7 @@ img{max-width:100%;display:block;border-radius:var(--radius)}
   display:flex; align-items:center; justify-content:flex-end;
   gap:8px; white-space:nowrap; overflow-x:auto; scrollbar-width:none; min-width:0;
   justify-self:end;
-  z-index:120; /* stay above hero if needed */
+  z-index:120;
 }
 .nav::-webkit-scrollbar{ display:none }
 
@@ -171,7 +207,7 @@ img{max-width:100%;display:block;border-radius:var(--radius)}
    HERO (slides + trapezium stats)
    =============================== */
 .hero{
-  position:relative; height:70vh; /* balanced height */
+  position:relative; height:70vh;
   overflow:hidden;
   border-radius:0 0 var(--radius-lg) var(--radius-lg);
   background:linear-gradient(180deg,var(--soft),#fff);
@@ -198,14 +234,9 @@ img{max-width:100%;display:block;border-radius:var(--radius)}
 }
 .stats-float .stat-card{ display:none; text-align:left; }
 .stats-float .stat-card.show{ display:block; }
-.stats-float .i{
-  display:inline-block; font-size:42px; line-height:1;
-  margin-right:10px; vertical-align:middle;
-}
-.stats-float strong{
-  font-size:22px; font-weight:800; display:inline-block; vertical-align:middle;
-}
-.stats-float small{ display:block; margin-top:4px; font-size:13px; opacity:.95; }
+.stats-float .i{ display:inline-block; font-size:42px; line-height:1; margin-right:10px; vertical-align:middle }
+.stats-float strong{ font-size:22px; font-weight:800; display:inline-block; vertical-align:middle }
+.stats-float small{ display:block; margin-top:4px; font-size:13px; opacity:.95 }
 
 /* ===============================
    SECTIONS & CARDS
@@ -277,9 +308,9 @@ section{ padding:50px 0 }
   background:transparent; border:0; cursor:pointer;
   color:var(--brand-blue-800);
   font-size:1.8rem; line-height:1;
-  padding:8px;            /* larger tap target */
-  margin-left:auto;       /* push to right on mobile */
-  z-index:130;            /* above ribbons/hero */
+  padding:8px;                 /* larger tap target */
+  margin-left:auto;
+  z-index:130;
 }
 
 /* Tablet down tweaks */
@@ -290,22 +321,22 @@ section{ padding:50px 0 }
 
 /* Phone layout */
 @media (max-width:900px){
-  /* Make header row = logo (left) + burger (right) */
   .site-header .wrap{
-    grid-template-columns: 1fr auto;    /* brand takes remaining space, burger hugs right */
+    grid-template-columns: 1fr auto;
     column-gap:12px; height:72px; padding:0 12px;
   }
 
   .brand{ margin-right:auto }
-  .brand-logo img{ height:56px }        /* smaller logo on phones */
-  .brand-text{ display:none }           /* hide text on small screens */
-  .burger{ display:inline-block }       /* show burger */
+  .brand-logo img{ height:56px }
+  .brand-text{ display:none }
+  .burger{ display:inline-block }
 
-  /* Mobile dropdown menu — full width, BELOW mini ribbon */
+  /* Mobile dropdown menu below header + ribbon */
   .nav{
     position:absolute;
     left:0;
-    top:calc(100% + var(--mini-ribbon-h)); /* sits below the ribbon */
+    top:100%;
+    margin-top: var(--mini-ribbon-h);
     width:100%;
     display:none;
     flex-direction:column;
@@ -314,7 +345,10 @@ section{ padding:50px 0 }
     background:#0A4E73;
     border-top:1px solid rgba(255,255,255,.2);
     border-radius:0 0 10px 10px;
-    z-index:2000;                        /* above everything */
+    z-index:2000;
+    max-height: calc(100vh - 72px - var(--mini-ribbon-h));
+    overflow:auto;
+    box-shadow:0 18px 40px rgba(0,0,0,.22);
   }
   .nav.open{ display:flex }
 
@@ -325,11 +359,9 @@ section{ padding:50px 0 }
     font-size:1.02rem;
   }
   .nav a:hover,.nav a.active{ background:#218CCF; color:#fff; box-shadow:none }
+
   .nav .btn{ margin:6px 12px 10px }
 
-  /* Hero a bit shorter on phones */
   .hero{ height:60vh }
-
-  /* Keep ticker visible on mobile */
   .ticker{ display:block }
 }

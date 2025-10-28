@@ -22,9 +22,9 @@ define('SMTP_PORT', (int)envv('SMTP_PORT',587));
 define('SMTP_USER', envv('SMTP_USER'));
 define('SMTP_PASS', envv('SMTP_PASS'));
 define('SMTP_SECURE', envv('SMTP_SECURE','tls'));
-define('SMTP_FROM_EMAIL', envv('SMTP_FROM_EMAIL', envv('SMTP_USER')));
+define('SMTP_FROM_EMAIL', envv('SMTP_FROM_EMAIL', envv('SMTP_USER', 'no-reply@combrok.co.ke')));
 define('SMTP_FROM_NAME',  envv('SMTP_FROM_NAME', APP_NAME));
-define('NOTIFY_TO_EMAIL', envv('NOTIFY_TO_EMAIL', envv('SMTP_USER')));
+define('NOTIFY_TO_EMAIL', envv('NOTIFY_TO_EMAIL', envv('SMTP_USER', 'info@combrok.co.ke')));
 define('NOTIFY_TO_NAME',  envv('NOTIFY_TO_NAME','Admin'));
 
 define('SOCIAL_X',        envv('SOCIAL_X',''));

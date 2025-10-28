@@ -40,7 +40,7 @@
 <!-- ========== WHY COMBROK SECTION ========== -->
 <section class="wrap grid-2 pad why-combrok">
   <div class="card shadow reveal">
-    <?php pictureTag('Tea-house-4','About image'); ?>
+    <?php pictureTag('tea-house-4','About image'); ?>
   </div>
   <div class="reveal">
     <h2>Why Choose <span class="accent">Combrok</span></h2>
@@ -57,7 +57,7 @@ Combrok catalogue attracts and is supported by over 75 local and international B
 our geographic coverage spans more than 8 African countries.</p>
 </div>
 <div class="card shadow reveal">
-    <?php pictureTag('Tea-house-4','About image'); ?>
+    <?php pictureTag('tea-house-4','About image'); ?>
   </div>
   <div class="reveal">
     <h3>Customer Focus</h3>

@@ -29,43 +29,91 @@
   </div>
 
   <!-- Mini ticker ribbon (inside header, full width, below the main row) -->
-  <div class="mini-ribbon">
-    <div class="mini-ribbon-content wrap">
-      <span class="logo-text">Combrok <span class="accent">Limited</span></span>
-      <div class="ticker" id="newsTicker" aria-label="Latest update">
-        <span class="ticker-track">
-          Empowering East Africa’s Tea Producers &amp; Buyers — delivering excellence through integrity and innovation. • Where agility meets adaptability. • Trusted auction representation, sampling, tasting &amp; market intelligence.
-        </span>
+ <div class="mini-ribbon">
+  <div class="mini-ribbon-content wrap">
+    <span class="logo-text">Combrok <span class="accent">Limited</span></span>
+
+    <div class="ticker" id="newsTicker" aria-label="Latest updates">
+      <div class="ticker-track">
+        <span class="tick">Where agility meets adaptability.</span>
+        <span class="tick">Empowering East Africa’s Tea Producers &amp; Buyers.</span>
+        <span class="tick">Delivering excellence through integrity and innovation.</span>
+        <span class="tick">Trusted auction representation, sampling &amp; Market intelligence.</span>
       </div>
     </div>
   </div>
+</div>
 </header>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  // Burger (unchanged)
   const burger = document.querySelector('.burger');
   const nav = document.querySelector('.nav');
-
   burger?.addEventListener('click', () => {
-    nav?.classList.toggle('open');
+    const opened = nav?.classList.toggle('open');
+    burger.setAttribute('aria-expanded', opened ? 'true' : 'false');
   });
 
-  // Shrink header on scroll
+  // Shrink header on scroll (unchanged)
   const header = document.querySelector('.site-header');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 10) header.classList.add('scrolled');
-    else header.classList.remove('scrolled');
+    header.classList.toggle('scrolled', window.scrollY > 10);
   });
 
-  // Right-to-left ticker: pause on hover
+  // === Sequential R→L ticker (one line at a time) ===
   const ticker = document.getElementById('newsTicker');
-  if (ticker) {
-    const track = ticker.querySelector('.ticker-track');
-    if (track) {
-      void track.offsetWidth; // kick off CSS animation if needed
-      ticker.addEventListener('mouseenter', () => track.style.animationPlayState = 'paused');
-      ticker.addEventListener('mouseleave', () => track.style.animationPlayState = 'running');
-    }
+  if (!ticker) return;
+  const ticks = ticker.querySelectorAll('.tick');
+  if (!ticks.length) return;
+
+  let i = 0;
+  const enterMs = 900;   // slide in
+  const holdMs  = 2600;  // pause fully visible
+  const exitMs  = 800;   // slide out
+  const totalMs = enterMs + holdMs + exitMs;
+
+  let timer;
+
+  function show(index){
+    // reset all
+    ticks.forEach(t => t.classList.remove('active','exit'));
+    const el = ticks[index];
+    // enter
+    el.classList.add('active');
+
+    // schedule exit
+    setTimeout(() => {
+      el.classList.add('exit');
+    }, enterMs + holdMs);
   }
+
+  function cycle(){
+    show(i);
+    i = (i + 1) % ticks.length;
+  }
+
+  function start(){
+    stop();
+    // kick off immediately, then interval
+    cycle();
+    timer = setInterval(cycle, totalMs);
+  }
+  function stop(){
+    if (timer) clearInterval(timer);
+    timer = null;
+  }
+
+  // Start rotation
+  start();
+
+  // Pause on hover / resume on leave
+  ticker.addEventListener('mouseenter', stop);
+  ticker.addEventListener('mouseleave', start);
+
+  // Save resources when not visible
+  document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+  window.addEventListener('blur', stop);
+  window.addEventListener('focus', start);
 });
 </script>
