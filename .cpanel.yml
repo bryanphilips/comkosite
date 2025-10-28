@@ -1,0 +1,13 @@
+# .cpanel.yml
+deployment:
+  tasks:
+    - export DEPLOYPATH="/home2/ezr3ruser36/_deploy/comksite"
+    - /bin/mkdir -p "$DEPLOYPATH"
+    - /bin/rsync -a --delete \
+        --exclude ".git" \
+        --exclude ".cpanel.yml" \
+        --exclude "node_modules" \
+        ./ "$DEPLOYPATH"/
+    # (Optional) normalize perms
+    - /bin/find "$DEPLOYPATH" -type d -exec chmod 755 {} \;
+    - /bin/find "$DEPLOYPATH" -type f -exec chmod 644 {} \;
