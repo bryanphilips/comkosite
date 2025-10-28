@@ -1,7 +1,17 @@
 <?php
-require __DIR__.'/vendor/autoload.php';
+$autoload = __DIR__ . '/vendor/autoload.php';
+if (file_exists($autoload)) {
+  require $autoload;
+} else {
+  http_response_code(500);
+  echo "Missing Composer dependencies. Run <code>composer install</code> on the server (or enable it in .cpanel.yml).";
+  exit;
+}
+
 use Dotenv\Dotenv;
-if (file_exists(__DIR__.'/.env')) { Dotenv::createImmutable(__DIR__)->safeLoad(); }
+if (file_exists(__DIR__.'/.env')) {
+  Dotenv::createImmutable(__DIR__)->safeLoad();
+}
 function envv($k,$d=null){ $v=$_ENV[$k]??$_SERVER[$k]??getenv($k); return $v!==false&&$v!==null?$v:$d; }
 
 define('APP_NAME', envv('APP_NAME','Combrok Limited'));

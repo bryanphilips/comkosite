@@ -2,11 +2,8 @@
 deployment:
   tasks:
     - export DEPLOYPATH="/home2/ezr3ruser36/_deploy/comksite"
-    - /bin/mkdir -p "$DEPLOYPATH"
-    - rsync -a --delete \
-        --exclude ".git" \
-        --exclude ".cpanel.yml" \
-        --exclude "node_modules" \
-        ./ "$DEPLOYPATH"/
+    - if [ -x /opt/cpanel/composer/bin/composer ]; then COMPOSER=/opt/cpanel/composer/bin/composer; elif [ -x /usr/local/bin/composer ]; then COMPOSER=/usr/local/bin/composer; else COMPOSER=composer; fi
+    - $COMPOSER install --no-dev --prefer-dist --no-interaction
+    - /usr/bin/rsync -a --delete --exclude='.git' --exclude='.cpanel.yml' ./ "$DEPLOYPATH"/
     - /bin/find "$DEPLOYPATH" -type d -exec chmod 755 {} \;
     - /bin/find "$DEPLOYPATH" -type f -exec chmod 644 {} \;
