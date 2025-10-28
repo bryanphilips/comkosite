@@ -3,7 +3,7 @@ deployment:
   tasks:
     - export DEPLOYPATH="/home2/ezr3ruser36/_deploy/comksite"
     - /bin/mkdir -p "$DEPLOYPATH"
-    - /bin/rsync -a --delete \
+    - rsync -a --delete \
         --exclude ".git" \
         --exclude ".cpanel.yml" \
         --exclude "node_modules" \
