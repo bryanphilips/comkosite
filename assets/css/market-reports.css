@@ -1,0 +1,212 @@
+/* =======================================================
+   MARKET REPORTS — Premium dashboard (scoped)
+   ======================================================= */
+
+.muted { color:#4b5563; }
+.small { font-size:.92rem; }
+
+/* =======================================================
+   FILTER BAR
+   ======================================================= */
+.mr-filters .filters{
+  display:flex; flex-wrap:wrap; gap:12px; align-items:flex-end;
+  background:linear-gradient(90deg,#EAF6FC,#CFEAF7);
+  border:1px solid #cfeaf7; border-radius:12px; padding:12px 14px;
+}
+
+.mr-filters .field{ display:grid; gap:6px; }
+.mr-filters .field > span{ font-weight:800; color:#0A4E73; letter-spacing:.2px; }
+
+.mr-filters input[type="number"],
+.mr-filters select{
+  appearance:auto;
+  border:1px solid #dbe7f1; border-radius:10px; padding:8px 10px;
+  min-width:160px; font-weight:600; color:#0a3246; background:#fff;
+}
+
+.mr-filters .range{ min-width:280px; }
+.mr-filters .range .range-row{ display:flex; align-items:center; gap:8px; }
+.mr-filters .range .sep{ color:#0A4E73; font-weight:800; }
+.mr-filters .range .chk{
+  display:flex; align-items:center; gap:8px; margin-top:6px; user-select:none;
+  color:#0A4E73; font-weight:600;
+}
+.mr-filters .range .chk input{ transform:translateY(1px); }
+
+.mr-filters .btn{
+  background:#218CCF; color:#fff; border-radius:999px;
+  padding:9px 14px; font-weight:700; border:0; cursor:pointer;
+  transition:all .4s ease; text-decoration:none;
+}
+.mr-filters .btn:hover{ filter:brightness(.96); }
+.mr-filters .btn.ghost{ background:#fff; color:#0A4E73; border:1px solid #cfeaf7; }
+.mr-filters .btn.dl{ font-weight:800; }
+.mr-filters .spacer{ flex:1; }
+
+/* =======================================================
+   KPI GRID
+   ======================================================= */
+.kpi-grid{
+  display:grid; gap:14px;
+  grid-template-columns: repeat(2, 1fr);
+}
+@media(min-width:900px){ .kpi-grid{ grid-template-columns: repeat(4, 1fr); } }
+
+.kpi{
+  background:#fff;
+  border:1px solid #e6eef4;
+  border-radius:14px;
+  padding:14px 16px;
+  box-shadow:0 10px 24px rgba(0,0,0,.06);
+  transform:translateY(10px);
+  opacity:0;
+}
+
+.kpi .label{ color:#0A4E73; font-weight:800; letter-spacing:.2px; }
+.kpi .value{ font-size:1.8rem; font-weight:800; color:#0a3246; line-height:1.25; }
+.kpi .delta{ font-weight:700; font-size:.9rem; }
+.delta.up{ color:#0b7d3a; }
+.delta.down{ color:#b42318; }
+
+/* KPI animation when in view */
+.kpi-grid.in-view .kpi { animation:kpiFadeUp .6s ease forwards; }
+.kpi-grid.in-view .kpi:nth-child(1){ animation-delay:.10s; }
+.kpi-grid.in-view .kpi:nth-child(2){ animation-delay:.25s; }
+.kpi-grid.in-view .kpi:nth-child(3){ animation-delay:.40s; }
+.kpi-grid.in-view .kpi:nth-child(4){ animation-delay:.55s; }
+
+@keyframes kpiFadeUp {
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* =======================================================
+   CHARTS GRID + CARDS
+   ======================================================= */
+.charts-grid{
+  display:grid; gap:18px; grid-template-columns:1fr;
+}
+@media(min-width:1000px){ .charts-grid{ grid-template-columns:1fr 1fr; } }
+
+.card{
+  background:#fff;
+  border:1px solid #e6eef4;
+  border-radius:16px;
+  box-shadow:0 10px 28px rgba(0,0,0,.06);
+  padding:14px;
+  overflow:hidden;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.card.hover:hover{
+  transform:translateY(-2px);
+  box-shadow:0 16px 36px rgba(0,0,0,.12);
+}
+
+.chart-head{ display:flex; align-items:baseline; gap:8px; margin-bottom:8px; }
+.chart-head h3{ margin:0; font-weight:800; color:#0A4E73; }
+.chart-head .sub{ color:#6b7280; font-size:.92rem; }
+
+.chart{ position:relative; min-height:260px; overflow:hidden; }
+.chart svg{ width:100%; height:100%; display:block; stroke-linecap:round; stroke-linejoin:round; }
+
+.donut{ display:grid; place-items:center; min-height:260px; }
+.mr-donut-sold { stroke:#0A68A0; fill:none; }
+
+/* =======================================================
+   TABLE
+   ======================================================= */
+.table-wrap{ overflow:auto; }
+.table{
+  width:100%;
+  border-collapse:separate; border-spacing:0;
+  border-radius:12px; overflow:hidden;
+  box-shadow:0 6px 22px rgba(0,0,0,.05);
+}
+.table thead th{
+  text-align:left;
+  padding:12px 14px;
+  background:#f3f9fe;
+  color:#0A4E73;
+  font-weight:800;
+  border-bottom:2px solid #cfeaf7;
+}
+.table tbody td{
+  padding:12px 14px;
+  border-bottom:1px solid #eef4f8;
+  color:#334155;
+}
+.table tbody tr:nth-child(odd) td{ background:#fbfdff; }
+.table tbody tr:hover td{ background:#f7fbff; }
+
+/* =======================================================
+   ANIMATIONS GATED BY SCROLL (.in-view)
+   ======================================================= */
+
+/* Axes/ticks fade */
+.chart .mr-gridline,
+.chart .mr-axis,
+.chart .mr-tick,
+.chart .mr-axis-label { opacity:0; }
+.chart.in-view .mr-gridline,
+.chart.in-view .mr-axis,
+.chart.in-view .mr-tick,
+.chart.in-view .mr-axis-label {
+  animation:fadeInChart 1.4s ease forwards;
+  animation-delay:.3s;
+}
+@keyframes fadeInChart { to { opacity:1; } }
+
+/* Lines — draw when in view */
+.mr-line-a, .mr-line-b { 
+  stroke-dasharray: var(--path-length, 0);
+  stroke-dashoffset: var(--path-length, 0);
+  animation: drawLine 4s ease forwards;
+ }
+.chart.in-view .mr-line-a,
+.chart.in-view .mr-line-b { animation: drawLine 3s ease forwards; }
+@keyframes drawLine { to { stroke-dashoffset:0; } }
+
+/* Last-point dot pop */
+.mr-dot { opacity:0; transform:scale(0); }
+.chart.in-view .mr-dot {
+  animation:dotPop .5s ease forwards;
+  animation-delay:1.0s;
+}
+@keyframes dotPop { to { opacity:1; transform:scale(1); } }
+.chart svg path.mr-line-a,
+.chart svg path.mr-line-b {
+  shape-rendering: geometricPrecision;
+}
+/* Bars — grow from baseline */
+.mr-bar-off, .mr-bar-sold { transform-origin:bottom; transform:scaleY(0); }
+.chart.in-view .mr-bar-off { animation:growBar .8s ease forwards; }
+.chart.in-view .mr-bar-sold {
+  animation:growBar .8s ease forwards;
+  animation-delay:.15s;
+}
+@keyframes growBar { to { transform:scaleY(1); } }
+
+/* Donut — sweep */
+.mr-donut-sold { stroke-dasharray:570; stroke-dashoffset:570; }
+.donut.in-view .mr-donut-sold { animation:donutFill 1.4s ease-out forwards; }
+@keyframes donutFill { to { stroke-dashoffset:0; } }
+
+/* Table rows — reveal when wrapper in view (JS also sets stagger) */
+#mr-rows tr { opacity:0; transform:translateY(8px); }
+.table-wrap.in-view #mr-rows tr { animation:fadeRow .4s ease forwards; }
+@keyframes fadeRow { to { opacity:1; transform:translateY(0); } }
+
+/* =======================================================
+   GENERAL ENHANCEMENTS
+   ======================================================= */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+}
+
+/* Subtle fade for summary card */
+#mr-summary {
+  opacity:0;
+  transform:translateY(8px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+#mr-summary.in-view { opacity:1; transform:translateY(0); }

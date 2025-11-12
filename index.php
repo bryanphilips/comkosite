@@ -9,7 +9,8 @@ require __DIR__.'/lib/helpers.php';
 $page = $_GET['p'] ?? 'home';
 $allowed = [
   'home','about','services','other-services','auctions',
-  'products','market-reports','events','contact','enquiry','request'
+  'products','market-reports','events','contact','enquiry',
+  'request','private-sale' // ← added
 ];
 if (!in_array($page,$allowed)) $page = 'home';
 
@@ -25,8 +26,10 @@ $metaMap = [
   'contact'        => ['Contact | '.APP_NAME, 'Reach our team for enquiries.', APP_URL.'/assets/img/hero-1.jpg','/contact'],
   'enquiry'        => ['Enquiry & Feedback | '.APP_NAME, 'Share enquiries, feedback or complaints.', APP_URL.'/assets/img/hero-2.jpg','/enquiry'],
   'request'        => ['Request Data | '.APP_NAME, 'Ask for catalogues, reports, or history.', APP_URL.'/assets/img/hero-3.jpg','/request'],
+  'private-sale'   => ['Request Private Sale | '.APP_NAME, 'Request a private sale for CTC or Orthodox teas.', APP_URL.'/assets/img/hero-2.jpg','/private-sale'], // ← added
 ];
-list($t,$d,$img,$slug) = $metaMap[$page];
+
+[$t,$d,$img,$slug] = $metaMap[$page];
 set_meta($t,$d,$img,$slug);
 
 include __DIR__.'/partials/head.php';

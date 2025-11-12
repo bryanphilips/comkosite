@@ -1,0 +1,88 @@
+/* ===== Alternating layout (Home-like) + Crossfade Rotator (scoped) ===== */
+
+.section-pad{ padding-block:56px; }
+.os-alt{ display:grid; gap:56px; }
+
+/* Alternating layout */
+.alt-row{
+  display:grid; align-items:center; gap:32px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 992px){
+  .alt-row{ grid-template-columns: 0.9fr 1.1fr; gap:48px; }
+  .alt-row.alt-reverse .alt-media{ order:2; }
+  .alt-row.alt-reverse .alt-body{  order:1; }
+}
+
+.alt-title{ font-weight:800; letter-spacing:.3px; margin-bottom:8px; color:#0A4E73; }
+.alt-sub{ color:#4b5563; margin-bottom:16px; max-width:700px; line-height:1.6; }
+.premium-bullets{ list-style:none; padding-left:0; margin:0; }
+.premium-bullets li{ padding-left:28px; position:relative; margin-bottom:10px; line-height:1.6; }
+.premium-bullets li::before{
+  content:""; position:absolute; left:0; top:.55em;
+  width:10px; height:10px; border-radius:50%;
+  background:#69B8E3; box-shadow:0 0 0 3px rgba(105,184,227,.25);
+}
+
+/* ===== Image Card ===== */
+.alt-media{ display:flex; justify-content:center; align-items:center; }
+
+.card.soft.why-img{
+  border:4px solid #fff;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 10px 28px rgba(0,0,0,.10);
+  max-width:80%;
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.card.soft.why-img:hover{
+  transform:translateY(-3px);
+  box-shadow:0 16px 36px rgba(0,0,0,.15);
+}
+@media (max-width:991.98px){ .card.soft.why-img{ max-width:100%; } }
+
+/* Ensure picture/img behave */
+picture, img { display:block; width:100%; height:100%; object-fit:cover; border-radius:12px; }
+
+/* ===== Crossfade Rotator (aspect-ratio based) ===== */
+.xfade-rotator{ position:relative; width:100%; }
+.xfade-stack{
+  position:relative;
+  width:100%;
+  aspect-ratio: 16 / 9;     /* guarantees height */
+  min-height:260px;         /* safety for very narrow viewports */
+  border-radius:12px;
+}
+.xfade-slide{
+  position:absolute; inset:0;
+  opacity:0; transition:opacity 1.8s ease;
+}
+.xfade-slide:first-child{ opacity:1; }
+.xfade-slide.is-active{ opacity:1; }
+
+.xfade-indicators{
+  position:absolute; left:50%; bottom:12px;
+  transform:translateX(-50%);
+  display:flex; gap:6px;
+  background:rgba(255,255,255,.6);
+  backdrop-filter:blur(6px);
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(10,78,115,.18);
+  z-index:2;
+}
+.xfade-indicators .dot{
+  width:8px; height:8px; border-radius:50%;
+  background:#9fcdee; opacity:.7;
+  transition:transform .2s ease, opacity .2s ease, background .2s ease;
+}
+.xfade-indicators .dot.active{
+  background:#218CCF; opacity:1; transform:scale(1.1);
+}
+
+/* ===== Lazy Fade-In (no-JS safe) ===== */
+/* Visible by default */
+.lazy-img{ opacity:1; transform:none; transition:opacity .6s ease, transform .6s ease; }
+/* Only fade when JS is live */
+.js picture.is-lazy .lazy-img{ opacity:0; transform:translateY(6px); }
+.js picture.is-lazy .lazy-img.is-loaded{ opacity:1; transform:none; }

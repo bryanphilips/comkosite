@@ -1,0 +1,265 @@
+/* ===========================================================
+   PRODUCTS PAGE — Premium Tea Varieties & Grade Glossary
+   =========================================================== */
+
+/* ===== Top spacing ===== */
+.products-top {
+  padding-top: 8px;
+  padding-bottom: 0;
+}
+
+/* ===== Pills / Filters ===== */
+.pillbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.pill {
+  appearance: none;
+  border: 1px solid #dbe7f1;
+  background: #fff;
+  color: #0A4E73;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.pill:hover {
+  border-color: #b9d6ea;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, .06);
+  transform: translateY(-1px);
+}
+.pill.is-active {
+  background: #0A68A0;
+  color: #fff;
+  border-color: #0A68A0;
+}
+
+/* ===== Grid ===== */
+.tea-grid {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 900px) {
+  .tea-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ===== Card ===== */
+.tea-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid #e6eef4;
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .06);
+  overflow: hidden;
+  transition: all .25s ease;
+}
+.tea-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, .12);
+}
+
+/* ===== Media (Image fills full width) ===== */
+.tea-card .media {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-bottom: 1px solid #eef4f8;
+}
+.tea-card .ratio {
+  position: relative;
+  width: 100%;
+  --ar: 56.25%;
+}
+.tea-card .ratio::before {
+  content: "";
+  display: block;
+  padding-top: var(--ar);
+}
+.tea-card .ratio.ratio-16x9 {
+  --ar: 56.25%;
+}
+
+/* Image fills the card neatly (cropped visually, not distorted) */
+.tea-card .ratio > picture,
+.tea-card .ratio > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* fills card area */
+  object-position: center center;
+  border-radius: 0;       /* remove rounded inside */
+  display: block;
+  transition: transform .6s ease;
+}
+.tea-card:hover .ratio > picture > img,
+.tea-card:hover .ratio > img {
+  transform: scale(1.05); /* zoom on hover */
+}
+
+/* When pictureTag outputs nested <picture><img> */
+.tea-card .ratio > picture > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  border-radius: 0;
+  transition: transform .6s ease;
+}
+
+/* ===== Card Body ===== */
+.tea-card .body {
+  flex: 1;
+  padding: 20px 22px 22px;
+}
+.tea-card h3 {
+  margin: 0 0 6px;
+  font-weight: 800;
+  color: #0A4E73;
+}
+.tea-card .lead {
+  margin: 0 0 10px;
+  color: #334155;
+}
+.bullets {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+.bullets li {
+  position: relative;
+  padding-left: 22px;
+  margin: 6px 0;
+  line-height: 1.55;
+}
+.bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .6em;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #69B8E3;
+  box-shadow: 0 0 0 3px rgba(105, 184, 227, .25);
+}
+
+/* ===== Glossary Card ===== */
+.glossary.card {
+  background: #fff;
+  border: 1px solid #e6eef4;
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .06);
+  padding: 20px;
+}
+.center { text-align: center; }
+.glossary-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 800px) {
+  .glossary-grid { grid-template-columns: 1fr 1fr; }
+}
+.compact { margin: 0; padding-left: 0; list-style: none; }
+.compact li { margin: 6px 0; }
+
+/* ===== CTA strip ===== */
+.cta-wide .cta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 18px 22px;
+  border-radius: 14px;
+  border: 1px solid #CFEAF7;
+  background: linear-gradient(90deg, #EAF6FC, #CFEAF7);
+}
+.cta-wide .btn {
+  background: #218CCF;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.cta-wide .btn:hover {
+  background: #0A68A0;
+  box-shadow: 0 6px 16px rgba(33, 140, 207, .25);
+}
+
+/* ===== Premium Grade Table ===== */
+.shadow-soft {
+  box-shadow: 0 12px 34px rgba(0, 0, 0, .06);
+  border: 1px solid #e6eef4;
+  border-radius: 16px;
+  padding: 22px;
+  background: #fff;
+}
+.center { text-align: center; }
+
+.grade-table-wrap { overflow: auto; margin-top: 14px; }
+.grade-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, .05);
+  font-size: .95rem;
+}
+.grade-table thead th {
+  text-align: left;
+  padding: 14px 16px;
+  font-weight: 800;
+  color: #0A4E73;
+  background: linear-gradient(90deg, #EAF6FC, #D9F0FA);
+  border-bottom: 2px solid #cfeaf7;
+}
+.grade-table tbody td {
+  padding: 12px 16px;
+  vertical-align: top;
+  border-bottom: 1px solid #eef4f8;
+  color: #334155;
+  line-height: 1.5;
+}
+.grade-table tbody tr:nth-child(odd) td { background: #fbfdff; }
+.grade-table tbody tr:hover td { background: #f5faff; }
+
+.grade-table tbody tr.section td {
+  background: #0A4E73;
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: .3px;
+  padding: 12px 16px;
+  border-bottom: none;
+}
+
+/* ===== Badges ===== */
+.badge {
+  display: inline-block;
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .3px;
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+.badge.ctc {
+  background: #E6F6EE;
+  color: #166534;
+  border: 1px solid #bfe9cf;
+}
+.badge.ortho {
+  background: #EAF6FF;
+  color: #0A4E73;
+  border: 1px solid #cfeaf7;
+}

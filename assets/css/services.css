@@ -1,0 +1,201 @@
+/* ===========================================================
+   SERVICES v3 — Center-pivot alternating (timeline style)
+   =========================================================== */
+
+.services-page .wrap {
+  max-width: 1100px;
+  margin-inline: auto;
+  padding-inline: 12px;
+}
+
+/* ===== Card per major section ===== */
+.svc-card {
+  background: #fff;
+  border: 1px solid var(--border, #e6eef4);
+  border-radius: 20px;
+  padding: 32px 22px;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.06);
+  margin: 32px 0 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Centered section heading */
+.svc-head {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.svc-title {
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.1rem);
+  color: var(--brand-blue-800, #0A4E73);
+  margin: 0 0 10px;
+}
+.svc-sub {
+  max-width: 800px;
+  margin: 0 auto;
+  color: #4b5563;
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+/* ===== Inner alternating items ===== */
+.svc-items {
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+  position: relative;
+}
+
+/* decorative faint center guide line */
+.svc-items::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, #e4eff7, #c7e4f5);
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+/* each mini row pivots around center axis */
+.svc-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  text-align: left;
+  flex-wrap: wrap;
+  transform-origin: center;
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.svc-item._in {
+  opacity: 1;
+  transform: none;
+}
+
+/* inner image box */
+.svc-img {
+  flex: 0 0 300px;
+  height: 200px;
+  border-radius: 16px;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 0 0 10px #fff, 0 10px 26px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+.svc-img picture,
+.svc-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* text */
+.svc-copy {
+  flex: 0 1 420px;
+  max-width: 100%;
+}
+.svc-item-title {
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+  color: #0b1720;
+}
+.svc-item-text {
+  color: #4b5563;
+  line-height: 1.6;
+  font-size: 0.98rem;
+  margin: 0;
+}
+
+/* left / right offset alternation */
+.svc-item:nth-child(odd) {
+  justify-content: flex-end;
+  text-align: right;
+}
+.svc-item:nth-child(odd) .svc-copy {
+  order: 2;
+}
+.svc-item:nth-child(odd) .svc-img {
+  order: 1;
+  transform: translateX(-20px);
+}
+.svc-item:nth-child(even) {
+  justify-content: flex-start;
+  text-align: left;
+}
+.svc-item:nth-child(even) .svc-copy {
+  order: 1;
+}
+.svc-item:nth-child(even) .svc-img {
+  order: 2;
+  transform: translateX(20px);
+}
+
+/* hover subtle lift */
+.svc-item:hover .svc-img {
+  transform: translateY(-6px) scale(1.02);
+  transition: transform 0.4s ease;
+}
+
+/* Responsive: stack centered */
+@media (max-width: 900px) {
+  .svc-items::before {
+    left: 10px;
+    width: 2px;
+  }
+  .svc-item {
+    justify-content: flex-start;
+    text-align: left;
+    gap: 14px;
+  }
+  .svc-item .svc-img {
+    flex: 0 0 100%;
+    max-width: 100%;
+    height: 220px;
+    transform: none !important;
+  }
+  .svc-copy {
+    flex: 1 1 100%;
+  }
+}
+
+/* CTA stays full width */
+.cta-wide-bleed {
+  margin-top: 64px;
+  background: linear-gradient(90deg, #EAF6FC, #CFEAF7);
+  border-top: 1px solid #CFEAF7;
+  border-bottom: 1px solid #e6eef4;
+}
+.cta-wide-bleed .wrap {
+  padding: 52px 12px;
+  max-width: 1180px;
+  margin-inline: auto;
+}
+.cta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.cta-row .btn.btn-brand {
+  background: var(--brand-blue-600, #218CCF);
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.75rem 1.4rem;
+  border: 0;
+  box-shadow: 0 10px 22px rgba(15, 109, 169, 0.18),
+    0 4px 10px rgba(15, 109, 169, 0.12);
+}
+.cta-row .btn.btn-brand:hover {
+  background: #187fc3;
+}

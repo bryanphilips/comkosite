@@ -1,0 +1,44 @@
+[
+  {
+    "date": "2025-09-24T09:00:00+03:00",
+    "title": "Launch of First-Ever Orthodox Tea Auction",
+    "location": "East African Tea Trade Association – Mombasa",
+    "description": "Celebrating the milestone of introducing Orthodox tea trading in Kenya.",
+    "ics": "/assets/events/orthodox-tea-auction.ics"
+  },
+  {
+    "date": "2025-10-22T09:00:00+03:00",
+    "title": "Upcoming Tea Auction (Sale 40)",
+    "location": "Tea Board of Kenya / EATTA, Mombasa",
+    "description": "Regular weekly sale of CTC and Orthodox teas.",
+    "ics": "/assets/events/tea-auction-sale40.ics"
+  },
+  {
+    "date": "2025-10-29T16:00:00+03:00",
+    "title": "Market Insights Webinar – Tea & Agri Exports",
+    "location": "Online (Webinar)",
+    "description": "Quarterly analysis on global tea demand, pricing and logistics.",
+    "ics": "/assets/events/market-insights-webinar.ics"
+  },
+  {
+    "date": "2025-11-28T18:00:00+03:00",
+    "title": "Gala Dinner – Industry Networking Evening",
+    "location": "PrideInn Hotel, Nairobi",
+    "description": "Annual end-year dinner for tea industry professionals and partners.",
+    "ics": "/assets/events/gala-dinner-2025.ics"
+  },
+  {
+    "date": "2025-12-10T10:00:00+03:00",
+    "title": "Tea Tasting Expo – Specialty & Orthodox Teas",
+    "location": "Combrok Offices, Nairobi",
+    "description": "Interactive session featuring producers and buyers with guided tasting.",
+    "ics": "/assets/events/tea-tasting-expo.ics"
+  },
+  {
+    "date": "2025-12-17T07:30:00+03:00",
+    "title": "Golf Tournament & Fundraiser — Mombasa Sports Club",
+    "location": "Mombasa Sports Club, Mombasa",
+    "description": "Charity golf event to support sustainability initiatives.",
+    "ics": "/assets/events/golf-tournament-2025.ics"
+  }
+]
