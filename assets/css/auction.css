@@ -138,3 +138,53 @@
   transform:none !important;
   filter:none !important;
 }
+.schedule-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  border-bottom: 1px solid #e6eef4;
+  padding-bottom: 1rem;
+}
+
+.schedule-header h2 {
+  font-weight: 800;
+  color: var(--brand-dark, #0A4E73);
+}
+
+.schedule-header p {
+  color: #64748b;
+  margin: .3rem 0 0;
+}
+
+.download-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem;
+}
+
+.btn-download {
+  background: var(--brand, #218CCF);
+  color: #fff;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .6rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background .25s ease, transform .2s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,.08);
+}
+
+.btn-download:hover {
+  background: var(--brand-dark, #0A4E73);
+  transform: translateY(-1px);
+}
+
+.btn-download svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}

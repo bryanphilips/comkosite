@@ -8,7 +8,7 @@ $services = [
     'items'    => [
       ['title' => 'Sampling & Grading', 'text' => 'We arrange representative samples for every lot (e.g., 4kg splits) and ensure distribution to buyers is accurate and timely.', 'img' => 'sampling'],
       ['title' => 'Tasting & Quality Evaluation', 'text' => 'Our tasting panel evaluates flavour, aroma, liquor and appearance—translating findings into clear, actionable guidance.', 'img' => 'sample-cup'],
-      ['title' => 'Valuation & Recommendation', 'text' => 'We attach pragmatic values based on quality and live market signals, and advise on targeted quality improvements.', 'img' => 'valuation'],
+      ['title' => 'Valuation & Recommendation', 'text' => 'We attach pragmatic values based on quality and live market signals, and advise on targeted quality improvements.', 'img' => 'sampled-heart'],
       ['title' => 'Catalogue Preparation', 'text' => 'We compile the official catalogue—origin, grades, weights, packaging, and tasting notes—presented clearly for buyers.', 'img' => 'catalogue'],
       ['title' => 'Lot Segmentation & Packaging', 'text' => 'We guide optimal lot splits (e.g., 20/40/60) and packing to enhance appeal, access and logistics.', 'img' => 'lots'],
       ['title' => 'Factory & Production Advisory', 'text' => 'We visit factories and give practical recommendations on plucking standards, manufacture, handling and warehousing.', 'img' => 'factory'],
@@ -32,7 +32,7 @@ $services = [
       ['title' => 'Forecasts & Projections', 'text' => 'We combine quality signals with demand outlooks to guide production plans, grade mix and price expectations.', 'img' => 'catalogue'],
       ['title' => 'Market Fit & Buyer Needs', 'text' => 'We align grades and cup profiles to target markets and buyer preferences—including blending needs.', 'img' => 'sample-cup'],
       ['title' => 'Storage, Warehousing & Handling', 'text' => 'We protect value through best-practice storage, handling and delivery coordination.', 'img' => 'factory'],
-      ['title' => 'Risk Management', 'text' => 'We navigate disputes, delays and downturns with structured contracts and proactive intelligence.', 'img' => 'tea-house-4'],
+      ['title' => 'Risk Management', 'text' => 'We navigate disputes, delays and downturns with structured contracts and proactive intelligence.', 'img' => 'tea_harvest'],
     ],
   ],
   [
@@ -40,7 +40,7 @@ $services = [
     'blurb'    => 'We close the loop with transparent reporting, timely remittance, and feedback that drives continuous improvement.',
     'items'    => [
       ['title' => 'Account Sales & Remittance', 'text' => 'We issue detailed account sales and remit proceeds promptly within auction timelines.', 'img' => 'catalogue'],
-      ['title' => 'Claims Handling & Disputes', 'text' => 'We manage buyer claims professionally, liaising with warehouses and producers to resolve quickly.', 'img' => 'tea-house-4'],
+      ['title' => 'Claims Handling & Disputes', 'text' => 'We manage buyer claims professionally, liaising with warehouses and producers to resolve quickly.', 'img' => 'plantation_landscape'],
       ['title' => 'Performance Monitoring & Feedback', 'text' => 'We analyse prices, buyer behaviour and unsolds—and share insights to refine your strategy.', 'img' => 'valuation'],
     ],
   ],
@@ -48,10 +48,10 @@ $services = [
     'category' => 'Value-Added & Consultancy Services',
     'blurb'    => 'We go beyond selling—building long-term capability through audits, training, strategy and benchmarking.',
     'items'    => [
-      ['title' => 'Audit & Consultancy', 'text' => 'We support audits, traceability and compliance, and design practical improvement programmes.', 'img' => 'tea-house-3'],
+      ['title' => 'Audit & Consultancy', 'text' => 'We support audits, traceability and compliance, and design practical improvement programmes.', 'img' => 'tea_harvest'],
       ['title' => 'Technical Visits & Training', 'text' => 'On-site sessions on plucking, leaf handling and manufacture—often alongside buyer visits.', 'img' => 'factory'],
       ['title' => 'Strategic Planning', 'text' => 'We help prioritise grades, optimise quality-yield balance, and target the right markets.', 'img' => 'sample'],
-      ['title' => 'Brand & Positioning', 'text' => 'We advise on differentiation, certification and access to premium and niche segments.', 'img' => 'TEA-HOUSE-2'],
+      ['title' => 'Brand & Positioning', 'text' => 'We advise on differentiation, certification and access to premium and niche segments.', 'img' => 'sampled-heart'],
       ['title' => 'Data & Benchmarking', 'text' => 'We benchmark your performance across grades and seasons to show where to push or pivot.', 'img' => 'sample-cup'],
     ],
   ],

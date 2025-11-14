@@ -19,7 +19,7 @@
     <!-- Slides -->
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <?php pictureTag('new-tea-house-1','Combrok Offices'); ?>
+        <?php pictureTag('plantation_landscape-2','Combrok Offices'); ?>
       </div>
       <div class="carousel-item">
         <?php pictureTag('plantation-1','Tea Plantation'); ?>
@@ -113,7 +113,7 @@
       <div class="col-lg-6">
         <div class="card soft why-img shadow-sm">
           <div class="ratio ratio-16x9">
-            <?php pictureTag('tea-house-4','About image'); ?>
+            <?php pictureTag('plantation_landscape-3','About image'); ?>
           </div>
         </div>
       </div>
@@ -121,30 +121,37 @@
       <div class="col-lg-6">
         <h2 class="display-6 fw-bold mb-3">Why Choose <span class="accent">Combrok</span></h2>
         <p class="lead text-secondary">
-          Combrok is a trusted partner serving stakeholders across the tea value chain. Licensed nearly five decades ago
-          as the third registered Tea Broker in Africa, we now partner with a wide spectrum of Producers and Buyers across the region.
+          Combrok is a leading tea brokerage firm, commanding close to <strong>five decades</strong> of trusted
+expertise in serving stakeholders across the entire tea value chain. As the third
+registered Tea Broker in Africa, we have built enduring partnerships with a diverse
+network of Producers and Buyers throughout the region.
         </p>
         <p>
-          Operating within the Mombasa Auction Centre, our last 5-year average annual volume exceeds <strong>60M kgs</strong>.
-          Our catalogues attract and are supported by over <strong>75 local and international Buyers</strong>, with a
-          geographic coverage spanning <strong>8+ African countries</strong>.
+          Operating from the heart of the Mombasa Auction Centre, we handle an impressive
+average annual volume of over <strong>60 Million Kilograms</strong> of tea.
+          Our catalogues consistently
+attract more than <strong>75 local and international Buyers</strong>, local and international Buyers, 
+with a geographic footprint spanning <strong>8+ African countries</strong>. Whether you&#39;re a Producer seeking market access or a Buyer looking for quality and
+consistency, Combrok is your trusted partner in navigating the dynamic tea trade.
         </p>
       </div>
 
       <div class="col-lg-6 order-lg-2">
         <div class="card soft why-img shadow-sm">
           <div class="ratio ratio-16x9">
-            <?php pictureTag('new-tea-house-1','Customer focus image'); ?>
+            <?php pictureTag('plantation_landscape','Customer focus image'); ?>
           </div>
         </div>
       </div>
 
       <div class="col-lg-6 order-lg-1">
         <h3 class="fw-semibold mb-3">Customer Focus</h3>
+        <p>At Combrok, our customers are at the heart of everything we do.</p>
         <ul class="list-unstyled premium-bullets">
-          <li>We deeply understand our customers, end users and influencers — and what they value most.</li>
-          <li>We innovate and differentiate around what creates value — and consistently deliver on our promises.</li>
-          <li>We collaborate across the organization to respond quickly and effectively to customer needs.</li>
+          <li>We cultivate a deep understanding of our customers, end users, and key influencers — recognizing what drives their decisions and what they value most.</li>
+          <li>We innovate with purpose, differentiating around what truly creates value and consistently delivering on our promises.</li>
+          <li>We foster seamless collaboration across our organization to respond swiftly and effectively to evolving customer needs.</li>
+          <p><strong>Our commitment is simple: listen deeply, act decisively, and earn trust through every interaction</strong></p>
         </ul>
       </div>
 
@@ -157,7 +164,7 @@
     <div class="wrap">
       <h2 class="auction-heading">The Auction Process</h2>
       <p class="auction-subtitle">
-        Our streamlined auction process ensures transparency and efficiency from sample evaluation to final sale.
+        <strong>Our streamlined auction process ensures transparency and efficiency from sample reception to the final sale.</strong>
       </p>
 
       <div class="auction-steps">
@@ -165,23 +172,22 @@
         <div class="auction-grid">
           <div class="auction-step">
             <div class="auction-circle">1</div>
-            <h3>Sample Collection</h3>
-            <p>Tea samples are collected from estates and evaluated by our expert tasters.</p>
+            <h3>Cataloging</h3>
+            
           </div>
           <div class="auction-step">
             <div class="auction-circle">2</div>
-            <h3>Quality Grading</h3>
-            <p>Each sample is meticulously graded based on appearance, aroma, taste, and liquor quality.</p>
+            <h3>Sampling</h3>
+            
           </div>
           <div class="auction-step">
             <div class="auction-circle">3</div>
-            <h3>Auction Catalog</h3>
-            <p>Allocated teas are listed in our catalog with detailed descriptions and quality notes.</p>
-          </div>
+            <h3>Tasting & Valuation</h3>
+           </div>
           <div class="auction-step">
             <div class="auction-circle">4</div>
             <h3>Auction & Settlement</h3>
-            <p>Buyers bid on lots during the auction days, with prompt payment and delivery coordination.</p>
+            
           </div>
         </div>
       </div>

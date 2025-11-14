@@ -205,7 +205,7 @@ function send_mail(string $toEmail, string $toName, string $subject, string $bod
 
       return $mail->send();
     } catch (\Throwable $e) {
-      if (APP_DEBUG) error_log('send_mail PHPMailer error: '.$e->getMessage());
+      error_log('send_mail PHPMailer error: '.$e->getMessage());
       return false;
     }
   }

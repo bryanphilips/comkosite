@@ -247,6 +247,11 @@
             <td><strong>OR / ORL</strong></td>
             <td><strong>Ordinary / Ordinary Leaf</strong> — factory-specific secondary orthodox grades, typically made from late infusions or off-sizes; liquor remains bright and drinkable.</td>
           </tr>
+           <tr>
+            <td><span class="badge ortho">Orthodox</span> Secondary</td>
+            <td><strong>BOPD</strong></td>
+            <td><strong>Broken Orange Pekoe Dust</strong> — Strong, fine broken leaf grade; quick infusing, bright coppery liquor, brisk cup.</td>
+          </tr>
 
         </tbody>
       </table>

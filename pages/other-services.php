@@ -96,9 +96,9 @@ function responsivePicture(string $base, string $alt = '', string $class = ''): 
     <div class="alt-media">
       <div class="card soft why-img xfade-rotator">
         <div class="ratio ratio-16x9 xfade-stack">
-          <div class="xfade-slide"><?php responsivePicture('valuation','Consultancy A'); ?></div>
+          <div class="xfade-slide"><?php responsivePicture('p_close-up','Consultancy A'); ?></div>
           <div class="xfade-slide"><?php responsivePicture('factory','Consultancy B'); ?></div>
-          <div class="xfade-slide"><?php responsivePicture('valuation','Consultancy C'); ?></div>
+          <div class="xfade-slide"><?php responsivePicture('tea_roasting','Consultancy C'); ?></div>
         </div>
         <div class="xfade-indicators">
           <span class="dot"></span><span class="dot"></span><span class="dot"></span>

@@ -60,7 +60,7 @@ try {
   // ----- Throttle (session + simple burst per IP)
   $now  = time();
   $last = (int)($_SESSION['last_enquiry_time'] ?? 0);
-  if ($now - $last < 60) api_fail('Please wait a moment before sending again.', 429);
+  if ($now - $last < 20) api_fail('Please wait a moment before sending again.', 429);
 
   $ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
   $bucketDir = sys_get_temp_dir() . '/enquiry_buckets';

@@ -9,8 +9,8 @@ require __DIR__.'/lib/helpers.php';
 $page = $_GET['p'] ?? 'home';
 $allowed = [
   'home','about','services','other-services','auctions',
-  'products','market-reports','events','contact','enquiry',
-  'request','private-sale' // ← added
+  'products','market-reports','events','sustainability','contact','enquiry',
+  'request','private-sale'
 ];
 if (!in_array($page,$allowed)) $page = 'home';
 
@@ -23,10 +23,16 @@ $metaMap = [
   'products'       => ['Products | '.APP_NAME, 'Tea varieties we broker.', APP_URL.'/assets/img/varieties.jpg','/products'],
   'market-reports' => ['Market Reports | '.APP_NAME, 'Teas offered vs sold, weekly metrics.', APP_URL.'/assets/img/hero-2.jpg','/market-reports'],
   'events'         => ['Events | '.APP_NAME, 'Calendar of upcoming auctions and sessions.', APP_URL.'/assets/img/hero-3.jpg','/events'],
+  'sustainability' => [
+    'Sustainability | '.APP_NAME,
+    'Tea sustainability, farmer empowerment, climate resilience and impact.',
+    APP_URL.'/assets/img/hero-2.jpg', // swap to a specific image later if you like
+    '/sustainability'
+  ],
   'contact'        => ['Contact | '.APP_NAME, 'Reach our team for enquiries.', APP_URL.'/assets/img/hero-1.jpg','/contact'],
   'enquiry'        => ['Enquiry & Feedback | '.APP_NAME, 'Share enquiries, feedback or complaints.', APP_URL.'/assets/img/hero-2.jpg','/enquiry'],
   'request'        => ['Request Data | '.APP_NAME, 'Ask for catalogues, reports, or history.', APP_URL.'/assets/img/hero-3.jpg','/request'],
-  'private-sale'   => ['Request Private Sale | '.APP_NAME, 'Request a private sale for CTC or Orthodox teas.', APP_URL.'/assets/img/hero-2.jpg','/private-sale'], // ← added
+  'private-sale'   => ['Request Private Sale | '.APP_NAME, 'Request a private sale for CTC or Orthodox teas.', APP_URL.'/assets/img/hero-2.jpg','/private-sale'],
 ];
 
 [$t,$d,$img,$slug] = $metaMap[$page];

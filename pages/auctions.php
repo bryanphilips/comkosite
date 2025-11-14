@@ -30,14 +30,23 @@ function pictureTagSolid(string $base, string $alt = '', string $class = ''): vo
       <h2>Auction Schedule</h2>
       <p>Plan your participation with our upcoming auction timetable.</p>
     </div>
-    <a class="btn btn-download" href="/assets/data/Auction Schedule - January 2026 - June 2026.pdf"
-       target="_blank" rel="noopener">
-      Auction Schedule (2026)
-    </a>
-    <a class="btn btn-download" href="/assets/data/Orthodox Tea Auction Schedule.pdf"
-       target="_blank" rel="noopener">
-      Orthodox Schedule (2025)
-    </a>
+    <div class="download-buttons">
+      <a class="btn btn-download" href="/assets/data/Auction Schedule - January 2026 - June 2026.pdf"
+         target="_blank" rel="noopener">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 16a1 1 0 0 1-.71-.29l-5-5a1 1 0 0 1 1.42-1.42L11 12.59V3a1 1 0 0 1 2 0v9.59l3.29-3.3a1 1 0 0 1 1.42 1.42l-5 5a1 1 0 0 1-.71.29zM5 19a1 1 0 0 1 0-2h14a1 1 0 0 1 0 2H5z"/>
+        </svg>
+        <span>Auction Schedule (2026)</span>
+      </a>
+
+      <a class="btn btn-download" href="/assets/data/Orthodox Tea Auction Schedule.pdf"
+         target="_blank" rel="noopener">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 16a1 1 0 0 1-.71-.29l-5-5a1 1 0 0 1 1.42-1.42L11 12.59V3a1 1 0 0 1 2 0v9.59l3.29-3.3a1 1 0 0 1 1.42 1.42l-5 5a1 1 0 0 1-.71.29zM5 19a1 1 0 0 1 0-2h14a1 1 0 0 1 0 2H5z"/>
+        </svg>
+        <span>Orthodox Schedule (2025)</span>
+      </a>
+    </div>
   </div>
 </section>
 

@@ -2,8 +2,16 @@
 /* partials/header.php — Fixed navbar + fixed mini-ribbon (premium) */
 $current = $_GET['p'] ?? 'home';
 $tabs = [
-  'about'=>'About','services'=>'Services','other-services'=>'Other Services','auctions'=>'Auctions',
-  'products'=>'Products','market-reports'=>'Market Reports','events'=>'Events','contact'=>'Contact','enquiry'=>'Enquiry'
+  'about'          => 'About',
+  'services'       => 'Services',
+  'other-services' => 'Other Services',
+  'auctions'       => 'Auctions',
+  'products'       => 'Products',
+  'market-reports' => 'Market Reports',
+  'events'         => 'Events',
+  'sustainability' => 'Sustainability', // ← NEW
+  'contact'        => 'Contact',
+  'enquiry'        => 'Enquiry'
 ];
 ?>
 <nav class="navbar navbar-expand-lg bg-white navbar-light fixed-top premium-navbar">
