@@ -53,7 +53,7 @@
       <span class="i">🌿</span><strong>50+</strong><small>Years of Brokerage</small>
     </div>
     <div class="stat-card">
-      <span class="i">🏷️</span><strong>85+</strong><small>Garden Marks</small>
+      <span class="i">🏷️</span><strong>70+</strong><small>Garden Marks</small>
     </div>
     <div class="stat-card">
       <span class="i">📦</span><strong>25K+</strong><small>Lots / Year</small>
@@ -62,7 +62,7 @@
       <span class="i">⚖️</span><strong>60M+</strong><small>Kilos Per Year</small>
     </div>
     <div class="stat-card">
-      <span class="i">🤝</span><strong>70+</strong><small>Buyers</small>
+      <span class="i">🤝</span><strong>75+</strong><small>Buyers</small>
     </div>
     <div class="stat-card">
       <span class="i">🌍</span><strong>8</strong><small>Countries Served</small>
@@ -86,7 +86,7 @@
       </div>
       <div class="col-6 col-md-4 col-lg-3">
         <div class="metric cardy">
-          <span class="i">🏷️</span><div><strong>85+</strong><div>Garden Marks</div></div>
+          <span class="i">🏷️</span><div><strong>70+</strong><div>Garden Marks</div></div>
         </div>
       </div>
       <div class="col-6 col-md-4 col-lg-3">
@@ -130,7 +130,7 @@ network of Producers and Buyers throughout the region.
           Operating from the heart of the Mombasa Auction Centre, we handle an impressive
 average annual volume of over <strong>60 Million Kilograms</strong> of tea.
           Our catalogues consistently
-attract more than <strong>75 local and international Buyers</strong>, local and international Buyers, 
+attract more than <strong>75 local and international Buyers</strong>, 
 with a geographic footprint spanning <strong>8+ African countries</strong>. Whether you&#39;re a Producer seeking market access or a Buyer looking for quality and
 consistency, Combrok is your trusted partner in navigating the dynamic tea trade.
         </p>

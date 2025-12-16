@@ -7,9 +7,9 @@ $services = [
     'blurb'    => 'We prepare your teas for market with disciplined sampling, rigorous tasting, and clear valuation—so every lot reaches buyers with confidence.',
     'items'    => [
       ['title' => 'Sampling & Grading', 'text' => 'We arrange representative samples for every lot (e.g., 4kg splits) and ensure distribution to buyers is accurate and timely.', 'img' => 'sampling'],
-      ['title' => 'Tasting & Quality Evaluation', 'text' => 'Our tasting panel evaluates flavour, aroma, liquor and appearance—translating findings into clear, actionable guidance.', 'img' => 'sample-cup'],
+      ['title' => 'Tasting & Quality Evaluation', 'text' => 'Our tasting panel evaluates leaf and liquor quality – translating findings into clear actionable guidance.', 'img' => 'sample-cup'],
       ['title' => 'Valuation & Recommendation', 'text' => 'We attach pragmatic values based on quality and live market signals, and advise on targeted quality improvements.', 'img' => 'sampled-heart'],
-      ['title' => 'Catalogue Preparation', 'text' => 'We compile the official catalogue—origin, grades, weights, packaging, and tasting notes—presented clearly for buyers.', 'img' => 'catalogue'],
+      ['title' => 'Catalogue Preparation', 'text' => 'We compile the official catalogue—origin, grades, weights, packaging, and tasting notes—presented clearly for buyers and producers.', 'img' => 'catalogue'],
       ['title' => 'Lot Segmentation & Packaging', 'text' => 'We guide optimal lot splits (e.g., 20/40/60) and packing to enhance appeal, access and logistics.', 'img' => 'lots'],
       ['title' => 'Factory & Production Advisory', 'text' => 'We visit factories and give practical recommendations on plucking standards, manufacture, handling and warehousing.', 'img' => 'factory'],
     ],

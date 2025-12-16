@@ -53,15 +53,36 @@
 
       <!-- Contact -->
       <div class="col-md-6 col-lg-5">
-        <h5 class="fw-bold mb-3 text-uppercase" style="color:#69B8E3;">Contact</h5>
-        <?php $emailSafe = htmlspecialchars(NOTIFY_TO_EMAIL ?? '', ENT_QUOTES, 'UTF-8'); ?>
-        <p class="mb-1">
-          <i class="bi bi-envelope me-2" style="color:#7FC3E7;"></i>
-          <?= $emailSafe !== '' ? "<a href='mailto:$emailSafe' class='text-decoration-none' style='color:#EAF6FC;'>$emailSafe</a>" : '—' ?>
-        </p>
-        <p class="mb-0"><i class="bi bi-clock me-2" style="color:#7FC3E7;"></i>Mon–Fri 9:00–17:00</p>
-      </div>
-    </div>
+  <h5 class="fw-bold mb-3 text-uppercase" style="color:#69B8E3;">Contact</h5>
+
+  <?php $emailSafe = htmlspecialchars(NOTIFY_TO_EMAIL ?? '', ENT_QUOTES, 'UTF-8'); ?>
+
+  <!-- Email -->
+  <p class="mb-1">
+    <i class="bi bi-envelope me-2" style="color:#7FC3E7;"></i>
+    <?= $emailSafe !== '' 
+      ? "<a href='mailto:$emailSafe' class='text-decoration-none' style='color:#EAF6FC;'>$emailSafe</a>" 
+      : '—' ?>
+  </p>
+
+  <!-- Phone Number -->
+  <p class="mb-1">
+    <i class="bi bi-telephone me-2" style="color:#7FC3E7;"></i>
+    <a href="tel:+254710513324" class="text-decoration-none" style="color:#EAF6FC;">
+      +254 710 513 324
+    </a>
+    <span style="color:#EAF6FC;"> / </span>
+    <a href="tel:+254741399995" class="text-decoration-none" style="color:#EAF6FC;">
+      +254 741 399 995
+    </a>
+  </p>
+
+  <!-- Working hours -->
+  <p class="mb-0">
+    <i class="bi bi-clock me-2" style="color:#7FC3E7;"></i>
+    Mon–Fri 9:00–17:00
+  </p>
+</div>
 
     <hr class="opacity-25 my-4" style="border-color:#69B8E3;">
 

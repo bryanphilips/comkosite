@@ -25,7 +25,7 @@
         <h3>CTC Black</h3>
         <p class="lead">Our core auction workhorse—clean, bright liquors with brisk cup and good color.</p>
         <ul class="bullets">
-          <li><strong>Common Grades:</strong> BP1, PF1, PD, Dust</li>
+          <li><strong>Common Grades:</strong> BP1, PF1, PD, Dust1</li>
           <li><strong>Typical Profile:</strong> Bright, brisk, colory; blends well; strong with milk.</li>
           <li><strong>Use Cases:</strong> Mainstream blends, retail packs, food-service.</li>
         </ul>
@@ -43,7 +43,7 @@
         <h3>Orthodox Black</h3>
         <p class="lead">Leafy teas with distinct origin character and well-made leaf styles.</p>
         <ul class="bullets">
-          <li><strong>Common Grades:</strong> OP, BOP, FOP, GFOP, TGFOP</li>
+          <li><strong>Common Grades:</strong> Large, Medium, Medium, Broken, Fannings, secondary</li>
           <li><strong>Typical Profile:</strong> Aromatic, layered, bright liquor; origin-specific nuance.</li>
           <li><strong>Use Cases:</strong> Specialty retail, premium blends, direct market programs.</li>
         </ul>

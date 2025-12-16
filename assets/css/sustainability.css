@@ -67,7 +67,237 @@
   border:1px solid rgba(255,255,255,.25);
 }
 
-/* Pillars */
+/* === Hero layout with awards slider =================================== */
+
+.hero-layout{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:32px;
+  flex-wrap:wrap;
+}
+
+.hero-copy{
+  flex:1 1 320px;
+  min-width:280px;
+}
+
+.hero-awards{
+  flex:0 0 320px;
+  max-width:360px;
+  background:rgba(15,23,42,0.18);
+  border-radius:18px;
+  padding:14px 14px 16px;
+  backdrop-filter:blur(4px);
+  border:1px solid rgba(148, 163, 184, 0.6);
+  color:#e5f4ff;
+}
+/* === Image-only zoom mode for awards card ======================= */
+
+.hero-awards.image-only{
+  padding:0;
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid rgba(148,163,184,0.7);
+  background:transparent;
+}
+
+/* Hide heading + body + dots when in full-image mode */
+.hero-awards.image-only .hero-awards-head,
+.hero-awards.image-only .award-body,
+.hero-awards.image-only .hero-awards-dots{
+  display:none;
+}
+
+/* Let the slider + slide fill the whole card */
+.hero-awards.image-only .hero-awards-slider{
+  min-height:0;
+  height:100%;
+}
+
+.hero-awards.image-only .award-slide{
+  display:block;          /* ensure the active slide fills */
+  padding:0;
+}
+
+/* Image fills the card */
+.hero-awards.image-only .award-image{
+  flex:1 1 auto;
+  width:100%;
+  height:100%;
+}
+
+.hero-awards.image-only .award-image picture,
+.hero-awards.image-only .award-image img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* Cursor hints */
+.award-image{
+  cursor:zoom-in;
+}
+.hero-awards.image-only .award-image{
+  cursor:zoom-out;
+}
+.hero-awards-head{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  margin-bottom:10px;
+  align-items: center;
+}
+.hero-awards-head .badge{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  font-size:.75rem;
+  font-weight:700;
+  padding:.2rem .55rem;
+  border-radius:999px;
+  background:rgba(34,197,94,0.14);
+  color:#bbf7d0;
+  border:1px solid rgba(34,197,94,0.6);
+}
+.hero-awards-head h2{
+  margin:0;
+  font-size:1.05rem;
+  font-weight:800;
+  color:#f9fafe;
+}
+
+/* Slider – full image with overlay text */
+.hero-awards-slider{
+  position:relative;
+  min-height:220px;
+  border-radius:16px;
+  overflow:hidden;
+}
+
+.award-slide{
+  position:absolute;
+  inset:0;
+  display:none;
+}
+.award-slide.active{
+  display:block;
+}
+
+.award-image{
+  position:absolute;
+  inset:0;
+}
+.award-image picture,
+.award-image img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* Overlay text on top of image */
+.award-body{
+  position:absolute;
+  inset:0;
+  padding:14px 14px 12px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  background:linear-gradient(
+    to top,
+    rgba(15,23,42,0.90),
+    rgba(15,23,42,0.35) 55%,
+    transparent 100%
+  );
+  font-size:.9rem;
+}
+.award-body h3{
+  margin:0 0 4px;
+  font-size:.95rem;
+  font-weight:800;
+  color:#f9fafb;
+}
+.award-body p{
+  margin:0 0 4px;
+  line-height:1.45;
+  color:#e5f4ff;
+
+  /* show only one line by default */
+  display:-webkit-box;
+  -webkit-line-clamp:1;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.award-meta{
+  font-size:.82rem;
+  opacity:.85;
+}
+.award-meta span{
+  font-weight:700;
+}
+
+/* Expanded state when clicking "More" */
+.award-body.expanded p{
+  -webkit-line-clamp:unset;
+  max-height:none;
+}
+
+/* More/Less button */
+.award-more{
+  margin-top:4px;
+  align-self:flex-start;
+  background:transparent;
+  border:0;
+  color:#bbf7d0;
+  font-size:.78rem;
+  font-weight:700;
+  text-decoration:underline;
+  cursor:pointer;
+  padding:0;
+}
+
+/* Dots */
+.hero-awards-dots{
+  margin-top:10px;
+  display:flex;
+  gap:6px;
+  justify-content:flex-start;
+}
+.hero-awards-dots .dot{
+  width:9px;
+  height:9px;
+  border-radius:999px;
+  border:none;
+  padding:0;
+  background:rgba(148,163,184,0.7);
+  cursor:pointer;
+  transition:all .2s ease;
+}
+.hero-awards-dots .dot.active{
+  width:18px;
+  background:#22c55e;
+}
+
+/* Responsive tweaks for hero + awards */
+@media (max-width: 900px){
+  .hero-layout{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .hero-awards{
+    max-width:none;
+    width:100%;
+  }
+}
+@media (max-width: 700px){
+  .hero-sust{
+    padding:100px 0 60px;
+  }
+}
+
+/* Pillars – big image, short text */
 .sust-intro{ background:#fff; }
 .pillars-grid{
   display:grid;
@@ -78,36 +308,36 @@
   background:#fff;
   border:1px solid var(--border);
   border-radius:18px;
-  padding:18px 16px 16px;
+  padding:12px 12px 14px;
   box-shadow:0 12px 32px rgba(15,23,42,.06);
   display:flex;
   flex-direction:column;
+  align-items:center;
+  text-align:center;
   gap:8px;
 }
 .pill-icon picture,
 .pill-icon img{
   display:block;
-  width:52px; height:52px;
+  width:100%;
+  height:200px;
   border-radius:14px;
   object-fit:cover;
-  box-shadow:0 8px 20px rgba(15,23,42,.25);
+  box-shadow:0 10px 24px rgba(15,23,42,.25);
 }
 .pillar-card h3{
-  margin:6px 0 4px;
-  font-size:1.05rem;
+  margin:8px 0 4px;
+  font-size:1.0rem;
   font-weight:800;
   color:var(--brand-dark);
 }
 .pillar-card p{
   margin:0;
-  color:#334155;
-  font-size:.95rem;
+  color:#475569;
+  font-size:.9rem;
 }
 .pillar-card ul{
-  margin:6px 0 0;
-  padding-left:18px;
-  color:#64748b;
-  font-size:.9rem;
+  display:none;
 }
 
 /* Impact */
@@ -151,7 +381,7 @@
   color:#475569;
 }
 
-/* Initiatives */
+/* Initiatives – image-first */
 .initiatives-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
@@ -170,31 +400,29 @@
 .initiative-media img{
   display:block;
   width:100%;
-  height:170px;
+  height:220px;
   object-fit:cover;
 }
 .initiative-body{
-  padding:14px 16px 16px;
+  padding:10px 12px 12px;
+  text-align:center;
 }
 .initiative-body h3{
-  margin:0 0 6px;
-  font-size:1.02rem;
+  margin:0 0 4px;
+  font-size:1.0rem;
   font-weight:800;
   color:var(--brand-dark);
 }
 .initiative-body p{
-  margin:0 0 8px;
-  color:#334155;
-  font-size:.95rem;
+  margin:0;
+  color:#475569;
+  font-size:.9rem;
 }
 .initiative-body ul{
-  margin:0;
-  padding-left:18px;
-  font-size:.9rem;
-  color:#64748b;
+  display:none;
 }
 
-/* Visuals */
+/* Visuals – gallery */
 .visuals-section{
   border-top:1px solid var(--border);
 }
@@ -214,12 +442,12 @@
 .visual-card img{
   display:block;
   width:100%;
-  height:180px;
+  height:240px;
   object-fit:cover;
 }
 .visual-card figcaption{
-  padding:10px 12px;
-  font-size:.9rem;
+  padding:8px 10px;
+  font-size:.88rem;
   color:#475569;
 }
 
@@ -268,7 +496,7 @@
   background:#fff;
   border:1px solid var(--border);
   border-radius:16px;
-  padding:22px 20px;
+  padding:18px 16px;
   box-shadow:0 12px 32px rgba(15,23,42,.06);
   display:flex;
   flex-direction:column;
@@ -281,15 +509,15 @@
   width:80px; height:80px;
   border-radius:999px;
   object-fit:cover;
-  margin-bottom:12px;
+  margin-bottom:10px;
   box-shadow:0 8px 20px rgba(0,0,0,.15);
 }
 .testimonial-card blockquote{
   font-style:italic;
-  font-size:1.0rem;
-  line-height:1.55;
+  font-size:.95rem;
+  line-height:1.5;
   color:#0f172a;
-  margin:0 0 14px;
+  margin:0 0 10px;
 }
 .testimonial-meta strong{
   display:block;
@@ -297,7 +525,7 @@
   color:var(--brand-dark);
 }
 .testimonial-meta span{
-  font-size:.9rem;
+  font-size:.85rem;
   color:#64748b;
 }
 

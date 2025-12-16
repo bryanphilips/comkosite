@@ -6,17 +6,92 @@ require_once __DIR__ . '/../config.php';
 <section class="hero-sust" style="background-image:url('/assets/images/sust-hero.webp')">
   <div class="hero-overlay"></div>
   <div class="wrap hero-inner">
-    <h1>Tea Sustainability &amp; Shared Value</h1>
-    <p class="hero-tagline">
-      Building a resilient tea value chain where farmers, producers and buyers
-      all benefit — without compromising our climate or communities.
-    </p>
-    <div class="hero-pills">
-      <span class="pill">Fair Pricing</span>
-      <span class="pill">Farmer Empowerment</span>
-      <span class="pill">Climate Action</span>
-      <span class="pill">Transparent Trading</span>
+
+    <div class="hero-layout">
+      <!-- LEFT: Copy & Pills -->
+      <div class="hero-copy">
+        <h1>Tea Sustainability &amp; Shared Value</h1>
+        <p class="hero-tagline">
+          Building a resilient tea value chain where farmers, producers and buyers
+          all benefit — without compromising our climate or communities.
+        </p>
+        <div class="hero-pills">
+          <span class="pill">Fair Pricing</span>
+          <span class="pill">Farmer Empowerment</span>
+          <span class="pill">Climate Action</span>
+          <span class="pill">Transparent Trading</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: Awards Slider -->
+      <aside class="hero-awards" aria-label="Awards and recognition">
+        <div class="hero-awards-head">
+         
+          <h2>Awards &amp; Recognition</h2>
+        </div>
+
+        <div class="hero-awards-slider" data-award-slider>
+          <!-- Slide 1 -->
+          <article class="award-slide active">
+            <div class="award-image">
+              <?php pictureTag('best_broker_2024', 'Best Priced Broker 2025 trophy'); ?>
+            </div>
+            <div class="award-body">
+              <h3>Best Priced Broker 2025</h3>
+              <p>
+                Recognised for consistently delivering fair and transparent prices to producers and buyers at the Mombasa Tea Auction.
+              </p>
+              <p class="award-meta">
+                <span>Award:</span> Best Priced Broker 2025
+              </p>
+              <button type="button" class="award-more" data-award-more>More</button>
+            </div>
+          </article>
+
+          <!-- Slide 2 -->
+          <article class="award-slide">
+            <div class="award-image">
+              <?php pictureTag('best_broker_2024', 'Farmer empowerment award'); ?>
+            </div>
+            <div class="award-body">
+              <h3>Farmer Empowerment Award 2025</h3>
+              <p>
+                Commended for empowering smallholder farmer groups with clear market insights, quality feedback and long-term relationship building.
+              </p>
+              <p class="award-meta">
+                <span>Award:</span> Farmer Empowerment 2025
+              </p>
+              <button type="button" class="award-more" data-award-more>More</button>
+            </div>
+          </article>
+
+          <!-- Slide 3 -->
+          <article class="award-slide">
+            <div class="award-image">
+              <?php pictureTag('best_broker_2024', 'Climate-smart tea initiative award'); ?>
+            </div>
+            <div class="award-body">
+              <h3>Climate-Smart Tea Initiative 2025</h3>
+              <p>
+                Highlighted for promoting climate-smart practices and traceable private sales that align with ESG expectations of global buyers.
+              </p>
+              <p class="award-meta">
+                <span>Award:</span> Climate-Smart Tea 2025
+              </p>
+              <button type="button" class="award-more" data-award-more>More</button>
+            </div>
+          </article>
+        </div>
+
+        <!-- Slider dots -->
+        <div class="hero-awards-dots" data-award-dots>
+          <button type="button" class="dot active" aria-label="Go to award 1"></button>
+          <button type="button" class="dot" aria-label="Go to award 2"></button>
+          <button type="button" class="dot" aria-label="Go to award 3"></button>
+        </div>
+      </aside>
     </div>
+
   </div>
 </section>
 

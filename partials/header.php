@@ -74,9 +74,10 @@ $tabs = [
     <strong class="text-white" style="margin-left:2px">Combrok Limited</strong>
     <div id="ribbonRotator" class="ribbon-rotator flex-grow-1">
       <div class="ribbon-msg">Where agility meets adaptability.</div>
-      <div class="ribbon-msg">Empowering East Africa’s Tea Producers &amp; Buyers.</div>
+      <div class="ribbon-msg">Empowering Tea Producers &amp; Buyers.</div>
       <div class="ribbon-msg">Trusted auction representation, sampling &amp; market intelligence.</div>
       <div class="ribbon-msg">Delivering excellence through integrity and innovation.</div>
+      <div class="ribbon-msg">!!! Winner Best Broker Highest Priced 2024..!!!</div>
     </div>
   </div>
 </div>

@@ -19,9 +19,9 @@
           <h2 class="h5 mb-3 text-brand">Visit / Reach Us</h2>
           <ul class="list-unstyled mb-4" style="margin:0 0 12px 0;">
             <li><strong>Email:</strong> <?= htmlspecialchars(NOTIFY_TO_EMAIL) ?></li>
-            <li><strong>Phone:</strong> +254 722 123 456</li>
+            <li><strong>Phone:</strong> +254 710 513 324 / 0741399995</li>
             <li><strong>Hours:</strong> Mon–Fri 9:00–17:00</li>
-            <li><strong>Address:</strong> P.O. Box 999, Mombasa, Kenya</li>
+            <li><strong>Address:</strong> P.O. Box 87411-80100, Mombasa, Kenya</li>
             <li><strong>Location:</strong> Tea House</li>
           </ul>
 

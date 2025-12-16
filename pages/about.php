@@ -10,7 +10,7 @@
     <div class="card shadow reveal image-rotator" style="--d:120ms">
       <?php
         // iterate between two+ images dynamically
-        $bgImages = ['sampled-heart', 'plantation_landscape-2', 'tea_harvest'];
+        $bgImages = ['tea_harvest', 'plantation_landscape-2', 'plantation_landscape'];
         foreach ($bgImages as $img): ?>
           <div class="rotating-img">
             <?php pictureTag($img, 'About Combrok'); ?>
