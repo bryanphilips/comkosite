@@ -158,6 +158,44 @@ consistency, Combrok is your trusted partner in navigating the dynamic tea trade
     </div>
   </div>
 </section>
+<section class="section-pad awards-strip reveal">
+  <div class="container wrap">
+
+    <div class="text-center mb-4">
+      <h2 class="display-6 fw-bold mb-2">Awards &amp; Recognition</h2>
+      <p class="text-secondary mb-0">
+        Milestones that reflect our commitment to transparency, value delivery and market integrity.
+      </p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-6 col-lg-4">
+        <div class="award-card h-100" data-award-card>
+
+          <!-- Image -->
+          <div class="award-media" data-award-media>
+            <div class="ratio ratio-16x9">
+              <?php pictureTag('best_broker_2024','Best Priced Broker 2024 Award'); ?>
+            </div>
+
+            <!-- Click overlay -->
+            <button type="button" class="award-zoom-btn" aria-label="View award image"></button>
+          </div>
+
+          <!-- Text -->
+          <div class="award-body">
+            <h3 class="award-title">Best Priced Broker 2024</h3>
+            <p class="award-text">
+              Recognised for consistently fair and transparent pricing outcomes.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
 <!-- === The Auction Process Section === -->
 <section class="section-pad auction-process reveal">
   <div class="container text-center">
@@ -219,3 +257,4 @@ consistency, Combrok is your trusted partner in navigating the dynamic tea trade
     <a class="btn btn-brand px-4" href="/?p=request">Request Data</a>
   </div>
 </section>
+<script defer src="/assets/js/home.js"></script>

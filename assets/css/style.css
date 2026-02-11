@@ -514,3 +514,281 @@ img.rounded-10{ border-radius:10px; }
 
 /* Optional: zero out Bootstrap default navbar paddings to lock 68px height */
 .premium-navbar.navbar{ padding-top:0; padding-bottom:0; }
+/* ==========================================================
+   AWARDS STRIP – COMPACT (14" laptop friendly)
+   Paste AFTER the current awards-strip CSS to override it.
+   ========================================================== */
+
+/* Make the card a 2-column layout on md+ */
+@media (min-width: 768px){
+.award-card{
+  display:flex;
+  flex-direction:column;
+  background:#fff;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 14px 36px rgba(15,23,42,.08);
+}
+
+/* IMAGE AREA */
+.award-media{
+  background:#000;
+}
+.award-media img{
+  object-fit:cover;
+}
+
+/* TEXT AREA */
+.award-body{
+  padding:24px 22px 26px;
+}
+
+.award-title{
+  font-size:1.15rem;
+  font-weight:800;
+  color:#0A4E73;
+  margin-bottom:12px;
+}
+
+.award-text{
+  font-size:.95rem;
+  line-height:1.65;
+  color:#475569;
+  margin-bottom:18px;
+}
+
+/* TAGS */
+.award-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.award-tags .badge{
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  color:#0f172a;
+  font-weight:700;
+  padding:.45rem .75rem;
+}
+}
+
+/* Mobile keeps stacked (default), just ensure nice spacing */
+@media (max-width: 767.98px){
+  .award-media{ padding:10px !important; }
+  .award-body{ padding:12px 14px 14px !important; }
+}
+/* ==========================================================
+   HERO AWARDS – FULL IMAGE MODE (FINAL OVERRIDE)
+   ========================================================== */
+
+/* Give the awards card a stable height */
+.hero-awards{
+  min-height: 340px;
+  position: relative;
+}
+
+@media (min-width: 992px){
+  .hero-awards{
+    min-height: 380px;
+  }
+}
+
+/* ---- Image-only mode ---- */
+.hero-awards.image-only{
+  padding: 0 !important;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Hide all non-image content */
+.hero-awards.image-only .hero-awards-head,
+.hero-awards.image-only .award-body,
+.hero-awards.image-only .hero-awards-dots{
+  display: none !important;
+}
+
+/* Force slider + slide to occupy full card */
+.hero-awards.image-only .hero-awards-slider,
+.hero-awards.image-only .award-slide.active,
+.hero-awards.image-only .award-image{
+  width: 100%;
+  height: 100%;
+}
+
+/* Remove any flex side-effects */
+.hero-awards.image-only .award-slide{
+  display: block !important;
+}
+
+/* Image fills the card perfectly */
+.hero-awards.image-only .award-image picture,
+.hero-awards.image-only .award-image img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+/* Cursor feedback */
+.award-image{
+  cursor: zoom-in;
+}
+.hero-awards.image-only .award-image{
+  cursor: zoom-out;
+}
+.award-media .ratio picture,
+.award-media .ratio img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+}
+/* ==========================================================
+   HOMEPAGE AWARDS — PREMIUM + RELIABLE IMAGE FILL + ZOOM
+   ========================================================== */
+
+.awards-strip{
+  background:linear-gradient(180deg,#ffffff, #f7fbff);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+
+/* Card layout */
+.award-card{
+  position:relative;
+  border-radius:22px;
+  overflow:hidden;
+  background:#fff;
+  border:1px solid var(--border);
+  box-shadow:0 16px 40px rgba(15,23,42,.08);
+  transition:transform .22s ease, box-shadow .22s ease;
+  min-height: 420px; /* stable height so image can dominate */
+  display:flex;
+  flex-direction:column;
+}
+
+@media (hover:hover){
+  .award-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 22px 52px rgba(15,23,42,.12);
+  }
+}
+
+/* Media takes most of the space */
+.award-media{
+  position:relative;
+  flex: 1 1 auto;              /* allow to expand */
+  min-height: 300px;           /* make image area BIG */
+  background:#0a0f14;
+}
+
+/* Ratio must stretch to fill the media area */
+.award-media .ratio{
+  width:100%;
+  height:100%;
+  border-radius:22px;
+  overflow:hidden;
+  background:#0a0f14;
+}
+
+/* Force ANY picture/img inside ratio to fill.
+   This covers pictureTag outputs even if structure varies. */
+.award-media .ratio picture,
+.award-media .ratio img,
+.award-media .ratio picture img{
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  display:block !important;
+  object-fit:cover !important;
+  object-position:center !important;
+}
+
+/* Minimal text area */
+.award-body{
+  padding:14px 16px 16px;
+  border-top:1px solid rgba(230,238,244,.7);
+  background:linear-gradient(180deg,#ffffff, #fbfdff);
+}
+
+.award-title{
+  font-size:1.05rem;
+  font-weight:900;
+  color:var(--brand-blue-800);
+  margin:0 0 6px;
+}
+
+.award-text{
+  margin:0;
+  color:#64748b;
+  font-size:.92rem;
+  line-height:1.45;
+  display:-webkit-box;
+  -webkit-line-clamp:1; /* one line */
+  line-clamp:1;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+/* Zoom overlay button */
+.award-zoom-btn{
+  position:absolute;
+  inset:0;
+  border:0;
+  background:transparent;
+  cursor:zoom-in;
+}
+
+/* Nice zoom icon */
+.award-media::after{
+  content:"⤢";
+  position:absolute;
+  right:12px; top:12px;
+  width:34px; height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  background:rgba(0,0,0,.45);
+  color:#fff;
+  font-weight:900;
+  opacity:0;
+  transform:translateY(-6px);
+  transition:.18s ease;
+  pointer-events:none;
+}
+.award-card:hover .award-media::after{
+  opacity:1;
+  transform:none;
+}
+
+/* =========================
+   ZOOM MODE (image only)
+   ========================= */
+.award-card.is-zoomed{
+  min-height: 480px;            /* allow larger preview */
+}
+.award-card.is-zoomed .award-body{
+  display:none !important;
+}
+.award-card.is-zoomed .award-media{
+  min-height: 480px;
+}
+.award-card.is-zoomed .award-zoom-btn{
+  cursor:zoom-out;
+}
+.award-card.is-zoomed .award-media::after{
+  content:"✕";
+  opacity:1;
+  transform:none;
+}
+
+/* Mobile: keep tall and premium */
+@media (max-width: 767.98px){
+  .award-card{ min-height: 380px; }
+  .award-media{ min-height: 260px; }
+}

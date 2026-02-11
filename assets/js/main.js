@@ -196,6 +196,91 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function initSustainabilityAwards() {
+  const awardsBox = document.querySelector('.hero-awards');
+  const slider = document.querySelector('[data-award-slider]');
+  const dotsWrap = document.querySelector('[data-award-dots]');
+  if (!awardsBox || !slider) return; // Only run on sustainability page
+
+  const slides = Array.from(slider.querySelectorAll('.award-slide'));
+  const dots = dotsWrap ? Array.from(dotsWrap.querySelectorAll('.dot')) : [];
+
+  if (!slides.length) return;
+
+  let currentIndex = slides.findIndex(s => s.classList.contains('active'));
+  if (currentIndex < 0) currentIndex = 0;
+
+  let autoTimer = null;
+  const AUTO_MS = 6000;
+
+  const setSlide = (idx) => {
+    currentIndex = (idx + slides.length) % slides.length;
+    slides.forEach((s, i) => s.classList.toggle('active', i === currentIndex));
+    dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+  };
+
+  const stopAuto = () => {
+    if (autoTimer) clearInterval(autoTimer);
+    autoTimer = null;
+  };
+
+  const startAuto = () => {
+    stopAuto();
+    // Don’t rotate while zoomed
+    if (awardsBox.classList.contains('image-only')) return;
+
+    autoTimer = setInterval(() => {
+      setSlide(currentIndex + 1);
+    }, AUTO_MS);
+  };
+
+  // Init slide
+  setSlide(currentIndex);
+  startAuto();
+
+  // Dots click
+  dots.forEach((dot, idx) => {
+    dot.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setSlide(idx);
+      startAuto();
+    });
+  });
+
+  // Click image => toggle full-image card mode
+  slides.forEach((slide) => {
+    const imgWrap = slide.querySelector('.award-image');
+    if (!imgWrap) return;
+
+    imgWrap.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const goingFull = !awardsBox.classList.contains('image-only');
+      awardsBox.classList.toggle('image-only', goingFull);
+
+      if (goingFull) stopAuto();
+      else startAuto();
+    });
+  });
+
+  // Clicking card while zoomed => exit zoom
+  awardsBox.addEventListener('click', () => {
+    if (!awardsBox.classList.contains('image-only')) return;
+    awardsBox.classList.remove('image-only');
+    startAuto();
+  });
+
+  // ESC closes zoom
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (!awardsBox.classList.contains('image-only')) return;
+    awardsBox.classList.remove('image-only');
+    startAuto();
+  });
+}
+
   /* Init after DOM */
   document.addEventListener('DOMContentLoaded', () => {
     console.log('[Combrok] DOMContentLoaded');
@@ -205,6 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initRibbonSimple({ holdMs: 5200, slideGap: 600 });
     initStatsFloat();
     initReveal();
+    initSustainabilityAwards();
     console.log('[Combrok] Init complete');
   });
 })();

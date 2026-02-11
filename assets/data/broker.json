@@ -1,0 +1,10 @@
+{
+  "broker_sale": [
+    { "sale": "01", "offered_lots": 546, "sold_lots": 490, "qty_offered": 1237804, "qty_sold": 1086662, "avg_prc": 1.78 },
+    { "sale": "02", "offered_lots": 495, "sold_lots": 421, "qty_offered": 1062467, "qty_sold": 928569, "avg_prc": 1.86 },
+    { "sale": "03", "offered_lots": 537, "sold_lots": 504, "qty_offered": 1261040, "qty_sold": 1184384, "avg_prc": 1.88 },
+    { "sale": "04", "offered_lots": 760, "sold_lots": 628, "qty_offered": 1662796, "qty_sold": 1380158, "avg_prc": 1.88 },
+    { "sale": "05", "offered_lots": 648, "sold_lots": 568, "qty_offered": 1500050, "qty_sold": 1287880, "avg_prc": 1.79 },
+    { "sale": "06", "offered_lots": 624, "sold_lots": 535, "qty_offered": 1375814, "qty_sold": 1224600 , "avg_prc": 1.86}
+  ]
+}

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.example.com/</loc></url>
-  <url><loc>https://www.example.com/about</loc></url>
-  <url><loc>https://www.example.com/services</loc></url>
-  <url><loc>https://www.example.com/other-services</loc></url>
-  <url><loc>https://www.example.com/auctions</loc></url>
-  <url><loc>https://www.example.com/products</loc></url>
-  <url><loc>https://www.example.com/market-reports</loc></url>
-  <url><loc>https://www.example.com/events</loc></url>
-  <url><loc>https://www.example.com/contact</loc></url>
-  <url><loc>https://www.example.com/enquiry</loc></url>
-  <url><loc>https://www.example.com/request</loc></url>
+  <url><loc>https://comksite.ezenafrica.co.ke/</loc></url>
+  <url><loc>https://comksite.ezenafrica.co.ke/?p=about</loc></url>
+  <url><loc>https://comksite.ezenafrica.co.ke/?p=services</loc></url>
+  <url><loc>https://comksite.ezenafrica.co.ke/?p=other-services</loc></url>
+  <url><loc>https://comksite.ezenafrica.co.ke/?p=auctions</loc></url>
+  <url><loc>https://comksite.ezenafrica.co.ke/?p=products</loc></url>
+  <url><loc>https://comksite.ezenafrica.co.ke/?p=market-reports</loc></url>
+  <url><loc>https://comksite.ezenafrica.co.ke/?p=events</loc></url>
+  <url><loc>https://comksite.ezenafrica.co.ke/?p=sustainability</loc></url>
+  <url><loc>https://comksite.ezenafrica.co.ke/?p=enquiry</loc></url>
+  <url><loc>https://comksite.ezenafrica.co.ke/?p=private-sale</loc></url>
 </urlset>

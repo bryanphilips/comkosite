@@ -1,627 +1,605 @@
-/* =======================================================
-   MARKET REPORTS — data loader + tiny SVG chart kit
-   (Week range + All Weeks + axes/labels/legend + scroll animations + pagination 26/page)
-   ======================================================= */
-(() => {
-  'use strict';
+document.addEventListener('DOMContentLoaded', () => {
+  // -----------------------------
+  // Elements
+  // -----------------------------
+  const yearEl   = document.getElementById('mr-year');
+  const fromEl   = document.getElementById('mr-week-from');
+  const toEl     = document.getElementById('mr-week-to');
+  const allWeeks = document.getElementById('mr-all-weeks');
+  const applyBtn = document.getElementById('mr-apply');
+  const clearBtn = document.getElementById('mr-clear');
 
-  // --- DOM -----------------------------------------------------------------
-  const YEAR_IN   = document.getElementById('mr-year');       // <input type=number>
-  const WEEK_FROM = document.getElementById('mr-week-from');  // <select>
-  const WEEK_TO   = document.getElementById('mr-week-to');    // <select>
-  const ALL_WEEKS = document.getElementById('mr-all-weeks');  // <input type=checkbox>
+  const kpiCombrok = document.getElementById('mr-kpis-combrok');
+  const kpiAuction = document.getElementById('mr-kpis-auction');
 
-  const BTN_APPLY = document.getElementById('mr-apply');
-  const BTN_CLEAR = document.getElementById('mr-clear');
+  const summaryEl = document.getElementById('mr-summary');
+  const rowsEl    = document.getElementById('mr-rows');
 
-  const KPIS    = document.getElementById('mr-kpis');
-  const ROWS    = document.getElementById('mr-rows');
-  const SUMMARY = document.getElementById('mr-summary');
+  const chartPriceTrend = document.getElementById('chart-price-trend');
+  const chartQtyStacked = document.getElementById('chart-qty-stacked');
+  const chartSellthrough= document.getElementById('chart-sellthrough');
+  const chartLotsLines  = document.getElementById('chart-lots-lines');
 
-  // Chart containers
-  const elPriceTrend = document.getElementById('chart-price-trend');
-  const elQtyStacked = document.getElementById('chart-qty-stacked');
-  const elDonut      = document.getElementById('chart-sellthrough');
-  const elLotsLines  = document.getElementById('chart-lots-lines');
+  const tableWrap = rowsEl ? rowsEl.closest('.table-wrap') : null;
+  const tabs = document.querySelectorAll('.mr-tab');
+  const panelCombrok = document.getElementById('panel-combrok');
+  const panelAuction = document.getElementById('panel-auction');
 
-  const DATA_URL = '/assets/data/market-reports.json';
+  const dlCombrok = document.getElementById('mr-download-combrok');
+  const dlAuction = document.getElementById('mr-download-auction');
 
-  // Global data store
-  let ALL = [];
+  function setActive(tabKey){
+    // Tabs
+    tabs.forEach(btn => {
+      const active = btn.dataset.mrTab === tabKey;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-selected', active ? 'true' : 'false');
+      btn.tabIndex = active ? 0 : -1;
+    });
 
-  // Pagination state
-  const PAGE_SIZE = 26;
-  let currentPage = 1;
-  let CURRENT_VIEW = []; // filtered rows (charts/KPIs use this full set; table is paged)
+    // Panels
+    const isCombrok = tabKey === 'combrok';
+    panelCombrok.classList.toggle('active', isCombrok);
+    panelAuction.classList.toggle('active', !isCombrok);
+    panelCombrok.hidden = !isCombrok;
+    panelAuction.hidden = isCombrok;
 
-  // --- Utils ---------------------------------------------------------------
-  const fmt   = new Intl.NumberFormat();
-  const money = new Intl.NumberFormat(undefined, { style:'currency', currency:'USD', maximumFractionDigits:2 });
-  const pct   = (num) => (Math.round(num * 10) / 10).toFixed(1) + '%';
-  const toNum = (v) => {
-    const n = Number(v);
-    return Number.isFinite(n) ? n : 0;
+    // Downloads (above tabs)
+    if (dlCombrok && dlAuction) {
+      dlCombrok.style.display = isCombrok ? '' : 'none';
+      dlAuction.style.display = isCombrok ? 'none' : '';
+    }
+  }
+
+  // Click handlers
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => setActive(btn.dataset.mrTab));
+  });
+
+  // Keyboard nav (left/right)
+  const tabList = document.querySelector('.mr-tabs');
+  if (tabList) {
+    tabList.addEventListener('keydown', (e) => {
+      const keys = ['ArrowLeft','ArrowRight'];
+      if (!keys.includes(e.key)) return;
+
+      const currentIndex = [...tabs].findIndex(t => t.classList.contains('active'));
+      let nextIndex = currentIndex;
+
+      if (e.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
+      if (e.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+
+      tabs[nextIndex].focus();
+      setActive(tabs[nextIndex].dataset.mrTab);
+    });
+  }
+
+  // default
+  setActive('combrok');
+
+
+  // -----------------------------
+  // Data sources (EDIT PATHS IF NEEDED)
+  // -----------------------------
+  const DATA_SOURCES = {
+    auction: '/assets/data/auction.json',
+    broker:  '/assets/data/broker.json'
   };
 
-  // --- Data layer ----------------------------------------------------------
-  async function loadData(){
-    try{
-      const res = await fetch(DATA_URL, { cache:'no-store' });
-      if(!res.ok) throw new Error('No data file');
-      const json = await res.json();
-      return Array.isArray(json) ? json : (json.data || []);
-    }catch(e){
-      // Demo data if file missing
-      const nowYear = (new Date()).getFullYear();
-      const seed = [];
-      let price = 2.30;
-      for(let w=1; w<=12; w++){
-        const lotsOff = 12000 + Math.round(Math.random()*2500);
-        const lotsSold= Math.round(lotsOff*(0.86 + Math.random()*0.08));
-        const qtyOff  = 6_500_000 + Math.round(Math.random()*800_000);
-        const qtySold = Math.round(qtyOff*(0.86 + Math.random()*0.08));
-        price += (Math.random()-.5)*0.08;
-        seed.push({
-          year: nowYear, week: w,
-          lotsOffered: lotsOff,
-          lotsSold: lotsSold,
-          qtyOfferedKg: qtyOff,
-          qtySoldKg: qtySold,
-          avgPriceUsd: +price.toFixed(2),
-          soldPct: +(lotsSold/lotsOff*100).toFixed(2)
-        });
-      }
-      return seed;
+  // -----------------------------
+  // Helpers
+  // -----------------------------
+  const num = (v, fallback = 0) => {
+    const x = parseFloat(String(v ?? '').replace(/,/g,''));
+    return Number.isFinite(x) ? x : fallback;
+  };
+
+  const fmtInt = (n) => Math.round(n).toLocaleString('en-KE');
+  const fmtKg  = (n) => `${fmtInt(n)} kg`;
+  const fmtUsd = (n) => `${Number(n).toFixed(2)}`;
+  const fmtPct = (n) => `${Number(n).toFixed(1)}%`;
+
+  function weekOptions(select, labelFirst) {
+    const opt0 = document.createElement('option');
+    opt0.value = '';
+    opt0.textContent = labelFirst;
+    select.innerHTML = '';
+    select.appendChild(opt0);
+
+    for (let w = 1; w <= 53; w++) {
+      const o = document.createElement('option');
+      o.value = String(w);
+      o.textContent = String(w);
+      select.appendChild(o);
     }
   }
 
-  // Populate both week selects based on selected year’s available weeks
-  function buildWeekOptionsForYear(allRows, year) {
-    const weeks = Array.from(
-      new Set(allRows.filter(r => r.year === +year).map(r => r.week))
-    ).sort((a,b) => a - b);
-
-    const fill = (sel, label) => {
-      sel.innerHTML = `<option value="">${label}</option>`;
-      for (const w of weeks) {
-        const opt = document.createElement('option');
-        opt.value = String(w);
-        opt.textContent = `W${w}`;
-        sel.appendChild(opt);
-      }
-    };
-
-    fill(WEEK_FROM, 'From');
-    fill(WEEK_TO, 'To');
-
-    if (weeks.length) {
-      WEEK_FROM.value = String(weeks[0]);
-      WEEK_TO.value   = String(weeks[weeks.length - 1]);
-    }
-    updateRangeEnabledState();
+  function getRange() {
+    const year = num(yearEl?.value, 0);
+    const all = !!allWeeks?.checked;
+    const from = all ? null : num(fromEl?.value, 0);
+    const to   = all ? null : num(toEl?.value, 0);
+    return { year, all, from, to };
   }
 
-  function updateRangeEnabledState(){
-    const disabled = ALL_WEEKS.checked;
-    WEEK_FROM.disabled = disabled;
-    WEEK_TO.disabled   = disabled;
+  function rangeLabel({year, all, from, to}) {
+    if (!year) return 'All available data';
+    if (all) return `Year ${year} — All weeks`;
+    if (!from || !to) return `Year ${year} — Select week range`;
+    return `Year ${year} — Weeks ${Math.min(from,to)} to ${Math.max(from,to)}`;
   }
 
-  function applyFilters(rows){
-    const y     = parseInt(YEAR_IN.value,10);
-    const allW  = ALL_WEEKS.checked;
-    const fromW = parseInt(WEEK_FROM.value,10);
-    const toW   = parseInt(WEEK_TO.value,10);
-
-    let view = rows.filter(r => Number.isFinite(y) ? r.year === y : true);
-
-    if (!allW && Number.isFinite(fromW) && Number.isFinite(toW)) {
-      const lo = Math.min(fromW, toW);
-      const hi = Math.max(fromW, toW);
-      view = view.filter(r => r.week >= lo && r.week <= hi);
-    }
-
-    return view.sort((a,b)=> a.week - b.week);
+  function enableWeekInputs(enabled) {
+    if (fromEl) fromEl.disabled = !enabled;
+    if (toEl) toEl.disabled = !enabled;
   }
 
-  // --- Render: KPIs --------------------------------------------------------
-  function renderKPIs(rowsAll, rowsView){
-    if(!rowsView.length){ KPIS.innerHTML = ''; SUMMARY.textContent=''; return; }
+  // -----------------------------
+  // Scroll reveal helpers (.in-view)
+  // -----------------------------
+  function setupInViewObserver() {
+    const targets = [];
 
-    const totalLotsOff = rowsView.reduce((a,b)=>a+b.lotsOffered,0);
-    const totalLotsSold= rowsView.reduce((a,b)=>a+b.lotsSold,0);
-    const totalQtyOff  = rowsView.reduce((a,b)=>a+b.qtyOfferedKg,0);
-    const totalQtySold = rowsView.reduce((a,b)=>a+b.qtySoldKg,0);
-    const avgPrice     = rowsView.reduce((a,b)=>a+b.avgPriceUsd,0)/rowsView.length;
-    const sellThrough  = totalLotsSold/totalLotsOff*100;
+    // KPI grids
+    document.querySelectorAll('.kpi-grid').forEach(el => targets.push(el));
 
-    const lastRow = rowsView[rowsView.length-1];
-    const prevRow = rowsAll
-      .filter(r => r.year===lastRow.year && r.week===lastRow.week-1)
-      .slice(-1)[0];
+    // Charts
+    document.querySelectorAll('.chart').forEach(el => targets.push(el));
 
-    const prevSell = prevRow ? (prevRow.lotsSold/prevRow.lotsOffered*100) : null;
-    const deltaPct = prevSell==null ? 0 : (sellThrough - prevSell);
-    const deltaPrice = prevRow ? (avgPrice - prevRow.avgPriceUsd) : 0;
+    // Summary
+    if (summaryEl) targets.push(summaryEl);
 
-    KPIS.innerHTML = `
-      <div class="kpi">
-        <div class="label">Sell-Through</div>
-        <div class="value">${pct(sellThrough)}</div>
-        <div class="delta ${deltaPct>=0?'up':'down'}">${deltaPct>=0?'+':''}${deltaPct.toFixed(1)} pp vs prev.</div>
-      </div>
-      <div class="kpi">
-        <div class="label">Avg Price</div>
-        <div class="value">${money.format(avgPrice)}</div>
-        <div class="delta ${deltaPrice>=0?'up':'down'}">${deltaPrice>=0?'+':''}${deltaPrice.toFixed(2)} vs prev.</div>
-      </div>
-      <div class="kpi">
-        <div class="label">Qty Sold</div>
-        <div class="value">${fmt.format(totalQtySold)} kg</div>
-        <div class="delta">of ${fmt.format(totalQtyOff)} kg offered</div>
-      </div>
-      <div class="kpi">
-        <div class="label">Lots Sold</div>
-        <div class="value">${fmt.format(totalLotsSold)}</div>
-        <div class="delta">of ${fmt.format(totalLotsOff)} offered</div>
-      </div>
-    `;
+    // Table wrapper
+    if (tableWrap) targets.push(tableWrap);
 
-    SUMMARY.innerHTML = `
-      <strong>Summary:</strong> ${rowsView.length} week(s) selected ·
-      Sell-through ${pct(sellThrough)} ·
-      Avg price ${money.format(avgPrice)} ·
-      Qty sold ${fmt.format(totalQtySold)} kg.
-    `;
-  }
+    if (!targets.length) return;
 
-  // --- Render: Table (paged) ----------------------------------------------
-  function renderTablePage(){
-    const total = CURRENT_VIEW.length;
-    const startIdx = (currentPage - 1) * PAGE_SIZE;
-    const pageRows = CURRENT_VIEW.slice(startIdx, startIdx + PAGE_SIZE);
-
-    if(!pageRows.length){
-      ROWS.innerHTML = '<tr><td colspan="8">No data for the selected filter.</td></tr>';
+    if (!('IntersectionObserver' in window)) {
+      targets.forEach(el => el.classList.add('in-view'));
       return;
     }
-    ROWS.innerHTML = pageRows.map(r=>{
-      const sp = Number.isFinite(r.soldPct) ? r.soldPct : (r.lotsSold/r.lotsOffered*100);
-      return `<tr>
-        <td>${r.year}</td>
-        <td>${r.week}</td>
-        <td>${fmt.format(r.lotsOffered)}</td>
-        <td>${fmt.format(r.lotsSold)}</td>
-        <td>${fmt.format(r.qtyOfferedKg)}</td>
-        <td>${fmt.format(r.qtySoldKg)}</td>
-        <td>${(sp||0).toFixed(1)}%</td>
-        <td>${Number(r.avgPriceUsd||0).toFixed(2)}</td>
-      </tr>`;
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.18 });
+
+    targets.forEach(el => io.observe(el));
+  }
+
+  // -----------------------------
+  // JSON loading + normalizing
+  // -----------------------------
+  async function fetchJson(url) {
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`Failed to load ${url} (${res.status})`);
+    return res.json();
+  }
+
+  // Normalize one row to:
+  // { year, week, lotsOffered, lotsSold, qtyOfferedKg, qtySoldKg, avgPriceUsdKg }
+  function normalizeRow(r) {
+    const year = num(r.year ?? r.Y ?? r.saleYear ?? r.SALE_YEAR, 0);
+
+    let week = num(r.week ?? r.W ?? r.saleWeek ?? r.SALE_WEEK, 0);
+    if (!week && typeof r.sale === 'string') {
+      const m = r.sale.match(/(\d+)/);
+      week = m ? num(m[1], 0) : 0;
+    }
+
+    const lotsOffered = num(
+      r.lotsOffered ?? r.lots_offered ?? r.offered_lots ?? r.LOTS_OFFERED,
+      0
+    );
+
+    const lotsSold = num(
+      r.lotsSold ?? r.lots_sold ?? r.sold_lots ?? r.LOTS_SOLD,
+      0
+    );
+
+    const qtyOfferedKg = num(
+      r.qtyOfferedKg ?? r.qty_offered_kg ?? r.qty_offered ?? r.QTY_OFFERED_KG,
+      0
+    );
+
+    const qtySoldKg = num(
+      r.qtySoldKg ?? r.qty_sold_kg ?? r.qty_sold ?? r.QTY_SOLD_KG,
+      0
+    );
+
+    const avgPriceUsdKg = num(
+      r.avgPriceUsdKg ?? r.avg_price_usd_kg ?? r.avgPrice ?? r.avg_prc ?? r.AVG_PRICE_USD_KG,
+      0
+    );
+
+    return { year, week, lotsOffered, lotsSold, qtyOfferedKg, qtySoldKg, avgPriceUsdKg };
+  }
+
+  function normalizeDataset(json) {
+    const arr = Array.isArray(json)
+      ? json
+      : (json.data ?? json.rows ?? json.broker_sale ?? []);
+
+    return arr
+      .map(normalizeRow)
+      .filter(r => r.week); // keep as long as week exists
+  }
+
+  let DATA_AUCTION = [];
+  let DATA_BROKER  = [];
+  let DATA_READY = false;
+
+  async function loadDatasets() {
+    try {
+      const [auctionJson, brokerJson] = await Promise.all([
+        fetchJson(DATA_SOURCES.auction),
+        fetchJson(DATA_SOURCES.broker),
+      ]);
+      DATA_AUCTION = normalizeDataset(auctionJson);
+      DATA_BROKER  = normalizeDataset(brokerJson);
+      DATA_READY = true;
+    } catch (e) {
+      console.error(e);
+      DATA_READY = false;
+      if (rowsEl) {
+        rowsEl.innerHTML = `
+          <tr>
+            <td colspan="8" style="padding:14px;color:#b91c1c;">
+              Failed to load report data. Check JSON paths:
+              <code>${DATA_SOURCES.auction}</code> and <code>${DATA_SOURCES.broker}</code>
+            </td>
+          </tr>
+        `;
+      }
+    }
+  }
+
+  function filterData(arr, {year, all, from, to}) {
+    let out = arr.slice();
+
+    // Allow missing year rows (0) to match selected year
+    if (year) out = out.filter(r => (r.year === year) || (r.year === 0));
+
+    if (!all) {
+      if (from && to) {
+        const a = Math.min(from, to);
+        const b = Math.max(from, to);
+        out = out.filter(r => r.week >= a && r.week <= b);
+      } else {
+        out = [];
+      }
+    }
+
+    if (year) out = out.map(r => (r.year ? r : ({ ...r, year })));
+
+    out.sort((a,b) => (a.year - b.year) || (a.week - b.week));
+    return out;
+  }
+
+  // -----------------------------
+  // KPIs
+  // -----------------------------
+  function calcKpis(arr) {
+    if (!arr.length) {
+      return { sale:'—', offered:'—', sold:'—', avg:'—', sellThrough:'—' };
+    }
+
+    const year = arr[arr.length - 1].year;
+    const lastWeek = arr[arr.length - 1].week;
+
+    const offeredKg = arr.reduce((s,r)=> s + num(r.qtyOfferedKg), 0);
+    const soldKg    = arr.reduce((s,r)=> s + num(r.qtySoldKg), 0);
+
+    const soldWeight = arr.reduce((s,r)=> s + num(r.qtySoldKg), 0);
+    const weighted = soldWeight > 0
+      ? arr.reduce((s,r)=> s + (num(r.avgPriceUsdKg) * num(r.qtySoldKg)), 0) / soldWeight
+      : (arr.reduce((s,r)=> s + num(r.avgPriceUsdKg), 0) / arr.length);
+
+    const sellThrough = offeredKg > 0 ? (soldKg / offeredKg) * 100 : 0;
+
+    return {
+      sale: `Y${year} W${lastWeek}`,
+      offered: fmtKg(offeredKg),
+      sold: fmtKg(soldKg),
+      avg: `${fmtUsd(weighted)} USD/kg`,
+      sellThrough: fmtPct(sellThrough),
+    };
+  }
+
+  function kpiCard({label, value, hint}) {
+    return `
+      <div class="kpi-card">
+        <div class="kpi-label">${label}</div>
+        <div class="kpi-value">${value}</div>
+        ${hint ? `<div class="kpi-hint">${hint}</div>` : ``}
+      </div>
+    `;
+  }
+
+  function renderKpis(combrokArr, auctionArr) {
+    if (!kpiCombrok || !kpiAuction) return;
+
+    const ck = calcKpis(combrokArr);
+    const ak = calcKpis(auctionArr);
+
+    kpiCombrok.innerHTML = [
+      kpiCard({label:'Sale', value: ck.sale, hint:'Latest period marker'}),
+      kpiCard({label:'Offered Qty', value: ck.offered}),
+      kpiCard({label:'Sold Qty', value: ck.sold}),
+      kpiCard({label:'Avg Price', value: ck.avg, hint:`Sell-through: ${ck.sellThrough}`}),
+    ].join('');
+
+    kpiAuction.innerHTML = [
+      kpiCard({label:'Sale', value: ak.sale, hint:'Market period marker'}),
+      kpiCard({label:'Offered Qty', value: ak.offered}),
+      kpiCard({label:'Sold Qty', value: ak.sold}),
+      kpiCard({label:'Avg Price', value: ak.avg, hint:`Sell-through: ${ak.sellThrough}`}),
+    ].join('');
+  }
+
+  // -----------------------------
+  // Summary + Table
+  // -----------------------------
+  function renderSummary(arr, range) {
+    if (!summaryEl) return;
+    const label = rangeLabel(range);
+    const k = calcKpis(arr);
+
+    summaryEl.innerHTML = `
+      <div class="mr-summary">
+        <div>
+          <h3 class="mr-summary-title">Report Summary</h3>
+          <p class="mr-summary-sub muted">${label}</p>
+        </div>
+        <div class="mr-summary-badges">
+          <span class="mr-badge">Offered: ${k.offered}</span>
+          <span class="mr-badge">Sold: ${k.sold}</span>
+          <span class="mr-badge">Avg: ${k.avg}</span>
+          <span class="mr-badge">Sell-through: ${k.sellThrough}</span>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderTable(arr) {
+    if (!rowsEl) return;
+
+    if (!arr.length) {
+      rowsEl.innerHTML = `
+        <tr>
+          <td colspan="8" style="padding:14px;color:#64748b;">
+            No data for the selected filters. Try “All weeks” or adjust week range.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    rowsEl.innerHTML = arr.map((r, idx) => {
+      const soldPct = r.qtyOfferedKg > 0 ? (r.qtySoldKg / r.qtyOfferedKg) * 100 : 0;
+
+      // Stagger table animation
+      const delay = Math.min(idx * 0.05, 1.2);
+
+      return `
+        <tr style="animation-delay:${delay}s">
+          <td>${r.year}</td>
+          <td>${r.week}</td>
+          <td>${fmtInt(r.lotsOffered)}</td>
+          <td>${fmtInt(r.lotsSold)}</td>
+          <td>${fmtInt(r.qtyOfferedKg)}</td>
+          <td>${fmtInt(r.qtySoldKg)}</td>
+          <td>${fmtPct(soldPct)}</td>
+          <td>${fmtUsd(r.avgPriceUsdKg)}</td>
+        </tr>
+      `;
     }).join('');
   }
 
-  function renderPager(totalCount){
-    const tableWrap = document.querySelector('.table-wrap');
-    if(!tableWrap) return;
+  // -----------------------------
+  // Minimal charts (SVG)
+  // -----------------------------
+  function renderLineChart(el, points, {minY, maxY, labelSuffix = ''} = {}) {
+    if (!el) return;
+    el.innerHTML = '';
 
-    let pager = document.getElementById('mr-pager');
-    if(!pager){
-      pager = document.createElement('div');
-      pager.id = 'mr-pager';
-      pager.style.display = 'flex';
-      pager.style.alignItems = 'center';
-      pager.style.gap = '8px';
-      pager.style.padding = '10px 0';
-      tableWrap.insertAdjacentElement('afterend', pager);
-    }
-
-    const totalPages = Math.max(1, Math.ceil(totalCount / PAGE_SIZE));
-    currentPage = Math.min(Math.max(1, currentPage), totalPages);
-
-    const start = (currentPage - 1) * PAGE_SIZE + 1;
-    const end   = Math.min(totalCount, currentPage * PAGE_SIZE);
-
-    pager.innerHTML = `
-      <button class="btn ghost" data-act="first" ${currentPage===1?'disabled':''}>&laquo; First</button>
-      <button class="btn ghost" data-act="prev"  ${currentPage===1?'disabled':''}>&lsaquo; Prev</button>
-      <span class="muted small" style="margin:0 6px;">
-        Page <strong>${currentPage}</strong> of <strong>${totalPages}</strong>
-      </span>
-      <button class="btn ghost" data-act="next" ${currentPage===totalPages?'disabled':''}>Next &rsaquo;</button>
-      <button class="btn ghost" data-act="last" ${currentPage===totalPages?'disabled':''}>Last &raquo;</button>
-      <span class="muted small" style="margin-left:auto;">Showing ${start}&ndash;${end} of ${totalCount}</span>
-    `;
-
-    pager.querySelectorAll('button[data-act]').forEach(btn=>{
-      btn.onclick = () => {
-        const act = btn.getAttribute('data-act');
-        if(act==='first') currentPage = 1;
-        if(act==='prev')  currentPage = Math.max(1, currentPage-1);
-        if(act==='next')  currentPage = Math.min(totalPages, currentPage+1);
-        if(act==='last')  currentPage = totalPages;
-
-        renderTablePage();
-        renderPager(totalCount);
-        window.dispatchEvent(new CustomEvent('mr:refreshed'));
-      };
-    });
-  }
-
-  // --- Tiny SVG Chart Kit --------------------------------------------------
-  const SVG_NS = 'http://www.w3.org/2000/svg';
-  const SVG  = (w,h)=>{ const s=document.createElementNS(SVG_NS,'svg'); s.setAttribute('viewBox',`0 0 ${w} ${h}`); s.setAttribute('preserveAspectRatio','xMidYMid meet'); return s; };
-  const Path = (d, cls)=>{ const p=document.createElementNS(SVG_NS,'path'); p.setAttribute('d',d); if(cls) p.setAttribute('class',cls); return p; };
-  const Rect = (x,y,w,h,cls)=>{ const r=document.createElementNS(SVG_NS,'rect'); r.setAttribute('x',x); r.setAttribute('y',y); r.setAttribute('width',w); r.setAttribute('height',h); if(cls) r.setAttribute('class',cls); r.setAttribute('rx',3); r.setAttribute('ry',3); return r; };
-  const Circle = (cx,cy,r,cls)=>{ const c=document.createElementNS(SVG_NS,'circle'); c.setAttribute('cx',cx); c.setAttribute('cy',cy); c.setAttribute('r',r); if(cls) c.setAttribute('class',cls); return c; };
-  const Text = (x,y,text,cls,anchor='middle')=>{ const t=document.createElementNS(SVG_NS,'text'); t.setAttribute('x',x); t.setAttribute('y',y); t.setAttribute('text-anchor',anchor); if(cls) t.setAttribute('class',cls); t.textContent=text; return t; };
-
-  const injectOnce = (()=> {
-    let done=false;
-    return ()=>{
-      if(done) return; done=true;
-      const css = `
-        .mr-gridline{ stroke:#e9eef5; stroke-width:1; }
-        .mr-axis{ stroke:#c7d7e6; stroke-width:1; }
-        .mr-tick{ fill:#5b6b79; font-size:11px; font-weight:600; }
-        .mr-axis-label{ fill:#0A4E73; font-size:12px; font-weight:800; }
-        .mr-line-a{ fill:none; stroke:#0A68A0; stroke-width:2.5; }
-        .mr-line-b{ fill:none; stroke:#34a853; stroke-width:2.5; }
-        .mr-dot{ fill:#0A68A0; }
-        .mr-bar-off{ fill:#cfeaf7; }
-        .mr-bar-sold{ fill:#8fd2a4; }
-        .mr-legend{ font-size:12px; fill:#0a3246; font-weight:700; }
-        .mr-donut-sold{ stroke:#0A68A0; fill:none; }
-      `;
-      const tag = document.createElement('style'); tag.textContent = css;
-      document.head.appendChild(tag);
-    };
-  })();
-
-  function niceTicks(minVal, maxVal, steps=4){
-    const span = maxVal - minVal || 1;
-    const raw = span/steps;
-    const pow10 = Math.pow(10, Math.floor(Math.log10(raw)));
-    const mults = [1,2,2.5,5,10];
-    const step = mults.find(m=> m*pow10 >= raw) * pow10;
-    const start = Math.floor(minVal/step)*step;
-    const end   = Math.ceil(maxVal/step)*step;
-    const ticks = [];
-    for(let v=start; v<=end+1e-9; v+=step) ticks.push(v);
-    return {ticks, min:start, max:end};
-  }
-
-  // Line chart with axes + legend (robust to invalid points)
-  function lineChart(el, series, labels){
-    injectOnce();
-    el.innerHTML='';
-    if(!series?.length || !labels?.length) return;
-
-    const W=860, H=280, Pleft=56, Pright=20, Ptop=24, Pbot=40;
-
-    const vals = series.flat().map(toNum);
-    const vmin = Math.min(...vals);
-    const vmax = Math.max(...vals);
-    const {ticks, min: yMin, max: yMax} = niceTicks(vmin, vmax, 4);
-
-    const xCount = Math.max(labels.length, 1);
-    const plotW = W - Pleft - Pright;
-    const plotH = H - Ptop - Pbot;
-
-    const sy = v => Ptop + plotH - ( (toNum(v) - yMin) / (yMax - yMin || 1) ) * plotH;
-    const sx = i => Pleft + (i * (plotW / Math.max(xCount-1,1)));
-
-    const svg = SVG(W,H);
-
-    // Gridlines + y ticks
-    ticks.forEach(v=>{
-      const y = sy(v);
-      svg.appendChild(Path(`M ${Pleft} ${y} H ${W-Pright}`,'mr-gridline'));
-      svg.appendChild(Text(Pleft-8, y+4, String(Math.round(v*100)/100), 'mr-tick','end'));
-    });
-
-    // Axes
-    svg.appendChild(Path(`M ${Pleft} ${Ptop} V ${H-Pbot}`,'mr-axis'));
-    svg.appendChild(Path(`M ${Pleft} ${H-Pbot} H ${W-Pright}`,'mr-axis'));
-
-    // X tick labels (sparse)
-    const step = Math.ceil(labels.length / 10);
-    labels.forEach((lab,i)=>{
-      if(i % step !== 0 && i!==labels.length-1) return;
-      const x = sx(i);
-      svg.appendChild(Text(x, H-Pbot+16, lab, 'mr-tick','middle'));
-    });
-
-    // Axis labels
-    const isLots = el.id && el.id.includes('lots-lines');
-    const isPrice= el.id && el.id.includes('price-trend');
-    const yLabel = isPrice ? 'USD/kg' : 'Count';
-    svg.appendChild(Text(Pleft-42, Ptop-6, yLabel, 'mr-axis-label','start'));
-    svg.appendChild(Text(W-Pright, H-8, 'Weeks', 'mr-axis-label','end'));
-
-    // Lines + last valid dot
-    series.forEach((s,idx)=>{
-      let d = '';
-      let started = false;
-      for (let i=0; i<s.length; i++){
-        const x = sx(i);
-        const y = sy(s[i]);
-        if (Number.isFinite(x) && Number.isFinite(y)) {
-          d += (started ? ' L ' : ' M ') + x + ' ' + y;
-          started = true;
-        }
-      }
-      const path = Path(d, idx ? 'mr-line-b' : 'mr-line-a');
-      // length hint for CSS animations (optional)
-      try {
-        const len = path.getTotalLength();
-        path.style.setProperty('--path-length', len);
-      } catch(e){}
-      svg.appendChild(path);
-
-      // Last valid point dot
-      for (let n=s.length-1; n>=0; n--){
-        const x = sx(n), y = sy(s[n]);
-        if (Number.isFinite(x) && Number.isFinite(y)) {
-          svg.appendChild(Circle(x, y, 3.5, 'mr-dot'));
-          break;
-        }
-      }
-    });
-
-    // Legend for two series
-    if(series.length===2){
-      const legendX = W - Pright - 150, legendY = Ptop + 8, gap=18;
-      const names = (isLots)
-        ? ['Lots Offered','Lots Sold']
-        : ['Series A','Series B'];
-      // A
-      const swA = document.createElementNS(SVG_NS,'line');
-      swA.setAttribute('x1', legendX); swA.setAttribute('y1', legendY);
-      swA.setAttribute('x2', legendX+20); swA.setAttribute('y2', legendY);
-      swA.setAttribute('class','mr-line-a');
-      svg.appendChild(swA);
-      svg.appendChild(Text(legendX+26, legendY+4, names[0], 'mr-legend','start'));
-      // B
-      const y2 = legendY + gap;
-      const swB = document.createElementNS(SVG_NS,'line');
-      swB.setAttribute('x1', legendX); swB.setAttribute('y1', y2);
-      swB.setAttribute('x2', legendX+20); swB.setAttribute('y2', y2);
-      swB.setAttribute('class','mr-line-b');
-      svg.appendChild(swB);
-      svg.appendChild(Text(legendX+26, y2+4, names[1], 'mr-legend','start'));
-    }
-
-    el.appendChild(svg);
-  }
-
-  // Stacked bars with axes + tick labels
-  function stackedBars(el, offered, sold){
-    injectOnce();
-    el.innerHTML='';
-    if(!offered?.length || !sold?.length) return;
-
-    const W=860, H=280, Pleft=56, Pright=16, Ptop=24, Pbot=40;
-    const plotW = W - Pleft - Pright;
-    const plotH = H - Ptop - Pbot;
-
-    const vmax = Math.max(...offered.map(toNum), ...sold.map(toNum));
-    const {ticks, min: yMin, max: yMax} = niceTicks(0, vmax, 4);
-
-    const N = offered.length;
-    const sx = i => Pleft + i*(plotW/N) + (plotW/N)/2;
-    const sy = v => Ptop + plotH - ( (toNum(v) - yMin) / (yMax - yMin || 1) ) * plotH;
-    const bw = (plotW/N) * 0.6;
-
-    const svg = SVG(W,H);
-
-    // Grid + y ticks
-    ticks.forEach(v=>{
-      const y = sy(v);
-      svg.appendChild(Path(`M ${Pleft} ${y} H ${W-Pright}`,'mr-gridline'));
-      svg.appendChild(Text(Pleft-8, y+4, String(Math.round(v)), 'mr-tick','end'));
-    });
-
-    // Axes
-    svg.appendChild(Path(`M ${Pleft} ${Ptop} V ${H-Pbot}`,'mr-axis'));
-    svg.appendChild(Path(`M ${Pleft} ${H-Pbot} H ${W-Pright}`,'mr-axis'));
-
-    // Bars
-    for(let i=0;i<N;i++){
-      const x = sx(i) - bw/2;
-      const yOff = sy(offered[i]);
-      const hOff = (H-Pbot) - yOff;
-      const ySold= sy(sold[i]);
-      const hSold= (H-Pbot) - ySold;
-
-      svg.appendChild(Rect(x, yOff, bw, hOff, 'mr-bar-off'));
-      svg.appendChild(Rect(x, ySold, bw, hSold, 'mr-bar-sold'));
-    }
-
-    // Axis labels
-    svg.appendChild(Text(Pleft-42, Ptop-6, 'Kilograms', 'mr-axis-label','start'));
-    svg.appendChild(Text(W-Pright, H-8, 'Weeks', 'mr-axis-label','end'));
-
-    el.appendChild(svg);
-  }
-
-  // Donut chart (% sell-through)
-  function donut(el, soldPct){
-    injectOnce();
-    el.innerHTML='';
-    const W=240,H=240,R=92;
-    const svg = SVG(W,H);
-    const cx=W/2, cy=H/2;
-
-    // background ring
-    const bg = document.createElementNS(SVG_NS,'circle');
-    bg.setAttribute('cx',cx); bg.setAttribute('cy',cy); bg.setAttribute('r',R);
-    bg.setAttribute('fill','none'); bg.setAttribute('stroke','#eef4f8'); bg.setAttribute('stroke-width',24);
-    svg.appendChild(bg);
-
-    // sold arc
-    const frac = Math.max(0, Math.min(1, (soldPct||0)/100));
-    const theta = frac * Math.PI*2;
-    const startX = cx + R*Math.cos(-Math.PI/2);
-    const startY = cy + R*Math.sin(-Math.PI/2);
-    const endX   = cx + R*Math.cos(theta - Math.PI/2);
-    const endY   = cy + R*Math.sin(theta - Math.PI/2);
-    const large  = frac > .5 ? 1 : 0;
-
-    const arc = document.createElementNS(SVG_NS,'path');
-    arc.setAttribute('d', `M ${startX} ${startY} A ${R} ${R} 0 ${large} 1 ${endX} ${endY}`);
-    arc.setAttribute('class','mr-donut-sold');
-    arc.setAttribute('stroke-width',24);
-    svg.appendChild(arc);
-
-    // center label
-    const txt = Text(cx, cy+6, (Math.round((soldPct||0)*10)/10).toFixed(1)+'%', 'mr-axis-label','middle');
-    txt.setAttribute('font-size','20');
-    svg.appendChild(txt);
-
-    el.appendChild(svg);
-  }
-
-  // --- Main ----------------------------------------------------------------
-  function refresh(){
-    // Sanitize and filter
-    const view = applyFilters(
-      ALL.map(r => ({
-        ...r,
-        year:        toNum(r.year),
-        week:        toNum(r.week),
-        lotsOffered: toNum(r.lotsOffered),
-        lotsSold:    toNum(r.lotsSold),
-        qtyOfferedKg:toNum(r.qtyOfferedKg),
-        qtySoldKg:   toNum(r.qtySoldKg),
-        avgPriceUsd: toNum(r.avgPriceUsd),
-        soldPct: Number.isFinite(r.soldPct) ? r.soldPct
-               : (toNum(r.lotsOffered) ? (toNum(r.lotsSold)/Math.max(1,toNum(r.lotsOffered))*100) : 0)
-      }))
-    );
-
-    // Update global CURRENT_VIEW and reset to page 1 on filter changes
-    CURRENT_VIEW = view;
-    currentPage = 1;
-
-    // KPIs + Summary
-    renderKPIs(ALL, CURRENT_VIEW);
-
-    // Charts & table
-    if(!CURRENT_VIEW.length){
-      ROWS.innerHTML = '<tr><td colspan="8">No data for the selected filter.</td></tr>';
-      [elPriceTrend, elQtyStacked, elDonut, elLotsLines].forEach(el=> el.innerHTML='');
-      renderPager(0);
-      window.dispatchEvent(new CustomEvent('mr:refreshed'));
+    if (!points.length) {
+      el.innerHTML = `<div class="chart-empty">No chart data</div>`;
       return;
     }
 
-    // Table page + pager
-    renderTablePage();
-    renderPager(CURRENT_VIEW.length);
+    const W = 640, H = 260, PAD = 30;
+    const xs = points.map(p => p.x);
+    const ys = points.map(p => p.y);
 
-    // Charts (use full filtered data, not paged)
-    const labels = CURRENT_VIEW.map(r=>`W${r.week}`);
-    const price  = CURRENT_VIEW.map(r=> toNum(r.avgPriceUsd));
-    const lotsO  = CURRENT_VIEW.map(r=> toNum(r.lotsOffered));
-    const lotsS  = CURRENT_VIEW.map(r=> toNum(r.lotsSold));
-    const qtyO   = CURRENT_VIEW.map(r=> toNum(r.qtyOfferedKg));
-    const qtyS   = CURRENT_VIEW.map(r=> toNum(r.qtySoldKg));
+    const minX = Math.min(...xs), maxX = Math.max(...xs);
+    const _minY = (minY != null) ? minY : Math.min(...ys);
+    const _maxY = (maxY != null) ? maxY : Math.max(...ys);
 
-    lineChart(elPriceTrend, [price], labels);
-    stackedBars(elQtyStacked, qtyO, qtyS);
-    const soldPctOverall = (lotsS.reduce((a,b)=>a+b,0)/Math.max(1,lotsO.reduce((a,b)=>a+b,0)))*100;
-    donut(elDonut, soldPctOverall);
-    lineChart(elLotsLines, [lotsO, lotsS], labels);
+    const xScale = (x) => PAD + ((x - minX) / (maxX - minX || 1)) * (W - PAD*2);
+    const yScale = (y) => (H - PAD) - ((y - _minY) / (_maxY - _minY || 1)) * (H - PAD*2);
 
-    // Notify observers to (re)apply in-view animations and row stagger
-    window.dispatchEvent(new CustomEvent('mr:refreshed'));
+    const d = points.map((p,i) => `${i===0?'M':'L'} ${xScale(p.x).toFixed(1)} ${yScale(p.y).toFixed(1)}`).join(' ');
+
+    const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    svg.setAttribute('width','100%');
+    svg.setAttribute('height','100%');
+
+    svg.innerHTML = `
+      <path class="mr-axis" d="M ${PAD} ${H-PAD} L ${W-PAD} ${H-PAD}" stroke="rgba(148,163,184,.55)" stroke-width="1"/>
+      <path class="mr-axis" d="M ${PAD} ${PAD} L ${PAD} ${H-PAD}" stroke="rgba(148,163,184,.55)" stroke-width="1"/>
+
+      <path class="mr-line-a" d="${d}" fill="none" stroke="currentColor" stroke-width="3"/>
+      ${points.map((p,i) => {
+        if (i !== points.length - 1) return '';
+        const cx = xScale(p.x), cy = yScale(p.y);
+        return `<circle class="mr-dot" cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="5" fill="currentColor"></circle>`;
+      }).join('')}
+
+      <text class="mr-axis-label" x="${PAD}" y="${PAD-10}" fill="rgba(100,116,139,.95)" font-size="12" font-weight="700">
+        ${_minY.toFixed(2)}${labelSuffix} → ${_maxY.toFixed(2)}${labelSuffix}
+      </text>
+    `;
+
+    // animate line drawing
+    requestAnimationFrame(() => {
+      const path = svg.querySelector('.mr-line-a');
+      if (path) {
+        const len = path.getTotalLength();
+        path.style.setProperty('--path-length', `${len}`);
+        path.style.strokeDasharray = `${len}`;
+        path.style.strokeDashoffset = `${len}`;
+      }
+    });
+
+    el.style.color = '#218CCF';
+    el.appendChild(svg);
   }
 
-  // Events
-  BTN_APPLY?.addEventListener('click', refresh);
+  function renderStackedBars(el, rows) {
+    if (!el) return;
+    el.innerHTML = '';
+    if (!rows.length) { el.innerHTML = `<div class="chart-empty">No chart data</div>`; return; }
 
-  BTN_CLEAR?.addEventListener('click', () => {
-    YEAR_IN.value = '';
-    ALL_WEEKS.checked = true;
-    updateRangeEnabledState();
-    WEEK_FROM.innerHTML = '<option value="">From</option>';
-    WEEK_TO.innerHTML   = '<option value="">To</option>';
-    refresh();
-  });
+    const W = 640, H = 260, PAD = 26;
+    const max = Math.max(...rows.map(r => r.offered), 1);
+    const gap = 10;
+    const barW = Math.max(10, ((W - PAD*2) / rows.length) - gap);
 
-  YEAR_IN?.addEventListener('input', () => {
-    if (YEAR_IN.value) buildWeekOptionsForYear(ALL, +YEAR_IN.value);
-    refresh();
-  });
+    const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    svg.setAttribute('width','100%');
+    svg.setAttribute('height','100%');
 
-  ALL_WEEKS?.addEventListener('change', () => {
-    updateRangeEnabledState();
-    refresh();
-  });
+    el.style.color = '#0A4E73';
 
-  WEEK_FROM?.addEventListener('change', refresh);
-  WEEK_TO?.addEventListener('change', refresh);
+    svg.innerHTML = `
+      <path class="mr-axis" d="M ${PAD} ${H-PAD} L ${W-PAD} ${H-PAD}" stroke="rgba(148,163,184,.55)" stroke-width="1"/>
+      <path class="mr-axis" d="M ${PAD} ${PAD} L ${PAD} ${H-PAD}" stroke="rgba(148,163,184,.55)" stroke-width="1"/>
 
+      ${rows.map((r,i) => {
+        const x = PAD + i * (barW + gap);
+        const offeredH = ((r.offered / max) * (H - PAD*2));
+        const soldH = ((r.sold / max) * (H - PAD*2));
+        const yOff = (H - PAD) - offeredH;
+        const ySold = (H - PAD) - soldH;
+
+        return `
+          <rect class="mr-bar-off" x="${x.toFixed(1)}" y="${yOff.toFixed(1)}" width="${barW.toFixed(1)}" height="${offeredH.toFixed(1)}"
+                rx="8" fill="currentColor" opacity="0.18"></rect>
+          <rect class="mr-bar-sold" x="${x.toFixed(1)}" y="${ySold.toFixed(1)}" width="${barW.toFixed(1)}" height="${soldH.toFixed(1)}"
+                rx="8" fill="currentColor" opacity="0.55"></rect>
+        `;
+      }).join('')}
+    `;
+
+    el.appendChild(svg);
+  }
+
+  function renderDonut(el, sold, offered) {
+    if (!el) return;
+    el.innerHTML = '';
+
+    const total = Math.max(offered, 0);
+    const s = Math.max(sold, 0);
+    const pct = total > 0 ? s / total : 0;
+
+    const size = 240, r = 78, cx = size/2, cy = size/2;
+    const circ = 2 * Math.PI * r;
+
+    el.style.color = '#22c55e';
+
+    el.innerHTML = `
+      <svg viewBox="0 0 ${size} ${size}" width="100%" height="100%">
+        <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(148,163,184,.25)" stroke-width="18"></circle>
+        <circle class="mr-donut-sold" cx="${cx}" cy="${cy}" r="${r}"
+                fill="none" stroke="currentColor" stroke-width="18"
+                stroke-linecap="round"
+                transform="rotate(-90 ${cx} ${cy})"
+                stroke-dasharray="${circ}" stroke-dashoffset="${circ * (1 - pct)}"></circle>
+
+        <text x="${cx}" y="${cy-4}" text-anchor="middle" font-size="28" font-weight="950" fill="#0f172a">
+          ${(pct*100).toFixed(1)}%
+        </text>
+        <text x="${cx}" y="${cy+22}" text-anchor="middle" font-size="12" font-weight="800" fill="#64748b">
+          Sell-through
+        </text>
+      </svg>
+    `;
+  }
+
+  // -----------------------------
+  // Render everything
+  // -----------------------------
+  function renderAll() {
+    if (!DATA_READY) return;
+
+    const range = getRange();
+
+    const combrokArr = filterData(DATA_BROKER, range);
+    const auctionArr = filterData(DATA_AUCTION, range);
+
+    renderKpis(combrokArr, auctionArr);
+    renderSummary(combrokArr, range);
+    renderTable(combrokArr);
+
+    // Charts
+    const ptsPrice = auctionArr.map(r => ({ x: r.week, y: num(r.avgPriceUsdKg) }));
+    renderLineChart(chartPriceTrend, ptsPrice, { labelSuffix: ' USD/kg' });
+
+    const bars = auctionArr.map(r => ({ offered: num(r.qtyOfferedKg), sold: num(r.qtySoldKg) }));
+    renderStackedBars(chartQtyStacked, bars);
+
+    const offeredTotal = auctionArr.reduce((s,r)=> s + num(r.qtyOfferedKg), 0);
+    const soldTotal = auctionArr.reduce((s,r)=> s + num(r.qtySoldKg), 0);
+    renderDonut(chartSellthrough, soldTotal, offeredTotal);
+
+    // Lots lines (simple: offered series)
+    const ptsLotsOff = combrokArr.map(r => ({ x: r.week, y: num(r.lotsOffered) }));
+    renderLineChart(chartLotsLines, ptsLotsOff, {});
+
+    // Re-arm in-view animations after HTML updates
+    setupInViewObserver();
+  }
+
+  // -----------------------------
   // Init
-  loadData().then(rows=>{
-    const sanitize = r => ({
-      year:        toNum(r.year),
-      week:        toNum(r.week),
-      lotsOffered: toNum(r.lotsOffered),
-      lotsSold:    toNum(r.lotsSold),
-      qtyOfferedKg:toNum(r.qtyOfferedKg),
-      qtySoldKg:   toNum(r.qtySoldKg),
-      avgPriceUsd: toNum(r.avgPriceUsd),
-      soldPct: Number.isFinite(r.soldPct) ? r.soldPct
-              : (toNum(r.lotsOffered) ? (toNum(r.lotsSold)/Math.max(1,toNum(r.lotsOffered))*100) : 0)
+  // -----------------------------
+  if (fromEl && toEl) {
+    weekOptions(fromEl, 'From');
+    weekOptions(toEl, 'To');
+  }
+
+  enableWeekInputs(false);
+
+  if (allWeeks) {
+    allWeeks.addEventListener('change', () => {
+      const enabled = !allWeeks.checked;
+      enableWeekInputs(enabled);
+      if (!enabled) { if (fromEl) fromEl.value = ''; if (toEl) toEl.value = ''; }
     });
+  }
 
-    ALL = rows.map(sanitize)
-              .sort((a,b)=> a.year===b.year ? a.week-b.week : a.year-b.year);
+  if (applyBtn) applyBtn.addEventListener('click', () => renderAll());
 
-    // default to latest year and full range
-    const last = ALL.slice(-1)[0];
-    if (last) {
-      YEAR_IN.value = last.year;
-      buildWeekOptionsForYear(ALL, last.year);
-      ALL_WEEKS.checked = true;
-      updateRangeEnabledState();
-    }
-
-    refresh();
-  });
-})();
-
-/* ========= On-scroll animation trigger + table stagger ========= */
-(() => {
-  const OBS_OPTS = { root:null, rootMargin:'0px', threshold:0.2 };
-  const onceObserver = new IntersectionObserver((entries, obs)=>{
-    entries.forEach(e=>{
-      if(!e.isIntersecting) return;
-      e.target.classList.add('in-view');
-      obs.unobserve(e.target); // animate once per render
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      if (yearEl) yearEl.value = '';
+      if (allWeeks) allWeeks.checked = true;
+      enableWeekInputs(false);
+      if (fromEl) fromEl.value = '';
+      if (toEl) toEl.value = '';
+      renderAll();
     });
-  }, OBS_OPTS);
+  }
 
-  const watch = sel => document.querySelectorAll(sel).forEach(el=> onceObserver.observe(el));
-  const hook = () => {
-    watch('.kpi-grid');
-    watch('.chart');
-    watch('.donut');
-    watch('.table-wrap');
-    const summary = document.getElementById('mr-summary');
-    if (summary) onceObserver.observe(summary);
-  };
-
-  const setRowDelays = () => {
-    const rows = document.querySelectorAll('#mr-rows tr');
-    rows.forEach((tr, i) => { tr.style.animationDelay = `${Math.min(i * 0.05, 1)}s`; });
-  };
-
-  window.addEventListener('mr:refreshed', () => {
-    setRowDelays();
-    hook();
-  });
-
-  document.addEventListener('DOMContentLoaded', hook);
-})();
+  (async () => {
+    await loadDatasets();
+    renderAll();
+  })();
+});

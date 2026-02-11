@@ -1,116 +1,206 @@
 <?php
-/* pages/market-reports.php — Premium Market Reports dashboard */
+/* pages/market-reports.php — Premium Market Reports dashboard (single download + tabs) */
 ?>
 <link rel="stylesheet" href="/assets/css/market-reports.css">
 
 <section class="page-head">
   <div class="wrap">
     <h1>Market Reports</h1>
-    <p class="muted">Weekly auction trends, performance ratios, and price movements. Filter by year and week to drill down.</p>
+    <p class="muted">
+      Weekly auction trends, performance ratios, and price movements. Switch tabs to compare broker vs market.
+    </p>
   </div>
 </section>
 
 <section class="wrap pad mr-filters">
-  <div class="filters">
-    <label class="field">
-      <span>Year</span>
-      <input id="mr-year" type="number" min="2015" max="2100" placeholder="e.g., 2026" inputmode="numeric">
-    </label>
 
-    <div class="field range">
-      <span>Week Range</span>
-      <div class="range-row">
-        <select id="mr-week-from" disabled>
-          <option value="">From</option>
-        </select>
-        <span class="sep">to</span>
-        <select id="mr-week-to" disabled>
-          <option value="">To</option>
-        </select>
-      </div>
-      <label class="chk">
-        <input type="checkbox" id="mr-all-weeks" checked>
-        <span>All weeks</span>
-      </label>
+  <!-- TOP: single download + selectors (optional) -->
+  <div class="mr-topbar card soft">
+    <div class="mr-topbar-left">
+      <h2 class="mr-title">Reports & Downloads</h2>
+      <p class="mr-sub muted">Download the selected report and explore insights below.</p>
     </div>
 
-    <button class="btn" id="mr-apply" type="button">Apply</button>
-    <button class="btn ghost" id="mr-clear" type="button">Clear</button>
+    <div class="mr-topbar-right">
+      <!-- Single download button -->
+      <a class="btn ghost dl"
+         id="mr-download"
+         href="/assets/data/MARKET%20REPORT%20SALE%2041%20EXCEL.xlsx"
+         download>
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+            <path d="M12 3v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M8 11l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4 21h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span id="mr-download-label">Download Combrok Report</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Tabs (below download) -->
+  <div class="mr-filters-row">
+    <div class="mr-tabs" role="tablist" aria-label="Market Reports Tabs">
+      <button class="mr-tab active"
+              id="tab-combrok"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="panel-combrok"
+              data-mr-tab="combrok">
+        Combrok Sales Data
+      </button>
+
+      <button class="mr-tab"
+              id="tab-auction"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-auction"
+              data-mr-tab="auction">
+        Auction Sales Data
+      </button>
+    </div>
 
     <div class="spacer"></div>
 
-    <!-- Replaced the CSV button with a direct Excel download -->
-    <a class="btn ghost dl"
-       id="mr-download-report"
-       href="/assets/data/MARKET%20REPORT%20SALE%2041%20EXCEL.xlsx"
-       download>
-      Download Market Report
-    </a>
+    <div class="mr-hint muted small">
+      Tip: switch tabs to compare broker vs market.
+    </div>
   </div>
 </section>
 
-<!-- KPI CARDS -->
-<section class="wrap pad kpi-grid" id="mr-kpis" aria-live="polite">
-  <!-- JS will inject KPI cards -->
+
+<!-- ===========================
+     TAB 1: COMBROK
+=========================== -->
+<section id="panel-combrok" class="mr-panel active" role="tabpanel" aria-labelledby="tab-combrok">
+  <!-- KPI SECTION -->
+  <section class="wrap pad">
+    <div class="mr-kpi-block">
+      <div class="mr-kpi-head">
+        <h2 class="mr-kpi-title">Combrok Sales</h2>
+        <p class="mr-kpi-sub muted">Broker performance summary for the selected period.</p>
+      </div>
+
+      <div class="kpi-grid" id="mr-kpis-combrok" aria-live="polite">
+        <!-- JS injects KPIs -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CHARTS ROW 1 -->
+  <section class="wrap pad charts-grid">
+    <article class="card hover">
+      <header class="chart-head">
+        <h3>Average Price (USD/kg) — Trend</h3>
+        <span class="sub">Weekly</span>
+      </header>
+      <div class="chart" id="chart-price-trend-combrok" role="img" aria-label="Combrok average price trend line chart"></div>
+    </article>
+
+    <article class="card hover">
+      <header class="chart-head">
+        <h3>Quantity Offered vs Sold</h3>
+        <span class="sub">Stacked bars</span>
+      </header>
+      <div class="chart" id="chart-qty-stacked-combrok" role="img" aria-label="Combrok offered and sold quantities"></div>
+    </article>
+  </section>
+
+  <!-- CHARTS ROW 2 -->
+  <section class="wrap pad charts-grid">
+    <article class="card hover">
+      <header class="chart-head">
+        <h3>Sell-Through (%)</h3>
+        <span class="sub">Sold vs Out-lot</span>
+      </header>
+      <div class="chart donut" id="chart-sellthrough-combrok" role="img" aria-label="Combrok sell-through donut chart"></div>
+    </article>
+
+    <article class="card hover">
+      <header class="chart-head">
+        <h3>Lots Sold & Offered</h3>
+        <span class="sub">Dual line</span>
+      </header>
+      <div class="chart" id="chart-lots-lines-combrok" role="img" aria-label="Combrok lots sold and offered trend"></div>
+    </article>
+  </section>
+
+  <!-- SUMMARY + NOTE -->
+  <section class="wrap pad">
+    <div id="mr-summary-combrok" class="card soft" style="margin-bottom:12px"></div>
+    <p class="muted small">
+      This is Combrok Sales Data and is analyzed and prepared by Combrok Limited.
+    </p>
+  </section>
 </section>
 
-<!-- CHARTS ROW 1 -->
-<section class="wrap pad charts-grid">
-  <article class="card hover">
-    <header class="chart-head">
-      <h3>Average Price (USD/kg) — Trend</h3>
-      <span class="sub">Weekly</span>
-    </header>
-    <div class="chart" id="chart-price-trend" role="img" aria-label="Average price trend line chart"></div>
-  </article>
 
-  <article class="card hover">
-    <header class="chart-head">
-      <h3>Quantity Offered vs Sold</h3>
-      <span class="sub">Stacked bars</span>
-    </header>
-    <div class="chart" id="chart-qty-stacked" role="img" aria-label="Stacked bars showing offered and sold quantities"></div>
-  </article>
-</section>
+<!-- ===========================
+     TAB 2: AUCTION
+=========================== -->
+<section id="panel-auction" class="mr-panel" role="tabpanel" aria-labelledby="tab-auction" hidden>
+  <!-- KPI SECTION -->
+  <section class="wrap pad">
+    <div class="mr-kpi-block">
+      <div class="mr-kpi-head">
+        <h2 class="mr-kpi-title">Auction Sales</h2>
+        <p class="mr-kpi-sub muted">Market-wide auction totals for the selected period.</p>
+      </div>
 
-<!-- CHARTS ROW 2 -->
-<section class="wrap pad charts-grid">
-  <article class="card hover">
-    <header class="chart-head">
-      <h3>Sell-Through (%)</h3>
-      <span class="sub">Sold vs Out-lot</span>
-    </header>
-    <div class="chart donut" id="chart-sellthrough" role="img" aria-label="Donut chart of sold vs out-lot"></div>
-  </article>
+      <div class="kpi-grid" id="mr-kpis-auction" aria-live="polite">
+        <!-- JS injects KPIs -->
+      </div>
+    </div>
+  </section>
 
-  <article class="card hover">
-    <header class="chart-head">
-      <h3>Lots Sold & Offered</h3>
-      <span class="sub">Dual line</span>
-    </header>
-    <div class="chart" id="chart-lots-lines" role="img" aria-label="Lots sold and offered trend"></div>
-  </article>
-</section>
+  <!-- CHARTS ROW 1 -->
+  <section class="wrap pad charts-grid">
+    <article class="card hover">
+      <header class="chart-head">
+        <h3>Average Price (USD/kg) — Trend</h3>
+        <span class="sub">Weekly</span>
+      </header>
+      <div class="chart" id="chart-price-trend-auction" role="img" aria-label="Auction average price trend line chart"></div>
+    </article>
 
-<!-- TABLE -->
-<section class="wrap pad">
-  <div id="mr-summary" class="card soft" style="margin-bottom:12px"></div>
+    <article class="card hover">
+      <header class="chart-head">
+        <h3>Quantity Offered vs Sold</h3>
+        <span class="sub">Stacked bars</span>
+      </header>
+      <div class="chart" id="chart-qty-stacked-auction" role="img" aria-label="Auction offered and sold quantities"></div>
+    </article>
+  </section>
 
-  <div class="table-wrap">
-    <table class="table" id="mr-table">
-      <thead>
-        <tr>
-          <th>Year</th><th>Week</th><th>Lots Offered</th><th>Lots Sold</th>
-          <th>Qty Offered (kg)</th><th>Qty Sold (kg)</th><th>Sold %</th><th>Avg Price (USD/kg)</th>
-        </tr>
-      </thead>
-      <tbody id="mr-rows"></tbody>
-    </table>
-  </div>
+  <!-- CHARTS ROW 2 -->
+  <section class="wrap pad charts-grid">
+    <article class="card hover">
+      <header class="chart-head">
+        <h3>Sell-Through (%)</h3>
+        <span class="sub">Sold vs Out-lot</span>
+      </header>
+      <div class="chart donut" id="chart-sellthrough-auction" role="img" aria-label="Auction sell-through donut chart"></div>
+    </article>
 
-  <p class="muted small">
-    This is Auction Data and is analyzed and prepared by Combrok Limited
-  </p>
+    <article class="card hover">
+      <header class="chart-head">
+        <h3>Lots Sold & Offered</h3>
+        <span class="sub">Dual line</span>
+      </header>
+      <div class="chart" id="chart-lots-lines-auction" role="img" aria-label="Auction lots sold and offered trend"></div>
+    </article>
+  </section>
+
+  <!-- SUMMARY + NOTE -->
+  <section class="wrap pad">
+    <div id="mr-summary-auction" class="card soft" style="margin-bottom:12px"></div>
+    <p class="muted small">
+      This is Auction Data and is analyzed and prepared by Combrok Limited.
+    </p>
+  </section>
 </section>
 
 <script defer src="/assets/js/market-reports.js"></script>

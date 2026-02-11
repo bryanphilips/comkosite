@@ -1,0 +1,44 @@
+{"auction_sales":[
+{
+"sale": "Sale 01",
+"offered_lots": 3982,
+"sold_lots": 3476,
+"qty_offered": 9613036,
+"qty_sold": 8281348
+},
+{
+"sale": "Sale 02",
+"offered_lots": 3749,
+"sold_lots": 3203,
+"qty_offered": 8711756,
+"qty_sold": 7544193
+},
+{
+"sale": "Sale 03",
+"offered_lots": 3847,
+"sold_lots": 3472,
+"qty_offered": 9291575,
+"qty_sold": 8394911
+},
+{
+"sale": "Sale 04",
+"offered_lots": 5469,
+"sold_lots": 4651,
+"qty_offered": 12856192,
+"qty_sold": 10986438
+},
+{
+"sale": "Sale 05",
+"offered_lots": 4876,
+"sold_lots": 4200,
+"qty_offered": 11842297,
+"qty_sold": 10065490
+},
+{
+"sale": "Sale 06",
+"offered_lots": 4797,
+"sold_lots": 2822,
+"qty_offered": 11314923,
+"qty_sold": 6530364
+}
+]}

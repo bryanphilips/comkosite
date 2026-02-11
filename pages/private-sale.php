@@ -17,8 +17,8 @@ $siteKey = RECAPTCHA_SITE_KEY ?? '';
 <section class="wrap">
   <div class="ps-tabs card soft">
     <div class="ps-tabbar" role="tablist" aria-label="Private Sale Tabs">
-      <button class="ps-tab active" data-tab="request" role="tab" aria-selected="true" aria-controls="panel-request">Request Private Sale</button>
-      <button class="ps-tab" data-tab="offer" role="tab" aria-selected="false" aria-controls="panel-offer">Offer Tea for Private Sale</button>
+      <button class="ps-tab active" data-tab="request" role="tab" aria-selected="true" aria-controls="panel-request">Buyer Request for Private Sale</button>
+      <button class="ps-tab" data-tab="offer" role="tab" aria-selected="false" aria-controls="panel-offer">Producer Offer Tea for Private Sale</button>
     </div>
 
     <!-- shared alert slot -->

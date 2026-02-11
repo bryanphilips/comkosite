@@ -16,6 +16,8 @@ $url   = function_exists('meta_url')   ? meta_url()   : (defined('APP_URL') ? AP
   >
   <title><?= htmlspecialchars($title, ENT_QUOTES, 'UTF-8') ?></title>
   <meta name="description" content="<?= htmlspecialchars($desc, ENT_QUOTES, 'UTF-8') ?>">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="<?= htmlspecialchars(APP_NAME ?? 'Combrok Limited', ENT_QUOTES, 'UTF-8') ?>">
 
   <!-- Canonical -->
   <link rel="canonical" href="<?= htmlspecialchars($url, ENT_QUOTES, 'UTF-8') ?>">
@@ -26,6 +28,8 @@ $url   = function_exists('meta_url')   ? meta_url()   : (defined('APP_URL') ? AP
   <meta property="og:description" content="<?= htmlspecialchars($desc, ENT_QUOTES, 'UTF-8') ?>">
   <meta property="og:image" content="<?= htmlspecialchars($img, ENT_QUOTES, 'UTF-8') ?>">
   <meta property="og:url" content="<?= htmlspecialchars($url, ENT_QUOTES, 'UTF-8') ?>">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">

@@ -1,10 +1,10 @@
 <?php
-/* pages/services.php — Premium cards, centered headings, alternating mini image/content */
+/* pages/services.php — Premium cards + per-section slider (auto, swipe, arrows, dots) */
 
 $services = [
   [
     'category' => 'Pre-Sale & Quality Services',
-    'blurb'    => 'We prepare your teas for market with disciplined sampling, rigorous tasting, and clear valuation—so every lot reaches buyers with confidence.',
+    'blurb'    => 'We prepare teas for market with disciplined sampling, rigorous tasting, and clear valuation—so every invoice reaches buyers with confidence.',
     'items'    => [
       ['title' => 'Sampling & Grading', 'text' => 'We arrange representative samples for every lot (e.g., 4kg splits) and ensure distribution to buyers is accurate and timely.', 'img' => 'sampling'],
       ['title' => 'Tasting & Quality Evaluation', 'text' => 'Our tasting panel evaluates leaf and liquor quality – translating findings into clear actionable guidance.', 'img' => 'sample-cup'],
@@ -62,25 +62,39 @@ $services = [
 
 <section class="services-page">
   <div class="wrap">
-    <?php foreach ($services as $section): ?>
-      <article class="svc-card reveal">
+    <?php foreach ($services as $sIndex => $section): ?>
+      <?php $sid = 'svc-'.$sIndex; ?>
+      <article class="svc-card">
         <header class="svc-head">
           <h2 class="svc-title"><?= htmlspecialchars($section['category']) ?></h2>
           <p class="svc-sub"><?= htmlspecialchars($section['blurb']) ?></p>
         </header>
 
-        <div class="svc-items">
-          <?php foreach ($section['items'] as $i => $item): ?>
-            <div class="svc-item <?= $i % 2 ? 'alt' : '' ?>">
-              <div class="svc-img ratio ratio-4x3">
-                <?php pictureTag($item['img'], $item['title']); ?>
-              </div>
-              <div class="svc-copy">
-                <h3 class="svc-item-title"><?= htmlspecialchars($item['title']) ?></h3>
-                <p class="svc-item-text"><?= htmlspecialchars($item['text']) ?></p>
-              </div>
+        <!-- Slider -->
+        <div class="svc-slider" data-svc-slider id="<?= $sid ?>" aria-label="<?= htmlspecialchars($section['category']) ?>">
+          <button class="svc-nav prev" type="button" aria-label="Previous slide">‹</button>
+
+          <div class="svc-viewport" data-svc-viewport>
+            <div class="svc-track" data-svc-track>
+              <?php foreach ($section['items'] as $item): ?>
+                <div class="svc-slide" data-svc-slide>
+                  <div class="svc-slide-inner">
+                    <div class="svc-slide-img ratio ratio-16x9">
+                      <?php pictureTag($item['img'], $item['title']); ?>
+                    </div>
+                    <div class="svc-slide-copy">
+                      <h3 class="svc-item-title"><?= htmlspecialchars($item['title']) ?></h3>
+                      <p class="svc-item-text"><?= htmlspecialchars($item['text']) ?></p>
+                    </div>
+                  </div>
+                </div>
+              <?php endforeach; ?>
             </div>
-          <?php endforeach; ?>
+          </div>
+
+          <button class="svc-nav next" type="button" aria-label="Next slide">›</button>
+
+          <div class="svc-dots" data-svc-dots aria-label="Slider dots"></div>
         </div>
       </article>
     <?php endforeach; ?>

@@ -9,8 +9,7 @@ $tabs = [
   'products'       => 'Products',
   'market-reports' => 'Market Reports',
   'events'         => 'Events',
-  'sustainability' => 'Sustainability', // ← NEW
-  'contact'        => 'Contact',
+  'sustainability' => 'Sustainability', 
   'enquiry'        => 'Enquiry'
 ];
 ?>
@@ -53,11 +52,6 @@ $tabs = [
             </li>
           <?php endforeach; ?>
 
-          <!-- CTAs -->
-          <li class="nav-item ms-lg-2">
-            <a class="btn btn-sm btn-outline-primary nav-cta <?= $current==='request'?'active':'' ?>"
-               href="/?p=request">Request Data</a>
-          </li>
           <li class="nav-item">
             <a class="btn btn-sm btn-brand nav-cta <?= $current==='private-sale'?'active':'' ?>"
                href="/?p=private-sale">Private Sale</a>
@@ -77,7 +71,7 @@ $tabs = [
       <div class="ribbon-msg">Empowering Tea Producers &amp; Buyers.</div>
       <div class="ribbon-msg">Trusted auction representation, sampling &amp; market intelligence.</div>
       <div class="ribbon-msg">Delivering excellence through integrity and innovation.</div>
-      <div class="ribbon-msg">!!! Winner Best Broker Highest Priced 2024..!!!</div>
+      <div class="ribbon-msg">🏆 Winner: Best Broker (Highest Priced) — 2024</div>
     </div>
   </div>
 </div>

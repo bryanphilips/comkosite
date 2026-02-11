@@ -1,44 +1,65 @@
 [
   {
-    "date": "2025-09-24T09:00:00+03:00",
-    "title": "Launch of First-Ever Orthodox Tea Auction",
-    "location": "East African Tea Trade Association – Mombasa",
-    "description": "Celebrating the milestone of introducing Orthodox tea trading in Kenya.",
-    "ics": "/assets/events/orthodox-tea-auction.ics"
+    "date": "2026-02-26T09:00:00+03:00",
+    "title": "Members Forum & Tea Veterans Caucus",
+    "location": "Mombasa, Kenya",
+    "description": "EATTA Members Forum and Tea Veterans Caucus meeting in Mombasa.",
+    "ics": "/assets/events/members-forum-tea-veterans-2026-02-26.ics"
   },
   {
-    "date": "2025-10-22T09:00:00+03:00",
-    "title": "Upcoming Tea Auction (Sale 40)",
-    "location": "Tea Board of Kenya / EATTA, Mombasa",
-    "description": "Regular weekly sale of CTC and Orthodox teas.",
-    "ics": "/assets/events/tea-auction-sale40.ics"
-  },
-  {
-    "date": "2025-10-29T16:00:00+03:00",
-    "title": "Market Insights Webinar – Tea & Agri Exports",
-    "location": "Online (Webinar)",
-    "description": "Quarterly analysis on global tea demand, pricing and logistics.",
-    "ics": "/assets/events/market-insights-webinar.ics"
-  },
-  {
-    "date": "2025-11-28T18:00:00+03:00",
-    "title": "Gala Dinner – Industry Networking Evening",
-    "location": "PrideInn Hotel, Nairobi",
-    "description": "Annual end-year dinner for tea industry professionals and partners.",
-    "ics": "/assets/events/gala-dinner-2025.ics"
-  },
-  {
-    "date": "2025-12-10T10:00:00+03:00",
-    "title": "Tea Tasting Expo – Specialty & Orthodox Teas",
-    "location": "Combrok Offices, Nairobi",
-    "description": "Interactive session featuring producers and buyers with guided tasting.",
-    "ics": "/assets/events/tea-tasting-expo.ics"
-  },
-  {
-    "date": "2025-12-17T07:30:00+03:00",
-    "title": "Golf Tournament & Fundraiser — Mombasa Sports Club",
+    "date": "2026-05-29T09:00:00+03:00",
+    "title": "Members Forum",
     "location": "Mombasa Sports Club, Mombasa",
-    "description": "Charity golf event to support sustainability initiatives.",
-    "ics": "/assets/events/golf-tournament-2025.ics"
+    "description": "EATTA Members Forum session hosted at Mombasa Sports Club.",
+    "ics": "/assets/events/members-forum-2026-05-29.ics"
+  },
+  {
+    "date": "2026-08-15T08:00:00+03:00",
+    "title": "Sports Day",
+    "location": "Mombasa, Kenya",
+    "description": "EATTA Sports Day event bringing members together for sports and networking.",
+    "ics": "/assets/events/sports-day-2026-08-15.ics"
+  },
+  {
+    "date": "2026-09-14T09:00:00+03:00",
+    "title": "EATTA 70th Anniversary Celebrations & 7th African Tea Convention (Day 1)",
+    "location": "Nairobi, Kenya",
+    "description": "Opening day of EATTA’s 70th Anniversary Celebrations and the 7th African Tea Convention (14–18 Sept 2026).",
+    "ics": "/assets/events/eatta-70th-african-tea-convention-2026-09-14.ics"
+  },
+  {
+    "date": "2026-09-15T09:00:00+03:00",
+    "title": "EATTA 70th Anniversary Celebrations & 7th African Tea Convention (Day 2)",
+    "location": "Nairobi, Kenya",
+    "description": "Day 2 of EATTA’s 70th Anniversary Celebrations and the 7th African Tea Convention (14–18 Sept 2026).",
+    "ics": "/assets/events/eatta-70th-african-tea-convention-2026-09-15.ics"
+  },
+  {
+    "date": "2026-09-16T09:00:00+03:00",
+    "title": "EATTA 70th Anniversary Celebrations & 7th African Tea Convention (Day 3)",
+    "location": "Nairobi, Kenya",
+    "description": "Day 3 of EATTA’s 70th Anniversary Celebrations and the 7th African Tea Convention (14–18 Sept 2026).",
+    "ics": "/assets/events/eatta-70th-african-tea-convention-2026-09-16.ics"
+  },
+  {
+    "date": "2026-09-17T09:00:00+03:00",
+    "title": "EATTA 70th Anniversary Celebrations & 7th African Tea Convention (Day 4)",
+    "location": "Nairobi, Kenya",
+    "description": "Day 4 of EATTA’s 70th Anniversary Celebrations and the 7th African Tea Convention (14–18 Sept 2026).",
+    "ics": "/assets/events/eatta-70th-african-tea-convention-2026-09-17.ics"
+  },
+  {
+    "date": "2026-09-18T09:00:00+03:00",
+    "title": "EATTA 70th Anniversary Celebrations & 7th African Tea Convention (Day 5)",
+    "location": "Nairobi, Kenya",
+    "description": "Closing day of EATTA’s 70th Anniversary Celebrations and the 7th African Tea Convention (14–18 Sept 2026).",
+    "ics": "/assets/events/eatta-70th-african-tea-convention-2026-09-18.ics"
+  },
+  {
+    "date": "2026-11-27T09:00:00+03:00",
+    "title": "Members Forum",
+    "location": "Mombasa, Kenya",
+    "description": "EATTA Members Forum meeting (end-year session).",
+    "ics": "/assets/events/members-forum-2026-11-27.ics"
   }
 ]

@@ -6,92 +6,19 @@ require_once __DIR__ . '/../config.php';
 <section class="hero-sust" style="background-image:url('/assets/images/sust-hero.webp')">
   <div class="hero-overlay"></div>
   <div class="wrap hero-inner">
-
-    <div class="hero-layout">
-      <!-- LEFT: Copy & Pills -->
-      <div class="hero-copy">
-        <h1>Tea Sustainability &amp; Shared Value</h1>
-        <p class="hero-tagline">
-          Building a resilient tea value chain where farmers, producers and buyers
-          all benefit — without compromising our climate or communities.
-        </p>
-        <div class="hero-pills">
-          <span class="pill">Fair Pricing</span>
-          <span class="pill">Farmer Empowerment</span>
-          <span class="pill">Climate Action</span>
-          <span class="pill">Transparent Trading</span>
-        </div>
+    <div class="hero-copy">
+      <h1>Tea Sustainability &amp; Shared Value</h1>
+      <p class="hero-tagline">
+        Building a resilient tea value chain where farmers, producers and buyers
+        all benefit — without compromising our climate or communities.
+      </p>
+      <div class="hero-pills">
+        <span class="pill">Fair Pricing</span>
+        <span class="pill">Farmer Empowerment</span>
+        <span class="pill">Climate Action</span>
+        <span class="pill">Transparent Trading</span>
       </div>
-
-      <!-- RIGHT: Awards Slider -->
-      <aside class="hero-awards" aria-label="Awards and recognition">
-        <div class="hero-awards-head">
-         
-          <h2>Awards &amp; Recognition</h2>
-        </div>
-
-        <div class="hero-awards-slider" data-award-slider>
-          <!-- Slide 1 -->
-          <article class="award-slide active">
-            <div class="award-image">
-              <?php pictureTag('best_broker_2024', 'Best Priced Broker 2025 trophy'); ?>
-            </div>
-            <div class="award-body">
-              <h3>Best Priced Broker 2025</h3>
-              <p>
-                Recognised for consistently delivering fair and transparent prices to producers and buyers at the Mombasa Tea Auction.
-              </p>
-              <p class="award-meta">
-                <span>Award:</span> Best Priced Broker 2025
-              </p>
-              <button type="button" class="award-more" data-award-more>More</button>
-            </div>
-          </article>
-
-          <!-- Slide 2 -->
-          <article class="award-slide">
-            <div class="award-image">
-              <?php pictureTag('best_broker_2024', 'Farmer empowerment award'); ?>
-            </div>
-            <div class="award-body">
-              <h3>Farmer Empowerment Award 2025</h3>
-              <p>
-                Commended for empowering smallholder farmer groups with clear market insights, quality feedback and long-term relationship building.
-              </p>
-              <p class="award-meta">
-                <span>Award:</span> Farmer Empowerment 2025
-              </p>
-              <button type="button" class="award-more" data-award-more>More</button>
-            </div>
-          </article>
-
-          <!-- Slide 3 -->
-          <article class="award-slide">
-            <div class="award-image">
-              <?php pictureTag('best_broker_2024', 'Climate-smart tea initiative award'); ?>
-            </div>
-            <div class="award-body">
-              <h3>Climate-Smart Tea Initiative 2025</h3>
-              <p>
-                Highlighted for promoting climate-smart practices and traceable private sales that align with ESG expectations of global buyers.
-              </p>
-              <p class="award-meta">
-                <span>Award:</span> Climate-Smart Tea 2025
-              </p>
-              <button type="button" class="award-more" data-award-more>More</button>
-            </div>
-          </article>
-        </div>
-
-        <!-- Slider dots -->
-        <div class="hero-awards-dots" data-award-dots>
-          <button type="button" class="dot active" aria-label="Go to award 1"></button>
-          <button type="button" class="dot" aria-label="Go to award 2"></button>
-          <button type="button" class="dot" aria-label="Go to award 3"></button>
-        </div>
-      </aside>
     </div>
-
   </div>
 </section>
 
@@ -113,9 +40,7 @@ require_once __DIR__ . '/../config.php';
       </div>
       <h3>Fair &amp; Transparent Pricing</h3>
       <p>
-        We promote auction processes that highlight quality, origin and traceability,
-        empowering producers to secure competitive prices and helping buyers access
-        teas that meet their specification — at a clearly understood value.
+        We promote auction processes that highlight quality, origin and traceability.
       </p>
       <ul>
         <li>Pricing linked to quality, grade and origin.</li>
@@ -130,14 +55,12 @@ require_once __DIR__ . '/../config.php';
       </div>
       <h3>Farmer Empowerment &amp; Growth</h3>
       <p>
-        We believe better information leads to better decisions on the farm. We translate
-        auction trends into simple insights that support smallholder farmers and estates
-        to improve husbandry, quality and income stability.
+        Practical insights that support better decisions from farm to factory.
       </p>
       <ul>
-        <li>Explaining market trends in farmer-friendly language.</li>
-        <li>Encouraging quality improvements from plucking to factory.</li>
-        <li>Highlighting value-add opportunities across the chain.</li>
+        <li>Farmer-friendly market updates.</li>
+        <li>Quality improvements from plucking to factory.</li>
+        <li>Value-add opportunities across the chain.</li>
       </ul>
     </article>
 
@@ -147,14 +70,12 @@ require_once __DIR__ . '/../config.php';
       </div>
       <h3>Climate &amp; Environment</h3>
       <p>
-        Tea is highly climate-sensitive. We collaborate with producers and partners to
-        surface climate-smart practices that protect soils, water sources and biodiversity
-        while maintaining cup quality and consistency.
+        Climate-smart practices that protect soils, water and biodiversity.
       </p>
       <ul>
-        <li>Encouraging climate-smart field and factory practices.</li>
-        <li>Prioritising sustainably certified and traceable teas.</li>
-        <li>Reducing waste in logistics and documentation.</li>
+        <li>Climate-smart field and factory practices.</li>
+        <li>Traceable and sustainably produced teas.</li>
+        <li>Reduced waste in logistics and documentation.</li>
       </ul>
     </article>
 
@@ -164,14 +85,12 @@ require_once __DIR__ . '/../config.php';
       </div>
       <h3>Responsible &amp; Compliant Trading</h3>
       <p>
-        We align with regulatory and ethical standards, supporting traceability,
-        digital documentation and responsible private-sale structures that protect
-        all parties in the value chain.
+        Traceability, compliance and responsible private-sale structures.
       </p>
       <ul>
-        <li>Compliance with market and tax regulations.</li>
-        <li>Transparent documentation for audits and reviews.</li>
-        <li>Support for responsible private sale structures.</li>
+        <li>Regulatory alignment and ethical standards.</li>
+        <li>Transparent documentation for audits.</li>
+        <li>Responsible private sale structures.</li>
       </ul>
     </article>
   </div>
@@ -193,7 +112,7 @@ require_once __DIR__ . '/../config.php';
       <p class="impact-label">Smallholder farmers indirectly supported through our brokered teas and insights.</p>
       <ul>
         <li>Better visibility of price trends.</li>
-        <li>Encouragement towards quality-focused agronomy.</li>
+        <li>Quality-focused agronomy encouragement.</li>
         <li>Improved predictability of income over time.</li>
       </ul>
     </article>
@@ -203,7 +122,7 @@ require_once __DIR__ . '/../config.php';
       <p class="impact-stat" data-target="85">0</p>
       <p class="impact-label">Factories and producers benefiting from transparent auction representation.</p>
       <ul>
-        <li>Weekly performance analytics and feedback.</li>
+        <li>Weekly performance analytics &amp; feedback.</li>
         <li>Support for certification-linked marketing.</li>
         <li>Better positioning of specialty and orthodox lines.</li>
       </ul>
@@ -215,7 +134,7 @@ require_once __DIR__ . '/../config.php';
       <p class="impact-label">International and regional buyers engaged on sustainable tea sourcing.</p>
       <ul>
         <li>Curated access to traceable sustainable teas.</li>
-        <li>Consistent quality communication and cupping notes.</li>
+        <li>Consistent quality communication &amp; cupping notes.</li>
         <li>Long-term relationships over one-off trades.</li>
       </ul>
     </article>
@@ -238,14 +157,11 @@ require_once __DIR__ . '/../config.php';
       </div>
       <div class="initiative-body">
         <h3>Field &amp; Factory Quality Clinics</h3>
-        <p>
-          Joint sessions with producers and farmer representatives, translating auction
-          feedback into practical improvements in plucking, withering, rolling and firing.
-        </p>
+        <p>Practical improvements informed by market feedback.</p>
         <ul>
-          <li>Focus on grades with strong market demand.</li>
-          <li>Demonstrating how quality shifts affect pricing.</li>
-          <li>Simple dashboards for factory and field teams.</li>
+          <li>Focus on grades with strong demand.</li>
+          <li>Quality shifts vs pricing outcomes.</li>
+          <li>Simple dashboards for factory teams.</li>
         </ul>
       </div>
     </article>
@@ -256,14 +172,11 @@ require_once __DIR__ . '/../config.php';
       </div>
       <div class="initiative-body">
         <h3>Climate-Smart Tea Practices</h3>
-        <p>
-          Working with partners to highlight water conservation, soil health, shade management
-          and energy efficiency — aligning premium buyers with climate-resilient producers.
-        </p>
+        <p>Conservation, resilience and efficiency aligned to premium markets.</p>
         <ul>
-          <li>Encouraging sustainable fuel and factory efficiency.</li>
-          <li>Supporting water and soil protection conversations.</li>
-          <li>Linking climate-smart teas with premium markets.</li>
+          <li>Energy and process efficiency.</li>
+          <li>Water and soil protection.</li>
+          <li>Linking resilient teas to premium buyers.</li>
         </ul>
       </div>
     </article>
@@ -274,14 +187,11 @@ require_once __DIR__ . '/../config.php';
       </div>
       <div class="initiative-body">
         <h3>Traceability &amp; Responsible Private Sales</h3>
-        <p>
-          Supporting structures that keep private sales transparent, traceable and aligned
-          with regulatory requirements while protecting the interests of all parties.
-        </p>
+        <p>Transparent structures that protect all parties.</p>
         <ul>
           <li>Clear documentation from garden mark to cup.</li>
-          <li>Support for digital trails and audit readiness.</li>
-          <li>Balanced structures for producers and buyers.</li>
+          <li>Digital trails and audit readiness.</li>
+          <li>Balanced producer–buyer structures.</li>
         </ul>
       </div>
     </article>
@@ -292,23 +202,17 @@ require_once __DIR__ . '/../config.php';
   <div class="visuals-grid">
     <figure class="visual-card fade-in">
       <?php pictureTag('plantation_landscape-2', 'Tea factory sustainability'); ?>
-      <figcaption>
-        Efficient factories, cleaner energy and smarter process controls reduce waste and emissions.
-      </figcaption>
+      <figcaption>Efficient factories reduce waste and emissions.</figcaption>
     </figure>
 
     <figure class="visual-card fade-in">
       <?php pictureTag('plantation_landscape-3', 'Farmer group meeting'); ?>
-      <figcaption>
-        Farmer groups receive market updates in simple, actionable language they can apply season-by-season.
-      </figcaption>
+      <figcaption>Market updates translated into practical actions.</figcaption>
     </figure>
 
     <figure class="visual-card fade-in">
       <?php pictureTag('plantation_landscape', 'Auction and buyers'); ?>
-      <figcaption>
-        Buyers and producers aligned on traceability and quality, with sustainability at the centre.
-      </figcaption>
+      <figcaption>Traceability and quality aligned to sustainable sourcing.</figcaption>
     </figure>
   </div>
 </section>
@@ -318,7 +222,6 @@ require_once __DIR__ . '/../config.php';
     <h2>Effect &amp; Monitoring</h2>
     <p>
       We track the effect of our work over time and refine our approach based on real data.
-      Some of the indicators we monitor include:
     </p>
   </div>
 
@@ -334,17 +237,17 @@ require_once __DIR__ . '/../config.php';
     <div class="monitoring-block fade-in">
       <h3>Producer-Level</h3>
       <ul>
-        <li>Performance of factories in weekly auctions and private sales.</li>
-        <li>Premiums achieved for sustainably produced or specialty lines.</li>
-        <li>Readiness for audits through better documentation and traceability.</li>
+        <li>Weekly auction performance improvements.</li>
+        <li>Premiums achieved for specialty and certified teas.</li>
+        <li>Audit readiness through documentation and traceability.</li>
       </ul>
     </div>
     <div class="monitoring-block fade-in">
       <h3>Buyer-Level</h3>
       <ul>
-        <li>Access to consistent quality and traceable teas across seasons.</li>
-        <li>Confidence to commit to long-term contracts and origin programs.</li>
-        <li>Alignment with global sustainability and ESG requirements.</li>
+        <li>Access to consistent traceable teas.</li>
+        <li>Confidence in long-term sourcing relationships.</li>
+        <li>Alignment to global ESG expectations.</li>
       </ul>
     </div>
   </div>
@@ -353,9 +256,7 @@ require_once __DIR__ . '/../config.php';
 <section class="wrap section-pad testimonials-section">
   <div class="section-head">
     <h2>What Our Partners Say</h2>
-    <p>
-      Voices from farmers, producers and buyers who experience the impact of sustainable tea ecosystems every day.
-    </p>
+    <p>Voices from farmers, producers and buyers who experience the impact first-hand.</p>
   </div>
 
   <div class="testimonials-grid">
@@ -364,13 +265,11 @@ require_once __DIR__ . '/../config.php';
         <?php pictureTag('sampled-heart', 'Farmer testimonial'); ?>
       </div>
       <blockquote>
-        “The quality insights and sustainable practices introduced to our field teams
-        have transformed both yield and income. Today our farmers understand how
-        climate-smart practices directly improve cup quality.”
+        “Better market information has helped us focus on quality and consistency.”
       </blockquote>
       <div class="testimonial-meta">
-        <strong>Mary Wanjiru</strong>
-        <span>Smallholder Farmer</span>
+        <strong>Combrok LTD</strong>
+        <span>COMK</span>
       </div>
     </article>
 
@@ -379,13 +278,11 @@ require_once __DIR__ . '/../config.php';
         <?php pictureTag('sampled-heart', 'Producer testimonial'); ?>
       </div>
       <blockquote>
-        “The weekly market intelligence and transparent reporting give our factory a
-        stronger position at the auction. Sustainability is no longer a slogan — it’s
-        measurable and visible.”
+        “Transparency and weekly insights have strengthened our auction performance.”
       </blockquote>
       <div class="testimonial-meta">
-        <strong>Daniel Kiprotich</strong>
-        <span>Factory Manager</span>
+        <strong>Combrok LTD</strong>
+        <span>COMK</span>
       </div>
     </article>
 
@@ -394,12 +291,11 @@ require_once __DIR__ . '/../config.php';
         <?php pictureTag('sampled-heart', 'Buyer testimonial'); ?>
       </div>
       <blockquote>
-        “Sustainable teas backed with origin traceability and consistent quality give us
-        confidence when sourcing for global markets. The transparency is unmatched.”
+        “Traceability and consistent quality give us confidence for global markets.”
       </blockquote>
       <div class="testimonial-meta">
-        <strong>Rebecca Mills</strong>
-        <span>Chairman Tea Buyers</span>
+        <strong>Combkrok LTD</strong>
+        <span>COMK</span>
       </div>
     </article>
   </div>
