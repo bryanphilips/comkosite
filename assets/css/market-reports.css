@@ -430,3 +430,5 @@
   .mr-summary{ flex-direction:column; }
   .mr-summary-badges{ justify-content:flex-start; }
 }
+.mr-panel[hidden] { display: none !important; }
+.mr-panel.active { display: block; }

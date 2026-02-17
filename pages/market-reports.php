@@ -137,7 +137,7 @@
   <section class="wrap pad charts-grid">
     <article class="card hover">
       <header class="chart-head">
-        <h3>Sell-Through (%)</h3>
+        <h3>Absorption (%)</h3>
         <span class="sub">Latest / selected range</span>
       </header>
       <div class="chart donut" id="chart-sellthrough-combrok" role="img" aria-label="Combrok sell-through donut chart"></div>
@@ -145,10 +145,11 @@
 
     <article class="card hover">
       <header class="chart-head">
-        <h3>Lots Sold Trend</h3>
+        <h3>Quantity Sold Trend</h3>
         <span class="sub">By Sale</span>
       </header>
-      <div class="chart" id="chart-lots-lines-combrok" role="img" aria-label="Combrok lots sold trend"></div>
+      <div class="chart" id="chart-lots-lines-combrok" role="img"
+     aria-label="Combrok quantity sold trend by sale"></div>
     </article>
   </section>
 
@@ -166,11 +167,9 @@
           <tr>
             <th>Year</th>
             <th>Sale</th>
-            <th>Lots Offered</th>
-            <th>Lots Sold</th>
             <th>Qty Offered (kg)</th>
             <th>Qty Sold (kg)</th>
-            <th>Sell-through</th>
+            <th>Absorption</th>
             <th>Avg Price (USD/kg)</th>
           </tr>
         </thead>
@@ -219,7 +218,7 @@
   <section class="wrap pad charts-grid">
     <article class="card hover">
       <header class="chart-head">
-        <h3>Sell-Through (%)</h3>
+        <h3>Absorption (%)</h3>
         <span class="sub">Latest / selected range</span>
       </header>
       <div class="chart donut" id="chart-sellthrough-auction" role="img" aria-label="Auction sell-through donut chart"></div>
@@ -227,10 +226,11 @@
 
     <article class="card hover">
       <header class="chart-head">
-        <h3>Lots Sold Trend</h3>
+        <h3>Quantity Sold Trend</h3>
         <span class="sub">By Sale</span>
       </header>
-      <div class="chart" id="chart-lots-lines-auction" role="img" aria-label="Auction lots sold trend"></div>
+      <div class="chart" id="chart-lots-lines-auction" role="img"
+     aria-label="Auction quantity sold trend by sale"></div>
     </article>
   </section>
 

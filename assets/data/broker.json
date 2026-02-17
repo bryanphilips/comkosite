@@ -1,5 +1,4 @@
-{
-  "broker_sale": [
+[
     { "year": 2026,"sale": 1, "offered_lots": 546, "sold_lots": 490, "qty_offered": 1237804, "qty_sold": 1086662, "avg_prc": 1.78 },
     { "year": 2026,"sale": 2, "offered_lots": 495, "sold_lots": 421, "qty_offered": 1062467, "qty_sold": 928569, "avg_prc": 1.86 },
     { "year": 2026,"sale": 3, "offered_lots": 537, "sold_lots": 504, "qty_offered": 1261040, "qty_sold": 1184384, "avg_prc": 1.88 },
@@ -7,4 +6,3 @@
     { "year": 2026,"sale": 5, "offered_lots": 648, "sold_lots": 568, "qty_offered": 1500050, "qty_sold": 1287880, "avg_prc": 1.79 },
     { "year": 2026,"sale": 6, "offered_lots": 624, "sold_lots": 535, "qty_offered": 1375814, "qty_sold": 1224600 , "avg_prc": 1.86}
   ]
-}
