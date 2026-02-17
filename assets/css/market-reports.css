@@ -1,5 +1,6 @@
 /* =======================================================
    MARKET REPORTS — Premium dashboard (scoped)
+   (UPDATED: Tabs orientation + panel transitions)
    ======================================================= */
 
 :root{
@@ -18,7 +19,99 @@
 .small{ font-size:.92rem; }
 
 /* =======================================================
-   FILTER BAR
+   TOPBAR + TABS ROW (NEW)
+   ======================================================= */
+.mr-filters-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+
+.mr-tabs{
+  /* pill container */
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px;
+  border-radius:999px;
+  background:linear-gradient(90deg, rgba(234,246,252,.95), rgba(207,234,247,.95));
+  border:1px solid var(--mr-soft2);
+  box-shadow:0 10px 24px rgba(15,23,42,.06);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  overflow:hidden;
+}
+
+.mr-tab{
+  appearance:none;
+  border:0;
+  background:transparent;
+  color:var(--mr-dark);
+  opacity:.75;
+  font-weight:950;
+  letter-spacing:.2px;
+  padding:10px 14px;
+  border-radius:999px;
+  cursor:pointer;
+  user-select:none;
+  transition: background-color .2s ease, color .2s ease, transform .15s ease, box-shadow .2s ease, opacity .2s ease;
+  outline:none;
+  min-height:40px;
+  white-space:nowrap;
+  position:relative;
+}
+
+.mr-tab:hover{
+  opacity:1;
+  background:rgba(255,255,255,.55);
+}
+
+.mr-tab:active{
+  transform: translateY(1px);
+}
+
+.mr-tab.active{
+  opacity:1;
+  color:#fff;
+  background:linear-gradient(135deg, var(--mr-dark), var(--mr-brand));
+  box-shadow:0 12px 22px rgba(10,78,115,.22);
+}
+
+.mr-tab.active::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.24);
+  pointer-events:none;
+}
+
+/* keyboard accessibility */
+.mr-tab:focus-visible{
+  opacity:1;
+  box-shadow:0 0 0 4px rgba(33,140,207,.25);
+}
+
+/* Mobile: full-width segmented control */
+@media (max-width: 560px){
+  .mr-tabs{
+    width:100%;
+    border-radius:18px;
+    padding:6px;
+  }
+  .mr-tab{
+    flex:1;
+    text-align:center;
+    white-space:normal;
+    line-height:1.15;
+    padding:10px 12px;
+  }
+}
+
+/* =======================================================
+   FILTER BAR (your existing)
    ======================================================= */
 .mr-filters .filters{
   display:flex;
@@ -98,6 +191,21 @@
 .mr-filters .btn.dl{ font-weight:950; }
 
 .mr-filters .spacer{ flex:1; }
+
+/* =======================================================
+   PANELS (NEW / fixes tab switching feel)
+   ======================================================= */
+.mr-panel{
+  display:none;
+  opacity:0;
+  transform: translateY(10px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.mr-panel.active{
+  display:block;
+  opacity:1;
+  transform: translateY(0);
+}
 
 /* =======================================================
    SUMMARY CARD

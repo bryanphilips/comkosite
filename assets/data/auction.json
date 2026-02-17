@@ -1,44 +1,56 @@
 {"auction_sales":[
 {
-"sale": "Sale 01",
+"year": 2026,
+"sale": 1,
 "offered_lots": 3982,
 "sold_lots": 3476,
 "qty_offered": 9613036,
-"qty_sold": 8281348
+"qty_sold": 8281348,
+"avg_prc": 1.78
 },
 {
-"sale": "Sale 02",
+"year": 2026,
+"sale": 2,
 "offered_lots": 3749,
 "sold_lots": 3203,
 "qty_offered": 8711756,
-"qty_sold": 7544193
+"qty_sold": 7544193,
+"avg_prc": 1.78
 },
 {
-"sale": "Sale 03",
+"year": 2026,
+"sale": 3,
 "offered_lots": 3847,
 "sold_lots": 3472,
 "qty_offered": 9291575,
-"qty_sold": 8394911
+"qty_sold": 8394911,
+"avg_prc": 1.78
 },
 {
-"sale": "Sale 04",
+"year": 2026,
+"sale": 4,
 "offered_lots": 5469,
 "sold_lots": 4651,
 "qty_offered": 12856192,
-"qty_sold": 10986438
+"qty_sold": 10986438,
+"avg_prc": 1.78
 },
 {
-"sale": "Sale 05",
+"year": 2026,
+"sale": 5,
 "offered_lots": 4876,
 "sold_lots": 4200,
 "qty_offered": 11842297,
-"qty_sold": 10065490
+"qty_sold": 10065490,
+"avg_prc": 1.78
 },
 {
-"sale": "Sale 06",
+"year": 2026,
+"sale": 6,
 "offered_lots": 4797,
 "sold_lots": 2822,
 "qty_offered": 11314923,
-"qty_sold": 6530364
+"qty_sold": 6530364,
+"avg_prc": 1.78
 }
 ]}
