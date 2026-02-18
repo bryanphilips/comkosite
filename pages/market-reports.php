@@ -112,6 +112,7 @@
         <p class="mr-kpi-sub muted">Broker performance summary for the selected period.</p>
       </div>
       <div class="kpi-grid" id="mr-kpis-combrok" aria-live="polite"></div>
+      
     </div>
   </section>
 
@@ -155,7 +156,7 @@
 
   <!-- Summary + Analytics -->
   <section class="wrap pad">
-    <div id="mr-summary-combrok" class="card soft" style="margin-bottom:12px"></div>
+    
 
     <p class="muted small" style="margin-top:0;">
       This is Combrok Sales Data and is analyzed and prepared by Combrok Limited.

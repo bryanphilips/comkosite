@@ -18,7 +18,7 @@
     <article class="tea-card" data-tags="ctc">
       <div class="media">
         <div class="ratio ratio-16x9">
-          <?php pictureTag('ctc-black-1','CTC Black'); ?>
+          <?php pictureTag('infusion%204','CTC Black'); ?>
         </div>
       </div>
       <div class="body">
@@ -36,7 +36,7 @@
     <article class="tea-card" data-tags="orthodox">
       <div class="media">
         <div class="ratio ratio-16x9">
-          <?php pictureTag('orthodox-1','Orthodox Black'); ?>
+          <?php pictureTag('A_orthodox%20infusion%201','Orthodox Black'); ?>
         </div>
       </div>
       <div class="body">
@@ -54,7 +54,7 @@
     <article class="tea-card" data-tags="green">
       <div class="media">
         <div class="ratio ratio-16x9">
-          <?php pictureTag('green-tea-1','Green Tea'); ?>
+          <?php pictureTag('A_orthodox%20infusion%206','Green Tea'); ?>
         </div>
       </div>
       <div class="body">
@@ -72,7 +72,7 @@
     <article class="tea-card" data-tags="specialty">
       <div class="media">
         <div class="ratio ratio-16x9">
-          <?php pictureTag('specialty-1','Specialty Tea'); ?>
+          <?php pictureTag('A_orthodox%20infusion%209','Specialty Tea'); ?>
         </div>
       </div>
       <div class="body">

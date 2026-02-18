@@ -432,3 +432,6 @@
 }
 .mr-panel[hidden] { display: none !important; }
 .mr-panel.active { display: block; }
+.mr-summary-top {
+  padding: 14px 16px;
+}
