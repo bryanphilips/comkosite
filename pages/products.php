@@ -36,7 +36,7 @@
     <article class="tea-card" data-tags="orthodox">
       <div class="media">
         <div class="ratio ratio-16x9">
-          <?php pictureTag('A_orthodox%20infusion%201','Orthodox Black'); ?>
+          <?php pictureTag('A_orthodox%20infusion%209','Orthodox Black'); ?>
         </div>
       </div>
       <div class="body">
@@ -72,7 +72,7 @@
     <article class="tea-card" data-tags="specialty">
       <div class="media">
         <div class="ratio ratio-16x9">
-          <?php pictureTag('A_orthodox%20infusion%209','Specialty Tea'); ?>
+          <?php pictureTag('A_orthodox%20infusion%201','Specialty Tea'); ?>
         </div>
       </div>
       <div class="body">

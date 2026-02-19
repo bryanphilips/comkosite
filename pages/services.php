@@ -9,7 +9,7 @@ $services = [
       ['title' => 'Sampling & Grading', 'text' => 'We arrange representative samples for every lot (e.g., 4kg splits) and ensure distribution to buyers is accurate and timely.', 'img' => 'sampling%20room%202'],
       ['title' => 'Tasting & Quality Evaluation', 'text' => 'Our tasting panel evaluates leaf and liquor quality – translating findings into clear actionable guidance.', 'img' => 'newimg2'],
       // ['title' => 'Valuation & Recommendation', 'text' => 'We attach pragmatic values based on quality and live market signals, and advise on targeted quality improvements.', 'img' => 'sampled-heart'],
-      ['title' => 'Catalogue Preparation', 'text' => 'We compile the official catalogue—origin, grades, weights, packaging, and tasting notes—presented clearly for buyers and producers.', 'img' => 'catalogue'],
+      ['title' => 'Catalogue Preparation', 'text' => 'We compile the official catalogue—origin, grades, weights, packaging, and tasting notes—presented clearly for buyers and producers.', 'img' => 'auction_catalog'],
       // ['title' => 'Lot Segmentation & Packaging', 'text' => 'We guide optimal lot splits (e.g., 20/40/60) and packing to enhance appeal, access and logistics.', 'img' => 'lots'],
       // ['title' => 'Factory & Production Advisory', 'text' => 'We visit factories and give practical recommendations on plucking standards, manufacture, handling and warehousing.', 'img' => 'factory'],
     ],
@@ -41,18 +41,18 @@ $services = [
     'items'    => [
       ['title' => 'Account Sales & Remittance', 'text' => 'We issue detailed account sales and remit proceeds promptly within auction timelines.', 'img' => 'account_sale'],
       ['title' => 'Claims Handling & Disputes', 'text' => 'We manage buyer claims professionally, liaising with warehouses and producers to resolve quickly.', 'img' => 'claims'],
-      ['title' => 'Performance Monitoring & Feedback', 'text' => 'We analyse prices, buyer behaviour and unsolds—and share insights to refine your strategy.', 'img' => 'auction_sales'],
+      ['title' => 'Performance Monitoring & Feedback', 'text' => 'We analyse prices, buyer behaviour and unsolds—and share insights to refine your strategy.', 'img' => 'performence'],
     ],
   ],
   [
     'category' => 'Value-Added & Consultancy Services',
     'blurb'    => 'We go beyond selling—building long-term capability through audits, training, strategy and benchmarking.',
     'items'    => [
-      ['title' => 'Audit & Consultancy', 'text' => 'We support audits, traceability and compliance, and design practical improvement programmes.', 'img' => 'tea_harvest'],
+      ['title' => 'Audit & Consultancy', 'text' => 'We support audits, traceability and compliance, and design practical improvement programmes.', 'img' => 'audit'],
       ['title' => 'Technical Visits & Training', 'text' => 'On-site sessions on plucking, leaf handling and manufacture—often alongside buyer visits.', 'img' => 'orthodox_factory'],
       // ['title' => 'Strategic Planning', 'text' => 'We help prioritise grades, optimise quality-yield balance, and target the right markets.', 'img' => 'sample'],
       // ['title' => 'Brand & Positioning', 'text' => 'We advise on differentiation, certification and access to premium and niche segments.', 'img' => 'sampled-heart'],
-      ['title' => 'Data & Benchmarking', 'text' => 'We benchmark your performance across grades and seasons to show where to push or pivot.', 'img' => 'A_orthodox%20infusion%208'],
+      ['title' => 'Data & Benchmarking', 'text' => 'We benchmark your performance across grades and seasons to show where to push or pivot.', 'img' => 'data_benchmarking'],
     ],
   ],
 ];
