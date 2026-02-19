@@ -557,9 +557,7 @@ Sold: ${fmtInt(r.sold)} kg</title>
         <text x="${cx}" y="${cy + 18}" text-anchor="middle" font-size="12" font-weight="900" fill="#64748b">
           Absorption
         </text>
-        <text x="${cx}" y="${cy + 44}" text-anchor="middle" font-size="11" font-weight="900" fill="#64748b">
-          Sold ${fmtShort(s)} / Offered ${fmtShort(total)} (kg)
-        </text>
+        
       </svg>
     `;
   }

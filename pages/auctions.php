@@ -79,7 +79,7 @@ function pictureTagSolid(string $base, string $alt = '', string $class = ''): vo
   <div class="alt-media">
     <div class="card soft why-img shadow-sm">
       <div class="ratio ratio-16x9">
-        <?php pictureTag('sampling%20room%202','Post-auction settlement'); ?>
+        <?php pictureTag('account_sale','Post-auction settlement'); ?>
       </div>
     </div>
   </div>
