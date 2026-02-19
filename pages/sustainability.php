@@ -36,7 +36,7 @@ require_once __DIR__ . '/../config.php';
   <div class="pillars-grid">
     <article class="pillar-card fade-in">
       <div class="pill-icon">
-        <?php pictureTag('catalogue', 'Tea pricing sustainability'); ?>
+        <?php pictureTag('auction_sales', 'Tea pricing sustainability'); ?>
       </div>
       <h3>Fair &amp; Transparent Pricing</h3>
       <p>
@@ -51,7 +51,7 @@ require_once __DIR__ . '/../config.php';
 
     <article class="pillar-card fade-in">
       <div class="pill-icon">
-        <?php pictureTag('p_close-up', 'Farmer empowerment'); ?>
+        <?php pictureTag('plantation-4', 'Farmer empowerment'); ?>
       </div>
       <h3>Farmer Empowerment &amp; Growth</h3>
       <p>
@@ -66,7 +66,7 @@ require_once __DIR__ . '/../config.php';
 
     <article class="pillar-card fade-in">
       <div class="pill-icon">
-        <?php pictureTag('plantation_sunrise', 'Climate and environment in tea'); ?>
+        <?php pictureTag('plantation-2', 'Climate and environment in tea'); ?>
       </div>
       <h3>Climate &amp; Environment</h3>
       <p>
@@ -81,7 +81,7 @@ require_once __DIR__ . '/../config.php';
 
     <article class="pillar-card fade-in">
       <div class="pill-icon">
-        <?php pictureTag('valuation', 'Responsible tea trading'); ?>
+        <?php pictureTag('performance1', 'Responsible tea trading'); ?>
       </div>
       <h3>Responsible &amp; Compliant Trading</h3>
       <p>
