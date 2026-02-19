@@ -6,10 +6,10 @@ $services = [
     'category' => 'Pre-Sale & Quality Services',
     'blurb'    => 'We prepare teas for market with disciplined sampling, rigorous tasting, and clear valuation—so every invoice reaches buyers with confidence.',
     'items'    => [
-      ['title' => 'Sampling & Grading', 'text' => 'We arrange representative samples for every lot (e.g., 4kg splits) and ensure distribution to buyers is accurate and timely.', 'img' => 'testing'],
-      ['title' => 'Tasting & Quality Evaluation', 'text' => 'Our tasting panel evaluates leaf and liquor quality – translating findings into clear actionable guidance.', 'img' => 'newimg1'],
+      ['title' => 'Sampling & Grading', 'text' => 'We arrange representative samples for every lot (e.g., 4kg splits) and ensure distribution to buyers is accurate and timely.', 'img' => 'sampling%20room%202'],
+      ['title' => 'Tasting & Quality Evaluation', 'text' => 'Our tasting panel evaluates leaf and liquor quality – translating findings into clear actionable guidance.', 'img' => 'newimg2'],
       // ['title' => 'Valuation & Recommendation', 'text' => 'We attach pragmatic values based on quality and live market signals, and advise on targeted quality improvements.', 'img' => 'sampled-heart'],
-      ['title' => 'Catalogue Preparation', 'text' => 'We compile the official catalogue—origin, grades, weights, packaging, and tasting notes—presented clearly for buyers and producers.', 'img' => 'infusion%202'],
+      ['title' => 'Catalogue Preparation', 'text' => 'We compile the official catalogue—origin, grades, weights, packaging, and tasting notes—presented clearly for buyers and producers.', 'img' => 'catalogue'],
       // ['title' => 'Lot Segmentation & Packaging', 'text' => 'We guide optimal lot splits (e.g., 20/40/60) and packing to enhance appeal, access and logistics.', 'img' => 'lots'],
       // ['title' => 'Factory & Production Advisory', 'text' => 'We visit factories and give practical recommendations on plucking standards, manufacture, handling and warehousing.', 'img' => 'factory'],
     ],
@@ -18,8 +18,8 @@ $services = [
     'category' => 'Market Access & Sales Services',
     'blurb'    => 'We represent you at auction, drive buyer engagement, and manage the entire sales path—from listing and bidding to documentation and payment.',
     'items'    => [
-      ['title' => 'Auction Sales', 'text' => 'We represent producers at the EATTA auction in Mombasa and manage the full selling process.', 'img' => 'newimg4'],
-      ['title' => 'Spot Sales & Forward Contracts', 'text' => 'We structure direct spot deals and forward contracts where they add value to your portfolio.', 'img' => 'newimg3'],
+      ['title' => 'Auction Sales', 'text' => 'We represent producers at the EATTA auction in Mombasa and manage the full selling process.', 'img' => 'auction_sales'],
+      ['title' => 'Spot Sales & Forward Contracts', 'text' => 'We structure direct spot deals and forward contracts where they add value to your portfolio.', 'img' => 'spot_sales'],
       // ['title' => 'Catalogue Distribution & Buyer Engagement', 'text' => 'We circulate catalogues and samples, stimulate interest, and capture buyer feedback.', 'img' => 'catalogue'],
       // ['title' => 'Logistics, Delivery & Payment', 'text' => 'We handle invoicing, confirmations, payment follow-up and coordinate warehouse delivery.', 'img' => 'factory'],
     ],
@@ -28,20 +28,20 @@ $services = [
     'category' => 'Market Intelligence, Advisory & Reporting',
     'blurb'    => 'We convert data into decisions—tracking trends, forecasting demand, and advising on market fit, quality focus and timing.',
     'items'    => [
-      ['title' => 'Market Analysis & Trend Reporting', 'text' => 'We monitor production, exports, pricing and consumer shifts, then brief you with clear recommendations.', 'img' => 'newimg1'],
-      ['title' => 'Forecasts & Projections', 'text' => 'We combine quality signals with demand outlooks to guide production plans, grade mix and price expectations.', 'img' => 'A_orthodox%20infusion%203'],
-      ['title' => 'Market Fit & Buyer Needs', 'text' => 'We align grades and cup profiles to target markets and buyer preferences—including blending needs.', 'img' => 'A_orthodox%20infusion%207'],
+      ['title' => 'Market Analysis & Trend Reporting', 'text' => 'We monitor production, exports, pricing and consumer shifts, then brief you with clear recommendations.', 'img' => 'market_analysis'],
+      ['title' => 'Forecasts & Projections', 'text' => 'We combine quality signals with demand outlooks to guide production plans, grade mix and price expectations.', 'img' => 'forecasting'],
+      ['title' => 'Market Fit & Buyer Needs', 'text' => 'We align grades and cup profiles to target markets and buyer preferences—including blending needs.', 'img' => 'market_fit'],
       // ['title' => 'Storage, Warehousing & Handling', 'text' => 'We protect value through best-practice storage, handling and delivery coordination.', 'img' => 'factory'],
-      ['title' => 'Risk Management', 'text' => 'We navigate disputes, delays and downturns with structured contracts and proactive intelligence.', 'img' => 'infusion%2016'],
+      ['title' => 'Risk Management', 'text' => 'We navigate disputes, delays and downturns with structured contracts and proactive intelligence.', 'img' => 'risk'],
     ],
   ],
   [
     'category' => 'Post-Sale Services & Follow-Up',
     'blurb'    => 'We close the loop with transparent reporting, timely remittance, and feedback that drives continuous improvement.',
     'items'    => [
-      ['title' => 'Account Sales & Remittance', 'text' => 'We issue detailed account sales and remit proceeds promptly within auction timelines.', 'img' => 'catalogue'],
-      ['title' => 'Claims Handling & Disputes', 'text' => 'We manage buyer claims professionally, liaising with warehouses and producers to resolve quickly.', 'img' => 'plantation_landscape'],
-      ['title' => 'Performance Monitoring & Feedback', 'text' => 'We analyse prices, buyer behaviour and unsolds—and share insights to refine your strategy.', 'img' => 'valuation'],
+      ['title' => 'Account Sales & Remittance', 'text' => 'We issue detailed account sales and remit proceeds promptly within auction timelines.', 'img' => 'account_sale'],
+      ['title' => 'Claims Handling & Disputes', 'text' => 'We manage buyer claims professionally, liaising with warehouses and producers to resolve quickly.', 'img' => 'claims'],
+      ['title' => 'Performance Monitoring & Feedback', 'text' => 'We analyse prices, buyer behaviour and unsolds—and share insights to refine your strategy.', 'img' => 'auction_sales'],
     ],
   ],
   [
@@ -57,7 +57,7 @@ $services = [
   ],
 ];
 ?>
-
+ 
 <link rel="stylesheet" href="/assets/css/services.css">
 
 <section class="services-page">

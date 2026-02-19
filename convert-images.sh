@@ -10,7 +10,7 @@ mkdir -p "$OUT_WEBP" "$OUT_AVIF"
 shopt -s nullglob nocaseglob
 
 # ---------- Convert JPG/JPEG to WebP + AVIF ----------
-jpg_files=("$IN_DIR"/*.jpg "$IN_DIR"/*.jpeg)
+jpg_files=("$IN_DIR"/*.jpg "$IN_DIR"/*.jpeg "$IN_DIR"/*.png)
 
 if [ ${#jpg_files[@]} -gt 0 ]; then
   WEBP_Q=82
