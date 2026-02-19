@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     return {
-      marker: `Y${last.year} Sale ${String(last.sale).padStart(2,'0')}`,
+      marker: `${last.year} Sale ${String(last.sale).padStart(2,'0')}`,
       offeredQty: fmtKg(offeredQty),
       soldQty: fmtKg(soldQty),
       absorption: fmtPct(absorption),
