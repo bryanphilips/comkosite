@@ -108,7 +108,7 @@ require_once __DIR__ . '/../config.php';
   <div class="impact-grid">
     <article class="impact-card fade-in">
       <h3>Farmers</h3>
-      <p class="impact-stat" data-target="15000">0</p>
+      <p class="impact-stat" data-target="300000">0</p>
       <p class="impact-label">Smallholder farmers indirectly supported through our brokered teas and insights.</p>
       <ul>
         <li>Better visibility of price trends.</li>
