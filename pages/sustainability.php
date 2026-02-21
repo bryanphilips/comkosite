@@ -3,7 +3,7 @@ require_once __DIR__ . '/../config.php';
 ?>
 <link rel="stylesheet" href="/assets/css/sustainability.css">
 
-<section class="hero-sust" style="background-image:url('/assets/images/sust-hero.webp')">
+<section class="hero-sust">
   <div class="hero-overlay"></div>
   <div class="wrap hero-inner">
     <div class="hero-copy">
