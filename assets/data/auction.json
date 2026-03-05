@@ -56,5 +56,7 @@
   { "year": 2026, "sale": 4, "offered_lots": 5469, "sold_lots": 4651, "qty_offered": 12856192, "qty_sold": 10986438, "avg_prc": 2.23 },
   { "year": 2026, "sale": 5, "offered_lots": 4876, "sold_lots": 4200, "qty_offered": 11842297, "qty_sold": 10065490, "avg_prc": 2.21 },
   { "year": 2026, "sale": 6, "offered_lots": 4797, "sold_lots": 2822, "qty_offered": 11314923, "qty_sold": 6530364,  "avg_prc": 2.25 },
-  { "year": 2026, "sale": 7, "offered_lots": 4617, "sold_lots": 4003, "qty_offered": 11245446, "qty_sold": 9708417, "avg_prc": 2.27 }
+  { "year": 2026, "sale": 7, "offered_lots": 4617, "sold_lots": 4003, "qty_offered": 11245446, "qty_sold": 9708417, "avg_prc": 2.27 },
+  { "year": 2026, "sale": 8, "offered_lots": 4783, "sold_lots": 4133, "qty_offered": 11358178, "qty_sold": 9866963, "avg_prc": 2.27 },
+  { "year": 2026, "sale": 9, "offered_lots": 4279, "sold_lots": 2320, "qty_offered": 10529648, "qty_sold": 5398263, "avg_prc": 2.09 }
 ]

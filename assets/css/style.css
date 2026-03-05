@@ -1,10 +1,8 @@
 /* =========================================================
-   Combrok Premium Theme (global)
-   - Fixed navbar + fixed mini-ribbon (slider + fallback)
-   - Desktop: premium nav pills + subtle 3D hover
-   - Mobile: offcanvas below header, fits content, centered title
-   - Hero (faster fade + Ken Burns), stats, sections, reveal
-   - Auction Process + CTA Wide (Request Data)
+   Combrok Premium Theme (global) — UPDATED
+   - Header alignment fixed (menu closer to logo, better spacing)
+   - Keeps your ribbon/offcanvas/hero/awards behavior
+   - Safe overrides added at the bottom
    ========================================================= */
 
 /* ==============
@@ -31,7 +29,7 @@
 
   /* Ribbon fallback speed */
   --ribbon-speed:36s;
-  --radius-xl: 18px;
+  --radius-xl:18px;
 }
 
 /* Reserve space for navbar+ribbon */
@@ -62,10 +60,12 @@ img.rounded-10{ border-radius:10px; }
   transition:box-shadow .25s ease;
   perspective:1000px;           /* subtle 3D hover (desktop) */
 }
+
 .premium-navbar.nav-scrolled{
   box-shadow:0 8px 24px rgba(0,0,0,.08);
   backdrop-filter:saturate(180%) blur(8px);
 }
+
 .navbar-brand{ margin-left:2px; }
 .brand-float{
   height:60px; width:auto; object-fit:contain; border-radius:10px;
@@ -122,26 +122,33 @@ img.rounded-10{ border-radius:10px; }
 }
 
 /* CTA variants */
-.btn-brand.nav-cta{ background:var(--brand-blue-600); color:#fff; border:1px solid var(--brand-blue-200); }
-.btn-outline-primary.nav-cta{ color:var(--brand-blue-700); border-color:var(--brand-blue-600); }
-.btn-outline-primary.nav-cta:hover{ background:var(--brand-blue-600); color:#fff; }
+.btn-brand.nav-cta{
+  background:var(--brand-blue-600);
+  color:#fff;
+  border:1px solid var(--brand-blue-200);
+}
+.btn-outline-primary.nav-cta{
+  color:var(--brand-blue-700);
+  border-color:var(--brand-blue-600);
+}
+.btn-outline-primary.nav-cta:hover{
+  background:var(--brand-blue-600);
+  color:#fff;
+}
 
 /* Desktop color specificity vs .navbar-light + alignment safeguards */
 @media (min-width:992px){
   .premium-navbar.navbar-light .navbar-nav .nav-link.premium-link{ color:var(--ink); }
   .premium-navbar.navbar-light .navbar-nav .nav-link.premium-link:hover{ color:#fff; }
+
   .premium-navbar .container,
   .premium-navbar .wrap{
     height: var(--nav-h);
-    display: flex;
-    align-items: center;
+    display:flex;
+    align-items:center;
   }
-  .premium-navbar .navbar-nav{
-    margin-left: auto;          /* push menu to the right */
-    gap: .35rem;
-    align-items: center;
-    flex-wrap: nowrap;          /* prevent wrapping under the ribbon */
-  }
+
+  /* (Old behavior was pushing menu too far right; override later) */
   .premium-navbar .navbar-brand{ padding-top:0; padding-bottom:0; }
   .premium-navbar .brand-float{ height:56px; }
 }
@@ -218,7 +225,6 @@ img.rounded-10{ border-radius:10px; }
   position:relative;
   min-height:44px;
 }
-/* Center the "Menu" title */
 .offcanvas.premium-offcanvas .offcanvas-title{
   position:absolute;
   left:50%;
@@ -227,7 +233,6 @@ img.rounded-10{ border-radius:10px; }
   width:max-content;
   font-weight:700;
 }
-/* Keep close button aligned right & vertically centered */
 .offcanvas.premium-offcanvas .btn-close{
   position:absolute;
   right:8px; top:50%;
@@ -252,7 +257,6 @@ img.rounded-10{ border-radius:10px; }
 .offcanvas.premium-offcanvas .btn.nav-cta:hover{
   background:#187fc3; border-color:#187fc3; transform:translateY(-1px);
 }
-/* Backdrop aligned under header stack */
 .offcanvas-backdrop.show{
   position:fixed;
   top:calc(var(--nav-h) + var(--ribbon-h));
@@ -296,13 +300,11 @@ img.rounded-10{ border-radius:10px; }
   animation: none;
   will-change: transform;
 }
-/* If you added .carousel-fade, make the fade snappier */
 .carousel.carousel-fade .carousel-item{
   transition-property: opacity;
   transition-duration: .6s;
   transition-timing-function: ease-out;
 }
-/* Ken Burns on active slide */
 .hero .carousel-item.active img{
   animation: kenburnsZoom 3.6s ease-in-out both;
 }
@@ -514,115 +516,78 @@ img.rounded-10{ border-radius:10px; }
 
 /* Optional: zero out Bootstrap default navbar paddings to lock 68px height */
 .premium-navbar.navbar{ padding-top:0; padding-bottom:0; }
+
 /* ==========================================================
    AWARDS STRIP – COMPACT (14" laptop friendly)
-   Paste AFTER the current awards-strip CSS to override it.
    ========================================================== */
-
-/* Make the card a 2-column layout on md+ */
 @media (min-width: 768px){
-.award-card{
-  display:flex;
-  flex-direction:column;
-  background:#fff;
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 14px 36px rgba(15,23,42,.08);
-}
+  .award-card{
+    display:flex;
+    flex-direction:column;
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 14px 36px rgba(15,23,42,.08);
+  }
+  .award-media{ background:#000; }
+  .award-media img{ object-fit:cover; }
 
-/* IMAGE AREA */
-.award-media{
-  background:#000;
-}
-.award-media img{
-  object-fit:cover;
-}
+  .award-body{ padding:24px 22px 26px; }
 
-/* TEXT AREA */
-.award-body{
-  padding:24px 22px 26px;
-}
+  .award-title{
+    font-size:1.15rem;
+    font-weight:800;
+    color:#0A4E73;
+    margin-bottom:12px;
+  }
 
-.award-title{
-  font-size:1.15rem;
-  font-weight:800;
-  color:#0A4E73;
-  margin-bottom:12px;
-}
+  .award-text{
+    font-size:.95rem;
+    line-height:1.65;
+    color:#475569;
+    margin-bottom:18px;
+  }
 
-.award-text{
-  font-size:.95rem;
-  line-height:1.65;
-  color:#475569;
-  margin-bottom:18px;
+  .award-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .award-tags .badge{
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    color:#0f172a;
+    font-weight:700;
+    padding:.45rem .75rem;
+  }
 }
-
-/* TAGS */
-.award-tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
-
-.award-tags .badge{
-  background:#f8fafc;
-  border:1px solid #e2e8f0;
-  color:#0f172a;
-  font-weight:700;
-  padding:.45rem .75rem;
-}
-}
-
-/* Mobile keeps stacked (default), just ensure nice spacing */
 @media (max-width: 767.98px){
   .award-media{ padding:10px !important; }
   .award-body{ padding:12px 14px 14px !important; }
 }
+
 /* ==========================================================
    HERO AWARDS – FULL IMAGE MODE (FINAL OVERRIDE)
    ========================================================== */
+.hero-awards{ min-height: 340px; position: relative; }
+@media (min-width: 992px){ .hero-awards{ min-height: 380px; } }
 
-/* Give the awards card a stable height */
-.hero-awards{
-  min-height: 340px;
-  position: relative;
-}
-
-@media (min-width: 992px){
-  .hero-awards{
-    min-height: 380px;
-  }
-}
-
-/* ---- Image-only mode ---- */
 .hero-awards.image-only{
   padding: 0 !important;
   border-radius: 20px;
   overflow: hidden;
   background: #000;
 }
-
-/* Hide all non-image content */
 .hero-awards.image-only .hero-awards-head,
 .hero-awards.image-only .award-body,
-.hero-awards.image-only .hero-awards-dots{
-  display: none !important;
-}
+.hero-awards.image-only .hero-awards-dots{ display: none !important; }
 
-/* Force slider + slide to occupy full card */
 .hero-awards.image-only .hero-awards-slider,
 .hero-awards.image-only .award-slide.active,
-.hero-awards.image-only .award-image{
-  width: 100%;
-  height: 100%;
-}
+.hero-awards.image-only .award-image{ width: 100%; height: 100%; }
 
-/* Remove any flex side-effects */
-.hero-awards.image-only .award-slide{
-  display: block !important;
-}
+.hero-awards.image-only .award-slide{ display: block !important; }
 
-/* Image fills the card perfectly */
 .hero-awards.image-only .award-image picture,
 .hero-awards.image-only .award-image img{
   width: 100%;
@@ -632,13 +597,8 @@ img.rounded-10{ border-radius:10px; }
   border-radius: 0;
 }
 
-/* Cursor feedback */
-.award-image{
-  cursor: zoom-in;
-}
-.hero-awards.image-only .award-image{
-  cursor: zoom-out;
-}
+.award-image{ cursor: zoom-in; }
+.hero-awards.image-only .award-image{ cursor: zoom-out; }
 .award-media .ratio picture,
 .award-media .ratio img{
   width:100%;
@@ -646,17 +606,16 @@ img.rounded-10{ border-radius:10px; }
   display:block;
   object-fit:cover;
 }
+
 /* ==========================================================
    HOMEPAGE AWARDS — PREMIUM + RELIABLE IMAGE FILL + ZOOM
    ========================================================== */
-
 .awards-strip{
   background:linear-gradient(180deg,#ffffff, #f7fbff);
   border-top:1px solid var(--border);
   border-bottom:1px solid var(--border);
 }
 
-/* Card layout */
 .award-card{
   position:relative;
   border-radius:22px;
@@ -665,11 +624,10 @@ img.rounded-10{ border-radius:10px; }
   border:1px solid var(--border);
   box-shadow:0 16px 40px rgba(15,23,42,.08);
   transition:transform .22s ease, box-shadow .22s ease;
-  min-height: 420px; /* stable height so image can dominate */
+  min-height: 420px;
   display:flex;
   flex-direction:column;
 }
-
 @media (hover:hover){
   .award-card:hover{
     transform:translateY(-3px);
@@ -677,15 +635,12 @@ img.rounded-10{ border-radius:10px; }
   }
 }
 
-/* Media takes most of the space */
 .award-media{
   position:relative;
-  flex: 1 1 auto;              /* allow to expand */
-  min-height: 300px;           /* make image area BIG */
+  flex: 1 1 auto;
+  min-height: 300px;
   background:#0a0f14;
 }
-
-/* Ratio must stretch to fill the media area */
 .award-media .ratio{
   width:100%;
   height:100%;
@@ -693,9 +648,6 @@ img.rounded-10{ border-radius:10px; }
   overflow:hidden;
   background:#0a0f14;
 }
-
-/* Force ANY picture/img inside ratio to fill.
-   This covers pictureTag outputs even if structure varies. */
 .award-media .ratio picture,
 .award-media .ratio img,
 .award-media .ratio picture img{
@@ -708,33 +660,29 @@ img.rounded-10{ border-radius:10px; }
   object-position:center !important;
 }
 
-/* Minimal text area */
 .award-body{
   padding:14px 16px 16px;
   border-top:1px solid rgba(230,238,244,.7);
   background:linear-gradient(180deg,#ffffff, #fbfdff);
 }
-
 .award-title{
   font-size:1.05rem;
   font-weight:900;
   color:var(--brand-blue-800);
   margin:0 0 6px;
 }
-
 .award-text{
   margin:0;
   color:#64748b;
   font-size:.92rem;
   line-height:1.45;
   display:-webkit-box;
-  -webkit-line-clamp:1; /* one line */
+  -webkit-line-clamp:1;
   line-clamp:1;
   -webkit-box-orient:vertical;
   overflow:hidden;
 }
 
-/* Zoom overlay button */
 .award-zoom-btn{
   position:absolute;
   inset:0;
@@ -743,7 +691,6 @@ img.rounded-10{ border-radius:10px; }
   cursor:zoom-in;
 }
 
-/* Nice zoom icon */
 .award-media::after{
   content:"⤢";
   position:absolute;
@@ -766,29 +713,232 @@ img.rounded-10{ border-radius:10px; }
   transform:none;
 }
 
-/* =========================
-   ZOOM MODE (image only)
-   ========================= */
-.award-card.is-zoomed{
-  min-height: 480px;            /* allow larger preview */
-}
-.award-card.is-zoomed .award-body{
-  display:none !important;
-}
-.award-card.is-zoomed .award-media{
-  min-height: 480px;
-}
-.award-card.is-zoomed .award-zoom-btn{
-  cursor:zoom-out;
-}
+.award-card.is-zoomed{ min-height: 480px; }
+.award-card.is-zoomed .award-body{ display:none !important; }
+.award-card.is-zoomed .award-media{ min-height: 480px; }
+.award-card.is-zoomed .award-zoom-btn{ cursor:zoom-out; }
 .award-card.is-zoomed .award-media::after{
   content:"✕";
   opacity:1;
   transform:none;
 }
 
-/* Mobile: keep tall and premium */
 @media (max-width: 767.98px){
   .award-card{ min-height: 380px; }
   .award-media{ min-height: 260px; }
+}
+
+/* =========================================================
+   ✅ HEADER ALIGNMENT OVERRIDES (FIX)
+   - Move links closer to logo
+   - Keep CTA on the right
+   - Remove double "push-right" from ms-auto + margin-left:auto
+   ========================================================= */
+
+/* If you keep <div class="container wrap">, this prevents weird Bootstrap padding */
+.premium-navbar .container.wrap{
+  max-width:1180px;
+  padding-left:12px;
+  padding-right:12px;
+}
+
+/* Desktop layout: logo | nav (near logo) | CTA (right) */
+@media (min-width: 992px){
+  /* Make offcanvas behave like an inline flex row */
+  .premium-navbar .offcanvas.premium-offcanvas{
+    flex:1 1 auto;
+    display:flex !important;
+    align-items:center;
+    justify-content:flex-start;
+  }
+
+  /* Bring menu closer to logo; stop pushing it to far right */
+  .premium-navbar .navbar-nav,
+  .premium-navbar .navbar-nav.ms-auto{
+    margin-left:18px !important;   /* ✅ near logo */
+    margin-right:auto !important;  /* ✅ leaves space for CTA at far right */
+    gap:8px;
+    align-items:center;
+    flex-wrap:nowrap;
+  }
+
+  /* CTA to far right */
+  .premium-navbar .navbar-nav .nav-item:last-child{
+    margin-left:12px;
+  }
+
+  /* Slightly tighter pills so everything fits nicely */
+  .premium-navbar .nav-link.premium-link{
+    padding:.52rem .85rem;
+    border-radius:999px;
+    font-weight:800;
+  }
+  .premium-navbar .btn.nav-cta{
+    padding:.55rem 1rem;
+    border-radius:999px;
+    font-weight:900;
+    margin-left:10px;
+  }
+
+  /* Logo sizing + spacing */
+  .premium-navbar .brand-float{ height:54px; }
+  .premium-navbar .navbar-brand{ margin-right:10px; }
+}
+
+/* Mobile: keep offcanvas centered & clean (already good) */
+@media (max-width: 991.98px){
+  .premium-navbar .navbar-nav{ gap:.25rem; }
+}
+/* ==========================================================
+   NAV BUTTONS — Bigger + Neumorphic (keeps dark text)
+   Paste AFTER the gradient-stroke CSS
+   ========================================================== */
+
+/* Bigger pills */
+.premium-navbar .nav-link.premium-link,
+.premium-navbar .btn.nav-cta{
+  padding: .72rem 1.08rem !important;   /* ✅ bigger */
+  font-size: 1.02rem !important;        /* ✅ slightly larger text */
+  font-weight: 750 !important;
+  border-radius: 16px !important;
+  letter-spacing: .1px;
+  line-height: 1.1;
+
+  /* Neumorphic surface */
+  background: #f7fbff !important; /* light surface */
+  color: var(--brand-blue-800) !important; /* ✅ keep text dark blue */
+
+  /* soft “pressed” edge + depth */
+  box-shadow:
+    10px 10px 20px rgba(10, 78, 115, .10),
+    -10px -10px 18px rgba(255,255,255,.90),
+    inset 1px 1px 0 rgba(255,255,255,.95),
+    inset -1px -1px 0 rgba(10,78,115,.06) !important;
+
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    background .18s ease,
+    filter .18s ease !important;
+}
+
+/* Hover: lift slightly, keep text dark, show outline more */
+@media (hover:hover){
+  .premium-navbar .nav-link.premium-link:hover,
+  .premium-navbar .btn.nav-cta:hover{
+    color: var(--brand-blue-800) !important; /* ✅ no white text */
+    background: #f9fcff !important;
+    transform: translateY(-1px);
+
+    box-shadow:
+      14px 14px 26px rgba(10, 78, 115, .12),
+      -14px -14px 22px rgba(255,255,255,.92),
+      inset 1px 1px 0 rgba(255,255,255,.98),
+      inset -1px -1px 0 rgba(10,78,115,.05) !important;
+  }
+}
+
+/* Active/current: slightly pressed (inset feel) */
+.premium-navbar .nav-link.premium-link.active,
+.premium-navbar .nav-link.premium-link[aria-current="page"]{
+  transform: translateY(0);
+  background: #f3f9fe !important;
+  color: var(--brand-blue-800) !important;
+
+  box-shadow:
+    inset 10px 10px 18px rgba(10, 78, 115, .12),
+    inset -10px -10px 18px rgba(255,255,255,.92),
+    0 2px 0 rgba(10,78,115,.05) !important;
+}
+
+/* Private Sale: unique premium neumorphic button */
+.premium-navbar .btn.btn-brand.nav-cta{
+  background: linear-gradient(180deg, #f7fbff 0%, #edf6fd 100%) !important;
+  color: var(--brand-blue-800) !important;
+  font-weight: 850 !important;
+
+  box-shadow:
+    16px 16px 28px rgba(10, 78, 115, .14),
+    -16px -16px 26px rgba(255,255,255,.92),
+    inset 1px 1px 0 rgba(255,255,255,.95),
+    inset -1px -1px 0 rgba(10,78,115,.05) !important;
+}
+
+/* Private Sale hover: stronger lift */
+@media (hover:hover){
+  .premium-navbar .btn.btn-brand.nav-cta:hover{
+    transform: translateY(-2px);
+    color: var(--brand-blue-800) !important;
+    background: linear-gradient(180deg, #fbfeff 0%, #eef7ff 100%) !important;
+  }
+}
+
+/* Optional: slightly more spacing between pills on desktop */
+@media (min-width: 992px){
+  .premium-navbar .navbar-nav{ gap: .55rem !important; }
+}
+
+/* Mobile: keep big but not cramped */
+@media (max-width: 991.98px){
+  .offcanvas.premium-offcanvas .nav-link.premium-link,
+  .offcanvas.premium-offcanvas .btn.nav-cta{
+    padding: .66rem .92rem !important;
+    font-size: .98rem !important;
+    border-radius: 14px !important;
+  }
+}
+/* ==========================================================
+   BLUE GRADIENT STROKE (center → bottom) for nav pills
+   Paste AFTER the neumorphic CSS
+   ========================================================== */
+
+/* Base stroke (visible but subtle) */
+.premium-navbar .nav-link.premium-link,
+.premium-navbar .btn.nav-cta{
+  border: 1.6px solid transparent !important;
+
+  /* gradient stroke: light at top, strongest at bottom */
+  background:
+    linear-gradient(#f7fbff,#f7fbff) padding-box,
+    linear-gradient(180deg,
+      rgba(33,140,207,.10) 0%,
+      rgba(33,140,207,.35) 45%,
+      rgba(10,78,115,.85) 100%) border-box !important;
+}
+
+/* Hover: make stroke pop more (text stays dark) */
+@media (hover:hover){
+  .premium-navbar .nav-link.premium-link:hover,
+  .premium-navbar .btn.nav-cta:hover{
+    border: 1.9px solid transparent !important;
+    background:
+      linear-gradient(#f9fcff,#f9fcff) padding-box,
+      linear-gradient(180deg,
+        rgba(33,140,207,.12) 0%,
+        rgba(33,140,207,.45) 45%,
+        rgba(10,78,115,.95) 100%) border-box !important;
+  }
+}
+
+/* Active/current: slightly stronger stroke (pressed feel still works) */
+.premium-navbar .nav-link.premium-link.active,
+.premium-navbar .nav-link.premium-link[aria-current="page"]{
+  border: 2px solid transparent !important;
+  background:
+    linear-gradient(#f3f9fe,#f3f9fe) padding-box,
+    linear-gradient(180deg,
+      rgba(33,140,207,.14) 0%,
+      rgba(33,140,207,.50) 45%,
+      rgba(10,78,115,.98) 100%) border-box !important;
+}
+
+/* Private Sale unique stroke: richer + slightly thicker */
+.premium-navbar .btn.btn-brand.nav-cta{
+  border: 2.2px solid transparent !important;
+  background:
+    linear-gradient(180deg, #fbfeff 0%, #eef7ff 100%) padding-box,
+    linear-gradient(180deg,
+      rgba(105,184,227,.22) 0%,
+      rgba(33,140,207,.55) 45%,
+      rgba(10,78,115,1) 100%) border-box !important;
 }

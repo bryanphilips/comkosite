@@ -269,4 +269,4 @@
   </div>
 </section>
 
-<script defer src="/assets/js/products.js"></script>
+<script defer src="/assets/js/product.js"></script>
